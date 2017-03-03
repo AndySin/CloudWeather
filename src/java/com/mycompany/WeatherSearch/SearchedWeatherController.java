@@ -2,7 +2,7 @@
  * Created by Andy Sin on 2017.03.02  * 
  * Copyright © 2017 Andy Sin. All rights reserved. * 
  */
-package WeatherSearch;
+package com.mycompany.WeatherSearch;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -11,6 +11,7 @@ import java.net.URL;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import org.primefaces.json.JSONArray;
+import org.primefaces.json.JSONObject;
 
 /**
  *
@@ -27,22 +28,38 @@ public class SearchedWeatherController implements Serializable {
 
     // API Key for weather API
     private final String weatherAPIKey = "4c99a07ca200047bf938adedb4a7891e";
+    
+    private final String COORD = "coord";
+    private final String WEATHER = "weather";
+    private final String BASE = "base";
+    private final String MAIN = "main";
+    private final String WIND = "wind";
+    private final String RAIN = "rain";
+    private final String CLOUDS = "clouds";
+    private final String NAME = "name";
 
     /* @TODO */
     private String customizeAPICall = "weather";
 
     private String searchQuery;
 
-    public String getForecast() {
-        JSONArray jsonArray;
-
+    public SearchedWeather getForecast() {
+        SearchedWeather result = null;
         try {
             String weatherAPICall = weatherAPIUrl + customizeAPICall
                     + searchQuery + "&appid=" + weatherAPIKey;
-            String JSONData = readUrlContent(weatherAPICall);
-            jsonArray = new JSONArray("[" + JSONData + "]");
+            JSONObject jsonData = readUrlContent(weatherAPICall);
             
-            /* @TODO */
+            JSONObject jsonCoords = jsonData.getJSONObject(COORD);
+            JSONArray jsonWeather = jsonData.getJSONArray(WEATHER);
+            JSONObject jsonTemp = jsonData.getJSONObject(MAIN);
+            JSONObject jsonName = jsonData.getJSONObject(NAME);
+            
+            result = new SearchedWeather(jsonTemp.getDouble("temp"), 
+                    jsonCoords.getDouble("lon"), jsonCoords.getDouble("lat"), 
+                    jsonWeather.getJSONObject(2).getString("dscription"), 
+                    jsonName.getString("name"));
+            return result;
             
         }
         catch (Exception e) {
@@ -66,7 +83,7 @@ public class SearchedWeatherController implements Serializable {
      * @return JSON data from the given URL as String
      * @throws Exception
      */
-    private String readUrlContent(String url) throws Exception {
+    private JSONObject readUrlContent(String url) throws Exception {
         BufferedReader urlReader = null;
         try {
             URL weatherUrl = new URL(url);
@@ -78,7 +95,7 @@ public class SearchedWeatherController implements Serializable {
                 JSONResult.append((char)current);
                 current = urlReader.read();
             }
-            return JSONResult.toString();
+            return new JSONObject(JSONResult.toString());
         }
         finally {
             if(urlReader != null) {
