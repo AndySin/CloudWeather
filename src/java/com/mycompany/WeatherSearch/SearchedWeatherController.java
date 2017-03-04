@@ -28,7 +28,7 @@ public class SearchedWeatherController implements Serializable {
 
     // API Key for weather API
     private final String weatherAPIKey = "4c99a07ca200047bf938adedb4a7891e";
-    
+
     private final String COORD = "coord";
     private final String WEATHER = "weather";
     private final String BASE = "base";
@@ -43,26 +43,27 @@ public class SearchedWeatherController implements Serializable {
 
     private String searchQuery;
 
+    // Object returned from API call
+    private SearchedWeather searchResults;
+
     public SearchedWeather getForecast() {
-        SearchedWeather result = null;
         try {
             String weatherAPICall = weatherAPIUrl + customizeAPICall
                     + searchQuery + "&appid=" + weatherAPIKey;
             JSONObject jsonData = readUrlContent(weatherAPICall);
-            
+
             JSONObject jsonCoords = jsonData.getJSONObject(COORD);
             JSONArray jsonWeather = jsonData.getJSONArray(WEATHER);
             JSONObject jsonTemp = jsonData.getJSONObject(MAIN);
             JSONObject jsonName = jsonData.getJSONObject(NAME);
-            
-            result = new SearchedWeather(jsonTemp.getDouble("temp"), 
-                    jsonCoords.getDouble("lon"), jsonCoords.getDouble("lat"), 
-                    jsonWeather.getJSONObject(2).getString("dscription"), 
+
+            searchResults = new SearchedWeather(jsonTemp.getDouble("temp"),
+                    jsonCoords.getDouble("lon"), jsonCoords.getDouble("lat"),
+                    jsonWeather.getJSONObject(2).getString("dscription"),
                     jsonName.getString("name"));
-            return result;
-            
-        }
-        catch (Exception e) {
+            return searchResults;
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -74,6 +75,10 @@ public class SearchedWeatherController implements Serializable {
 
     public void setSearchQuery(String searchQuery) {
         this.searchQuery = searchQuery;
+    }
+
+    public SearchedWeather getSearchResults() {
+        return searchResults;
     }
 
     /**
@@ -91,14 +96,13 @@ public class SearchedWeatherController implements Serializable {
                     new InputStreamReader(weatherUrl.openStream()));
             StringBuilder JSONResult = new StringBuilder();
             int current = urlReader.read();
-            while(current != -1) {
-                JSONResult.append((char)current);
+            while (current != -1) {
+                JSONResult.append((char) current);
                 current = urlReader.read();
             }
             return new JSONObject(JSONResult.toString());
-        }
-        finally {
-            if(urlReader != null) {
+        } finally {
+            if (urlReader != null) {
                 urlReader.close();
             }
         }
