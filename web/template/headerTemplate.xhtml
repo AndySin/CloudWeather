@@ -11,10 +11,44 @@ Copyright © 2017 Andy Sin. All rights reserved.
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition>
-        
-        <!-- TODO -->
-        
+
+        <h:link outcome="index" styleClass="arialTen">
+            <i class="fa fa-home">&nbsp;</i>Home
+        </h:link>&nbsp;&nbsp;
+
+        <i class="fa fa-search"></i>&nbsp;
+        <p:commandLink value="Get Forecast" styleClass="arialTen" 
+                       oncomplete="PF('WeatherSearchDialog').show()" />
+
+        <p:dialog position="center center" id="WeatherSearchDialog" widgetVar="WeatherSearchDialog" 
+                  modal="true" resizable="false" appendTo="@(body)" header="Get Weather Forecast" width="300px">
+
+            <h:form id="searchDialogForm">
+                <div align="center" bgcolor="#FDF5E6" >
+                    <br />
+                    <h:outputLabel for="searchQueryField" value="Enter city name to search:" />
+                    <br /><br />
+
+                    <h:inputText id="searchQueryField" style="width:200px"
+                                 value="#{searchedWeatherController.searchQuery}" >
+                    </h:inputText>  
+                    <br /><br /><br />
+
+                    <p:commandButton value="Search" id="searchButton"  ajax="false" 
+                                     styleClass="commandButton" icon="ui-icon-search"
+                                     action="#{searchedWeatherController.getForecast()}" />
+                    &nbsp;&nbsp;
+
+                    <!-- CANCEL button -->
+                    <p:commandButton value="Cancel" onclick="PF('WeatherSearchDialog').hide()" 
+                                     styleClass="commandButton" icon="ui-icon-cancel"/>
+                    <br /><br />
+                </div>
+            </h:form>  
+
+        </p:dialog>
+
     </ui:composition>
-    
-    
+
+
 </html>

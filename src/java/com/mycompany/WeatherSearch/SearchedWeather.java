@@ -25,7 +25,7 @@ public class SearchedWeather {
     public SearchedWeather(double kelvin, double longitude, double latitude,
             String weatherDescription, String locationName) {
         this.kelvin = kelvin;
-        celsius = kelvin + 273.15;
+        celsius = kelvin - 273.15;
         fahrenheit = celsius * 1.8 + 32;
 
         this.longitude = longitude;

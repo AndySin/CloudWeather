@@ -24,7 +24,7 @@ import org.primefaces.json.JSONObject;
 public class SearchedWeatherController implements Serializable {
 
     // URL for weather API
-    private final String weatherAPIUrl = "api.openweathermap.org/data/2.5/";
+    private final String weatherAPIUrl = "http://api.openweathermap.org/data/2.5/";
 
     // API Key for weather API
     private final String weatherAPIKey = "4c99a07ca200047bf938adedb4a7891e";
@@ -39,14 +39,14 @@ public class SearchedWeatherController implements Serializable {
     private final String NAME = "name";
 
     /* @TODO */
-    private String customizeAPICall = "weather";
+    private String customizeAPICall = "weather?q=";
 
     private String searchQuery;
 
     // Object returned from API call
     private SearchedWeather searchResults;
 
-    public SearchedWeather getForecast() {
+    public String getForecast() {
         try {
             String weatherAPICall = weatherAPIUrl + customizeAPICall
                     + searchQuery + "&appid=" + weatherAPIKey;
@@ -55,18 +55,16 @@ public class SearchedWeatherController implements Serializable {
             JSONObject jsonCoords = jsonData.getJSONObject(COORD);
             JSONArray jsonWeather = jsonData.getJSONArray(WEATHER);
             JSONObject jsonTemp = jsonData.getJSONObject(MAIN);
-            JSONObject jsonName = jsonData.getJSONObject(NAME);
 
             searchResults = new SearchedWeather(jsonTemp.getDouble("temp"),
                     jsonCoords.getDouble("lon"), jsonCoords.getDouble("lat"),
-                    jsonWeather.getJSONObject(2).getString("dscription"),
-                    jsonName.getString("name"));
-            return searchResults;
+                    jsonWeather.getJSONObject(0).getString("description"),
+                    jsonData.getString("name"));
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return "WeatherForecastResults?faces-redirect=true";
     }
 
     public String getSearchQuery() {
