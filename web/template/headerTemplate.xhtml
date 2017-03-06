@@ -8,7 +8,8 @@ Copyright © 2017 Andy Sin. All rights reserved.
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:composition>
 
@@ -32,11 +33,21 @@ Copyright © 2017 Andy Sin. All rights reserved.
                     <h:inputText id="searchQueryField" style="width:200px"
                                  value="#{searchedWeatherController.searchQuery}" >
                     </h:inputText>  
+
+                    <p:selectOneMenu id="selectOne" class="formItemText"
+                                     value="#{searchedWeatherController.searchParameter}"
+                                     required="true">
+                        <f:selectItem itemLabel="Select One" itemValue="" />
+                        <f:selectItem itemLabel="City Name" itemValue="q" />
+                        <f:selectItem itemLabel="Zip Code (US)" itemValue="zip" />
+                    </p:selectOneMenu>        
+
                     <br /><br /><br />
 
                     <p:commandButton value="Search" id="searchButton"  ajax="false" 
                                      styleClass="commandButton" icon="ui-icon-search"
-                                     action="#{searchedWeatherController.getForecast()}" />
+                                     action="#{searchedWeatherController.getForecast()}"
+                                      />
                     &nbsp;&nbsp;
 
                     <!-- CANCEL button -->

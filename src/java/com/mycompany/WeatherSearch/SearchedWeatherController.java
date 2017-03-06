@@ -38,9 +38,7 @@ public class SearchedWeatherController implements Serializable {
     private final String CLOUDS = "clouds";
     private final String NAME = "name";
 
-    /* @TODO */
-    private String customizeAPICall = "weather?q=";
-
+    private String searchParameter;
     private String searchQuery;
 
     // Object returned from API call
@@ -48,8 +46,8 @@ public class SearchedWeatherController implements Serializable {
 
     public String getForecast() {
         try {
-            String weatherAPICall = weatherAPIUrl + customizeAPICall
-                    + searchQuery + "&appid=" + weatherAPIKey;
+            String weatherAPICall = weatherAPIUrl + "weather?"
+                    + searchParameter + "=" + searchQuery + "&appid=" + weatherAPIKey;
             JSONObject jsonData = readUrlContent(weatherAPICall);
 
             JSONObject jsonCoords = jsonData.getJSONObject(COORD);
@@ -74,6 +72,14 @@ public class SearchedWeatherController implements Serializable {
 
     public void setSearchQuery(String searchQuery) {
         this.searchQuery = searchQuery;
+    }
+
+    public String getSearchParameter() {
+        return searchParameter;
+    }
+
+    public void setSearchParameter(String searchParameter) {
+        this.searchParameter = searchParameter;
     }
 
     public SearchedWeather getSearchResults() {
