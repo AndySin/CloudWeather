@@ -63,6 +63,7 @@ public class SearchedWeatherController implements Serializable {
 
         } catch (Exception e) {
             e.printStackTrace();
+            return "WeatherForecastResultsError?faces-redirect=true";
         }
         return "WeatherForecastResults?faces-redirect=true";
     }
