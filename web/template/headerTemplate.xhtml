@@ -13,13 +13,26 @@ Copyright © 2017 Andy Sin. All rights reserved.
 
     <ui:composition>
 
-        <h:link outcome="index" styleClass="arialTen">
-            <i class="fa fa-home">&nbsp;</i>Home
-        </h:link>&nbsp;&nbsp;
+        <h:panelGrid columns="2" columnClasses="leftTopCornerAlign, rightTopCornerAlign">
 
-        <i class="fa fa-search"></i>&nbsp;
-        <p:commandLink value="Get Forecast" styleClass="arialTen" 
-                       oncomplete="PF('WeatherSearchDialog').show()" />
+            <h:link outcome="index">
+                <img src="resources/images/Cloud.png"
+                     style="width:100%; height:100%; max-height:60px; max-width:70px; border: none"
+                     alt="Cloud Logo" />
+            </h:link>
+
+            <h:panelGroup>
+
+                <h:link outcome="index" styleClass="arialTen">
+                    <i class="fa fa-home">&nbsp;</i>Home
+                </h:link>&nbsp;&nbsp;
+
+                <i class="fa fa-search"></i>&nbsp;
+                <p:commandLink value="Get Forecast" styleClass="arialTen" 
+                               oncomplete="PF('WeatherSearchDialog').show()" />
+
+            </h:panelGroup>
+        </h:panelGrid>
 
         <p:dialog position="center center" id="WeatherSearchDialog" widgetVar="WeatherSearchDialog" 
                   modal="true" resizable="false" appendTo="@(body)" header="Get Weather Forecast" width="300px">
@@ -33,6 +46,8 @@ Copyright © 2017 Andy Sin. All rights reserved.
                     <h:inputText id="searchQueryField" style="width:200px"
                                  value="#{searchedWeatherController.searchQuery}" >
                     </h:inputText>  
+                    
+                    <br /><br />
 
                     <p:selectOneMenu id="selectOne" class="formItemText"
                                      value="#{searchedWeatherController.searchParameter}"
@@ -47,7 +62,7 @@ Copyright © 2017 Andy Sin. All rights reserved.
                     <p:commandButton value="Search" id="searchButton"  ajax="false" 
                                      styleClass="commandButton" icon="ui-icon-search"
                                      action="#{searchedWeatherController.getForecast()}"
-                                      />
+                                     />
                     &nbsp;&nbsp;
 
                     <!-- CANCEL button -->

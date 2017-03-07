@@ -172,6 +172,61 @@ Style the div component whose unique id is "footer" per reference
     right: 0px;
     bottom: 0px;
 }
+/* 
+Style the div component whose unique id is "footerPanelGrid" per reference
+<h:panelGrid id="footerPanelGrid" columns="2"> in footerTemplate.xhtml 
+*/
+#footerPanelGrid {
+    width: 80%;
+}
+/* 
+Style the div component whose unique id is "rightAlignPanelGroup" per reference
+<h:panelGroup id="rightAlignPanelGroup"> in footerTemplate.xhtml 
+*/
+#rightAlignPanelGroup {
+    float: right;
+}
+/* 
+Place the logo image on the left top corner per reference
+<h:panelGrid columns="2" columnClasses="leftTopCornerAlign, rightTopCornerAlign">
+in headerTemplate.xhtml
+*/
+.leftTopCornerAlign {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 10px;
+}
+/* 
+Place the navigation menu bar on the right top corner per reference
+<h:panelGrid columns="2" columnClasses="leftTopCornerAlign, rightTopCornerAlign">
+in headerTemplate.xhtml 
+*/
+.rightTopCornerAlign {
+    position: absolute;
+    right: 0;
+    top: 24px;
+    padding: 10px;
+}
+
+/* 
+Right align column 1 text and disallow line breaks per reference
+<p:panelGrid columns="2" columnClasses="columnOne, columnTwo">
+in Create.xhtml, View.xhtml, and Edit.xhtml. 
+*/
+.columnOne {
+    text-align: right;
+    white-space: nowrap;  /* Disallow line break */
+}
+/* 
+Left align column 2 text and disallow line breaks per reference
+<p:panelGrid columns="2" columnClasses="columnOne, columnTwo">
+in Create.xhtml, View.xhtml, and Edit.xhtml. 
+*/
+.columnTwo {
+    text-align: left;
+    white-space: nowrap;  /* Disallow line break */
+}
 
 /*
 ========================
