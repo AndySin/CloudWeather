@@ -12,8 +12,8 @@ package com.mycompany.WeatherSearch;
 public class SearchedWeather {
 
     private double kelvin;
-    private double celsius;
-    private double fahrenheit;
+    private int celsius;
+    private int fahrenheit;
 
     private double latitude;
     private double longitude;
@@ -25,8 +25,8 @@ public class SearchedWeather {
     public SearchedWeather(double kelvin, double longitude, double latitude,
             String weatherDescription, String locationName) {
         this.kelvin = kelvin;
-        celsius = kelvin - 273.15;
-        fahrenheit = celsius * 1.8 + 32;
+        celsius = (int)(kelvin - 273.15);
+        fahrenheit = (int)((kelvin - 273.15) * 1.8 + 32);
 
         this.longitude = longitude;
         this.latitude = latitude;
@@ -43,19 +43,19 @@ public class SearchedWeather {
         this.kelvin = kelvin;
     }
 
-    public double getCelsius() {
+    public int getCelsius() {
         return celsius;
     }
 
-    public void setCelsius(double celsius) {
+    public void setCelsius(int celsius) {
         this.celsius = celsius;
     }
 
-    public double getFahrenheit() {
+    public int getFahrenheit() {
         return fahrenheit;
     }
 
-    public void setFahrenheit(double fahrenheit) {
+    public void setFahrenheit(int fahrenheit) {
         this.fahrenheit = fahrenheit;
     }
 
