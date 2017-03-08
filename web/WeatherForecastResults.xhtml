@@ -8,43 +8,48 @@ Copyright © 2017 Andy Sin. All rights reserved.
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
+    <!-- This page is constructed based on the siteTemplate -->
+    <ui:composition template="/template/siteTemplate.xhtml">
+        <ui:define name="title">
+            <!-- Set the page title -->
+            <h:outputText value="Forecast Results"></h:outputText>
+        </ui:define>
 
-    <h:body>
-        <h:outputStylesheet library="css" name="globalStyles.css"/>
+        <ui:define name="editableContent">
 
-        <div align="center">
-            <h:form id="WeatherResultsForm">
-                <h:graphicImage value="resources/images/WeatherHeader.png" styleClass="headerImage" />
-                <br /><br />
-                <h1>Weather Forecast Results</h1>
-                <br />
-                <h:panelGrid columns="2" columnClasses="rightAlign, leftAlign">
-                    <!-- Columns 1 & 2 -->
-                    <h:outputText value="City: " />                  
-                    <h:outputText value="#{searchedWeatherController.searchResults.locationName}" />
+            <div align="center">
 
-                    <!-- Columns 1 & 2 -->
-                    <h:outputText value="Weather: " />                  
-                    <h:outputText value="#{searchedWeatherController.searchResults.weatherDescription}" />
+                <h:form id="WeatherResultsForm">
+                    <h:graphicImage value="resources/images/WeatherHeader.png" styleClass="headerImage" />
+                    <br /><br />
+                    <h1>Weather Forecast Results</h1>
+                    <br />
+                    <h:panelGrid columns="2" columnClasses="rightAlign, leftAlign">
+                        <!-- Columns 1 & 2 -->
+                        <h:outputText value="City: " />                  
+                        <h:outputText value="#{searchedWeatherController.searchResults.locationName}" />
 
-                    <!-- Columns 1 & 2 -->
-                    <h:outputText value="Temperature: " />  
-                    <h:outputText value="#{searchedWeatherController.searchResults.celsius} °C 
-                                  / #{searchedWeatherController.searchResults.fahrenheit} °F" />  
+                        <!-- Columns 1 & 2 -->
+                        <h:outputText value="Weather: " />                  
+                        <h:outputText value="#{searchedWeatherController.searchResults.weatherDescription}" />
 
-                </h:panelGrid>
-                <br />
-                <br />
-                <!-- When the "Go Back" button is clicked on, the index.xhtml page is shown. -->
+                        <!-- Columns 1 & 2 -->
+                        <h:outputText value="Temperature: " />  
+                        <h:outputText value="#{searchedWeatherController.searchResults.celsius} °C 
+                                      / #{searchedWeatherController.searchResults.fahrenheit} °F" />  
 
-                <p:commandButton value="Go Back" ajax="false" styleClass="commandButton" 
-                                 icon="ui-icon-arrowthick-1-w" action="index?faces-redirect=true" />
-            </h:form>
-        </div>
-    </h:body>
+                    </h:panelGrid>
+                    <br />
+                    <br />
+                    <!-- When the "Go Back" button is clicked on, the index.xhtml page is shown. -->
 
+                    <p:commandButton value="Go Back" ajax="false" styleClass="commandButton" 
+                                     icon="ui-icon-arrowthick-1-w" action="index?faces-redirect=true" />
+                </h:form>
+            </div>
+        </ui:define>
 
+    </ui:composition>
 </html>
