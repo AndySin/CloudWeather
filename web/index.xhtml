@@ -5,15 +5,17 @@ Copyright © 2017 Andy Sin. All rights reserved.
 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"   
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <!-- This page is constructed based on the siteTemplate -->
-    <ui:composition template="/template/siteTemplate.xhtml">
+    <ui:composition template="/template/siteTemplate.xhtml" >
 
-        <!-- Create the content for this page below -->
-        <ui:define name="editableContent">
 
-            <!-- TODO -->
+        <ui:define name="editableContent" >
+
+            <iframe width='97%' frameBorder='0' style='height: 60vh; margin: 25px 0;' 
+                    src='https://maps.darksky.net/@temperature,39.000,-95.000,4?embed=true&amp;timeControl=false&amp;fieldControl=false&amp;defaultField=temperature&amp;defaultUnits=_f'></iframe>
 
         </ui:define>
 
