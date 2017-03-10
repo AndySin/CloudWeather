@@ -45,9 +45,13 @@ public class SearchedWeatherController implements Serializable {
     private SearchedWeather searchResults;
 
     public String getForecast() {
+        
+        String noSpaceSearchQuery = searchQuery.replaceAll(" ", "+");
+        
         try {
             String weatherAPICall = weatherAPIUrl + "weather?"
-                    + searchParameter + "=" + searchQuery + "&appid=" + weatherAPIKey;
+                    + searchParameter + "=" + noSpaceSearchQuery 
+                    + "&appid=" + weatherAPIKey;
             JSONObject jsonData = readUrlContent(weatherAPICall);
 
             JSONObject jsonCoords = jsonData.getJSONObject(COORD);
