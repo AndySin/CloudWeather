@@ -58,7 +58,8 @@ public class SearchedWeatherController implements Serializable {
             JSONArray jsonWeather = jsonData.getJSONArray(WEATHER);
             JSONObject jsonTemp = jsonData.getJSONObject(MAIN);
 
-            searchResults = new SearchedWeather(jsonTemp.getDouble("temp"),
+            searchResults = new SearchedWeather(jsonTemp.getDouble("temp"), 
+                    jsonTemp.getDouble("temp_min"), jsonTemp.getDouble("temp_max"), 
                     jsonCoords.getDouble("lon"), jsonCoords.getDouble("lat"),
                     jsonWeather.getJSONObject(0).getString("description"),
                     jsonData.getString("name"));

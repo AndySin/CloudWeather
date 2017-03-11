@@ -15,6 +15,14 @@ public class SearchedWeather {
     private int celsius;
     private int fahrenheit;
 
+    private double kelvinMin;
+    private int celsiusMin;
+    private int fahrenheitMin;
+
+    private double kelvinMax;
+    private int celsiusMax;
+    private int fahrenheitMax;
+
     private double latitude;
     private double longitude;
 
@@ -22,11 +30,13 @@ public class SearchedWeather {
 
     private String locationName;
 
-    public SearchedWeather(double kelvin, double longitude, double latitude,
-            String weatherDescription, String locationName) {
-        this.kelvin = kelvin;
-        celsius = (int)(kelvin - 273.15);
-        fahrenheit = (int)((kelvin - 273.15) * 1.8 + 32);
+    public SearchedWeather(double kelvin, double kelvinMin, double kelvinMax, 
+            double longitude, double latitude, String weatherDescription, 
+            String locationName) {
+        
+        setKelvin(kelvin);
+        setKelvinMin(kelvinMin);
+        setKelvinMax(kelvinMax);
 
         this.longitude = longitude;
         this.latitude = latitude;
@@ -41,22 +51,52 @@ public class SearchedWeather {
 
     public void setKelvin(double kelvin) {
         this.kelvin = kelvin;
+        celsius = (int) (kelvin - 273.15);
+        fahrenheit = (int) ((kelvin - 273.15) * 1.8 + 32);
     }
 
     public int getCelsius() {
         return celsius;
     }
 
-    public void setCelsius(int celsius) {
-        this.celsius = celsius;
-    }
-
     public int getFahrenheit() {
         return fahrenheit;
     }
 
-    public void setFahrenheit(int fahrenheit) {
-        this.fahrenheit = fahrenheit;
+    public double getKelvinMin() {
+        return kelvinMin;
+    }
+
+    public void setKelvinMin(double kelvinMin) {
+        this.kelvinMin = kelvinMin;
+        celsiusMin = (int) (kelvinMin - 273.15);
+        fahrenheitMin = (int) ((kelvinMin - 273.15) * 1.8 + 32);
+    }
+
+    public int getCelsiusMin() {
+        return celsiusMin;
+    }
+
+    public int getFahrenheitMin() {
+        return fahrenheitMin;
+    }
+
+    public double getKelvinMax() {
+        return kelvinMax;
+    }
+
+    public void setKelvinMax(double kelvinMax) {
+        this.kelvinMax = kelvinMax;
+        celsiusMax = (int) (kelvinMax - 273.15);
+        fahrenheitMax = (int) ((kelvinMax - 273.15) * 1.8 + 32);
+    }
+
+    public int getCelsiusMax() {
+        return celsiusMax;
+    }
+
+    public int getFahrenheitMax() {
+        return fahrenheitMax;
     }
 
     public double getLatitude() {
