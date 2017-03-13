@@ -5,6 +5,8 @@
 package com.mycompany.WeatherSearch;
 
 import com.mycompany.Weather.SearchedWeather;
+import com.mycompany.Weather.WeatherForecast;
+import com.mycompany.Weather.WeatherTimestamp;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.Serializable;
@@ -38,20 +40,25 @@ public class SearchedWeatherController implements Serializable {
     private final String RAIN = "rain";
     private final String CLOUDS = "clouds";
     private final String NAME = "name";
+    private final String LIST = "list";
+    private final String DT = "dt";
 
     private String searchParameter;
     private String searchQuery;
 
-    // Object returned from API call
+    // Object returned from API call for current forecast
     private SearchedWeather searchResults;
 
+    // Object returned from API call for multi-day forecast
+    private WeatherForecast forecastResults;
+
     public String getForecast() {
-        
+
         String noSpaceSearchQuery = searchQuery.replaceAll(" ", "+");
-        
+
         try {
             String weatherAPICall = weatherAPIUrl + "weather?"
-                    + searchParameter + "=" + noSpaceSearchQuery 
+                    + searchParameter + "=" + noSpaceSearchQuery
                     + "&appid=" + weatherAPIKey;
             JSONObject jsonData = readUrlContent(weatherAPICall);
 
@@ -59,17 +66,46 @@ public class SearchedWeatherController implements Serializable {
             JSONArray jsonWeather = jsonData.getJSONArray(WEATHER);
             JSONObject jsonTemp = jsonData.getJSONObject(MAIN);
 
-            searchResults = new SearchedWeather(jsonTemp.getDouble("temp"), 
-                    jsonTemp.getDouble("temp_min"), jsonTemp.getDouble("temp_max"), 
-                    jsonCoords.getDouble("lon"), jsonCoords.getDouble("lat"),
-                    jsonWeather.getJSONObject(0).getString("description"),
-                    jsonData.getString("name"));
+            searchResults = makeSearchedWeather(
+                    jsonData, jsonCoords, jsonWeather, jsonTemp);
 
         } catch (Exception e) {
             e.printStackTrace();
             return "WeatherForecastResultsError?faces-redirect=true";
         }
         return "WeatherForecastResults?faces-redirect=true";
+    }
+
+    public String get5DayForecast() {
+        String noSpaceSearchQuery = searchQuery.replaceAll(" ", "+");
+
+        try {
+            String weatherAPICall = weatherAPIUrl + "forecast?"
+                    + searchParameter + "=" + noSpaceSearchQuery
+                    + "&appid=" + weatherAPIKey;
+            JSONObject jsonData = readUrlContent(weatherAPICall);
+
+            JSONObject jsonCoords = jsonData.getJSONObject(COORD);
+            JSONArray jsonForecast = jsonData.getJSONArray(LIST);
+            int arrSize = jsonForecast.length();
+
+            forecastResults = new WeatherForecast();
+            for (int x = 0; x < arrSize; x++) {
+                JSONObject current = jsonForecast.getJSONObject(x);
+                long dt = current.getLong(DT);
+                JSONArray jsonWeather = jsonData.getJSONArray(WEATHER);
+                JSONObject jsonTemp = jsonData.getJSONObject(MAIN);
+                SearchedWeather currentWeather = makeSearchedWeather(
+                        jsonData, jsonCoords, jsonWeather, jsonTemp);
+                WeatherTimestamp currentWeatherTimestamp
+                        = new WeatherTimestamp(currentWeather, dt);
+                forecastResults.addWeather(currentWeatherTimestamp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "WeatherForecastResultsError?faces-redirect=true";
+        }
+        return "WeatherMultiForecastResults?faces-redirect=true";
     }
 
     public String getSearchQuery() {
@@ -117,6 +153,16 @@ public class SearchedWeatherController implements Serializable {
                 urlReader.close();
             }
         }
+    }
+
+    private SearchedWeather makeSearchedWeather(JSONObject jsonData,
+            JSONObject jsonCoords, JSONArray jsonWeather, JSONObject jsonTemp) {
+        return new SearchedWeather(jsonTemp.getDouble("temp"),
+                jsonTemp.getDouble("temp_min"), jsonTemp.getDouble(
+                "temp_max"),
+                jsonCoords.getDouble("lon"), jsonCoords.getDouble("lat"),
+                jsonWeather.getJSONObject(0).getString("description"),
+                jsonData.getString("name"));
     }
 
 }
