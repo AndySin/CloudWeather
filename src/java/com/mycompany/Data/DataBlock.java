@@ -14,24 +14,24 @@ import java.util.List;
 public class DataBlock {
 
     private final List<DataPoint> data;
-    private final String summary;
     private final String icon;
+    private final String summary;
 
-    public DataBlock(List<DataPoint> data, String summary, String icon) {
+    public DataBlock(List<DataPoint> data, String icon, String summary) {
         this.data = data;
-        this.summary = summary;
         this.icon = icon;
+        this.summary = summary;
     }
 
     public List<DataPoint> getData() {
         return data;
     }
 
-    public String getSummary() {
-        return summary;
-    }
-
     public String getIcon() {
         return icon;
+    }
+
+    public String getSummary() {
+        return summary;
     }
 }

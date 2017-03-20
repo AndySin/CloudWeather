@@ -8,25 +8,28 @@ import java.util.List;
 
 /**
  * Contains an alert issued by a government authority.
- * 
+ *
  * @author Andy
  */
 public class Alert {
+
     private final String description;
     private final Long expires;
     private final List<String> regions;
     private final String severity;
     private final Long time;
     private final String title;
+    private final String uri;
 
     public Alert(String description, Long expires, List<String> regions,
-            String severity, Long time, String title) {
+            String severity, Long time, String title, String uri) {
         this.description = description;
         this.expires = expires;
         this.regions = regions;
         this.severity = severity;
         this.time = time;
         this.title = title;
+        this.uri = uri;
     }
 
     public String getDescription() {
@@ -52,4 +55,9 @@ public class Alert {
     public String getTitle() {
         return title;
     }
+
+    public String getUri() {
+        return uri;
+    }
+
 }
