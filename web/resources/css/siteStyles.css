@@ -1,20 +1,29 @@
-/**********************************************
+/*********************************************
 Cascading Style Sheets (CSS) Style Definitions
-Adapted from Osman Balci's CSS Style Definitions
-**********************************************/
-
-/* @TODO CLEAN UP **/
-
+Composed by Osman Balci on May 24, 2016.
+*********************************************/
 
 html, body {
+    /*---------------------------------------------------------------------------------
+    If you use a background image, make sure that its size is very small, i.e., < 100KB
+    -----------------------------------------------------------------------------------
+    Expression Language (EL) variable 'resource' is an implicit object
+    for javax.faces.application.ResourceHandler. The 'resources' is
+    the default directory the handler looks for resource files in.
+    */
+    /* background-image: url("#{resource['images:background.jpg']}"); */
 
+    /*---------------------------------------------------------------------------------
+    Preferably, use a background color. Uncomment the one you like from examples below.
+    See more HTML colors at http://www.w3schools.com/colors/colors_names.asp
+    ---------------------------------------------------------------------------------*/
     /* background-color: #F0F8FF;   /* AliceBlue */
     /* background-color: #F0FFFF;   /* Azure */
     /* background-color: #F5F5DC;   /* Beige */
     /* background-color: #DCDCDC;   /* Gainsboro */
     /* background-color: #FFFFF0;   /* Ivory */
-    /* background-color: #FAF0E6;   /* Linen */
-    background-color: #FDF5E6;   /* OldLace */
+    background-color: #FAF0E6;   /* Linen */
+    /* background-color: #FDF5E6;   /* OldLace */
     /* background-color: #FFEFD5;   /* PapayaWhip */
     /* background-color: #F5DEB3;   /* Wheat */
     /* background-color: #B0E0E6;   /* PowderBlue */
@@ -25,10 +34,18 @@ html, body {
     -moz-background-size: cover;    /* For Mozilla */
     -o-background-size: cover;      /* For Opera */
     background-size: cover;         /* Generic */
-    background-repeat: no-repeat;   /* Do not repeat the image */
+    background-repeat: repeat-x;   /* Do not repeat the image */
+    background-image: url('http://bgfons.com/upload/sky_texture1967.jpg');
+
+    animation: animatedBackground 30s linear infinite;
 
     width: 100%;                    /* Set page width horizontally 100% */
     height: 100%;                   /* Set page height vertically 100% */
+}
+
+@keyframes animatedBackground {
+	from { background-position: 0 0; }
+	to { background-position: 100% 0; }
 }
 
 /* Style the text used under the standard HTML tag "body" */
@@ -39,6 +56,7 @@ body {
     font-weight: normal;
     text-decoration: none;
     color: black;
+    
 }
 
 /* Style the text used under the standard HTML tag "p" for paragraph */
@@ -57,7 +75,7 @@ h1 {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12pt;
     font-style: normal;
-    font-weight: normal;
+    font-weight: bold;
     text-decoration: none;
     color: #006400; /* Dark Green */
 }
@@ -76,7 +94,6 @@ h2 {
 ==================
 Styling Hyperlinks
 ==================
-The <a> tag defines a hyperlink.
 Hyperlinks (or links) are styled differently depending on what state they are in:
     a:link      - normal state (unvisited link)
     a:visited   - visited state (link clicked on by user earlier)
@@ -118,7 +135,7 @@ See CSS Selector Reference at http://www.w3schools.com/cssref/css_selectors.asp
 .stylename defines the style of all elements marked as class="stylename" or
 styleClass="stylename". Note that styleClass is converted to class.
 
-Since ids are unique, the #id styling is used only once.
+Since id's are unique, the #id styling is used only once.
 .stylename can be used many times to style a class of elements.
 */
 
@@ -139,7 +156,7 @@ Style the div component whose unique id is "header" per reference
 <div id="header"> in siteTemplate.xhtml
 */
 #header {
-    background-color: #F0FFFF;   /* Azure */
+    background-color: #B0E0E6;   /* PowderBlue */
     width: 100%;
     height: 84px;
     position: absolute;
@@ -154,12 +171,12 @@ Style the div component whose unique id is "editableContent" per reference
 */
 #editableContent {
     /* height = 100% window height - (header height 84px + footer height 100px) */
-    height: calc(100% - 184px); 
+    height: 100%; 
     width: 100%;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 100px;
-    margin-bottom: 16px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 /* 
 Style the div component whose unique id is "footer" per reference 
@@ -195,7 +212,7 @@ in headerTemplate.xhtml
     position: absolute;
     left: 0;
     top: 0;
-    padding: 10px;
+    padding: 7px;
 }
 /* 
 Place the navigation menu bar on the right top corner per reference
@@ -205,7 +222,7 @@ in headerTemplate.xhtml
 .rightTopCornerAlign {
     position: absolute;
     right: 0;
-    top: 24px;
+    top: 12px;
     padding: 10px;
 }
 
@@ -229,155 +246,20 @@ in Create.xhtml, View.xhtml, and Edit.xhtml.
 }
 
 /*
-========================
-Vertical Navigation Menu
-========================
-*/
-/* Style class for <ul> */
-.verticalMenu {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    width: 180px;
-    background-color: #F0FFFF; /* Azure */
-    border: 1px solid #555;
-
-}
-
-/* Style class for <li> */
-.verticalMenuItem {
-    text-align: left;
-    border-bottom: 1px solid #555;
-}
-
-/* Style class for <li> and the <a> tag that defines a hyperlink */
-.verticalMenuItem a {
-    display: block;
-    color: black;
-    padding: 8px 16px;
-    text-decoration: none;  /* Do not underline the hyperlink */
-}
-
-/* Style class for <ul>, <li> and <a> hyperlink tag */
-.verticalMenu, .verticalMenuItem a {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 10pt;
-    font-style: normal;
-    font-weight: normal;
-}
-
-/* Style class for <li> last-child */
-.verticalMenuItem:last-child {
-    border-bottom: none;
-}
-
-/* Style class for <li> for mouse over state */
-.verticalMenuItem a:hover {
-    background-color: #87CEFA; /* Light Sky Blue */
-    color: darkblue; 
-}
-
-/*
 =======================
 Other Style Definitions
 =======================
 */
 
-/* Used in footerTemplate and Profile */
-.arialTen {
+/* Style the Create, View, and Edit data fields */
+.dataFields {
+    width: 300px;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 10pt;
-    font-style: normal;
-    font-weight: normal;
-}
-
-/* Used in EditAccount and UserFiles */
-.alertUser {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 10pt;
-    font-style: normal;
-    font-weight: normal;
-    color: darkred;
-}
-
-/* Used in CreateAccount, EditAccount, SignIn, and Profile */
-.accountColumn1, .signInColumn1, .profileColumn1 {
-    text-align: right;
-    background-color: #FFE4C4;   /* Bisque */
-    white-space: nowrap;  /* Disallow line break */
-}
-
-/* Used in CreateAccount and EditAccount */
-.accountColumn2, .signInColumn2, .profileColumn2 {
-    text-align: left;
-    background-color: #FFEBCD;   /* Blanched Almond  */
-    white-space: nowrap;  /* Disallow line break */
-}
-
-/* Style error messages text */
-.errorMessages {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12pt;
-    font-style: normal;
-    font-weight: normal;
-    color: #FF0000; /* Red */
-}
-
-/* Style a heading text */
-.heading {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14pt;
-    font-style: normal;
-    font-weight: normal;
-    color: #006400;  /* Dark Green */
-}
-
-/* Style form item text */
-.formItemText {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12pt;
     font-style: normal;
     font-weight: normal;
     text-decoration: none;
-}
-
-/* Used in Profile */
-.profilePhoto {
-    display: inline-block;
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-}
-
-/* Used in UserFiles */
-.previewImage {
-    width: auto;
-    height: 36px;
-}
-
-/* Used in DisplayFile */
-.displayImage {
-    width: auto;
-    max-height: 400px;
-}
-
-/* Used in UserFiles */
-.previewProfilePhoto {
-    display: inline-block;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-}
-
-/* Used in CreateAccount, EditAccount, SignIn, EnterUsername, and SecurityQuestion */
-.accountInputTextField, .signInInputTextField, .usernameInputTextField, .securityAnswerTextField {
-    width: 200px;
+    color: black;
 }
 
 /*
@@ -418,19 +300,34 @@ the speed of the transition to change over time.
 =================================
 Skinning PrimeFaces UI Components
 =================================
-Check the documentation of a PrimeFaces UI component to identify
-which styles are used so that you can override them.
 
-You can also Inspect the UI element under the Chrome web browser
-to determine which CSS style is used so that you can override it. 
+Approach 1: 
+    Check the documentation of a PrimeFaces UI component to identify
+    which styles are used so that you can override them.
+
+    You can also Inspect the UI element under the Chrome web browser
+    to determine which CSS style is used so that you can override it. 
+
+Approach 2: 
+    Define a style in this file and apply it to the PrimeFaces element
+    using the styleClass attribute to override the PrimeFaces style.
 
 Styles are applied in a cascading order. To make sure that a
 style is applied regardless of where the style is defined in the
 cascading hierarchy, use the !important attribute.
 */
 
-/* Style PrimeFaces Command Button --> p:commandButton  */
-.commandButton, .ui-confirmdialog-yes, .ui-confirmdialog-no, .ui-fileupload-choose, .ui-fileupload-upload, .ui-fileupload-cancel {
+/* Approach 1: Override PrimeFaces style definitions to use smaller Arial font */
+.ui-datatable-data, .facetHeader, .ui-panel-titlebar, .ui-paginator, .ui-dialog-content, .ui-confirm-dialog-message, .ui-widget-content {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+/* Approach 2: Override PrimeFaces p:commandButton style */
+.commandButton {
     border-radius: 2em !important;
     font-family: Arial, Helvetica, sans-serif !important;
     font-size: 10pt !important;
@@ -440,108 +337,14 @@ cascading hierarchy, use the !important attribute.
     color: black;
 }
 
-/*
-Position the confirmation dialog box on the center of the screen per
-reference <p:confirmDialog id="confirmDialogBox" ...> in Profile.xhtml
-*/
-#confirmDialogBox {
-    top: 50%;
-    left: 50%;
+/* Approach 2: Override PrimeFaces p:menubar style */
+.menubar {
+    background: none;
+    border: none;
 }
 
-/* Leave 5px padding to left and right of p:dataTable */
+/* Approach 2: Override PrimeFaces p:dataTable style */
 .dataTable {
-    padding-left: 5px;
     padding-right: 5px;
 }
 
-/* Override PrimeFaces style definitions for the Data Table component */
-.ui-datatable-data, .facetHeader, .ui-panel-titlebar, .ui-paginator, .ui-dialog-content, .ui-confirm-dialog-message, .ui-widget-content {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 10pt;
-    font-style: normal;
-    font-weight: normal;
-    text-decoration: none;
-}
-
-/* Override PrimeFaces style definitions for the Data Grid component */
-.ui-datagrid, .ui-datagrid-content, .ui-datagrid-data, .ui-datagrid-row, .ui-datagrid-column {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 10pt;
-    font-style: normal;
-    font-weight: normal;
-    text-decoration: none;
-    background-color: #FDF5E6;   /* OldLace */
-}
-
-/* Override PrimeFaces style definitions for the Panel component */
-.ui-panel, .ui-panel-content {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 10pt;
-    font-style: normal;
-    font-weight: normal;
-    text-decoration: none;
-    background-color: #FDF5E6;   /* OldLace */
-}
-
-/* Override PrimeFaces style definitions for the Dialog component */
-.ui-dialog, .ui-dialog-content, .ui-dialog-buttonpane {
-    color: #800000; /* Maroon */
-    background-color: #FDF5E6;   /* OldLace */
-}
-
-/* Override PrimeFaces style definition for the fileUpload component */
-.ui-fileupload {
-    width: 80%;
-}
-
-.ui-fileupload-buttonbar {
-    /* padding values are specified in clockwise: Top, Right, Bottom, and Left */
-    padding: 0px 0px 8px 0px !important;
-}
-
-.ui-fileupload-content {
-    /* The drag-and-drop area height will increase as more files are dropped */
-    min-height: 200px;
-}
-
-/*
-======================================================
-Auto generated jsfcrud.css content is provided below. 
-Delete jsfcrud.css since its content is provided here.
-======================================================
-*/
-
-/* 
-Set font size in ui-widget styled elements to 12px.
-
-The !important directive forces the style to be applied no matter
-where the style appears in the CSS document.
-*/
-
-.ui-widget {
-    font-size: 12px !important;
-}
-
-/* 
-The overflow property specifies what happens 
-if content overflows an element's box. 
-*/
-.ui-layout-north {
-    z-index: 20 !important;
-    overflow: visible !important;;
-}
-.ui-layout-north .ui-layout-unit-content {
-    overflow: visible !important;
-}
-
-/* This styles the <p:panel header="..."> */
-.ui-widget-header {
-    text-align: center;
-    /* text-transform: uppercase; we do not want this */
-}
-
-/* Leave 10px pading on top for the ui-button elements */
-.ui-button {
-    margin-top: 10px !important;
-}
