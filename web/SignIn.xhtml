@@ -17,18 +17,19 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
 
         <!-- Create the content for this page below -->
         <ui:define name="editableContent">
-            <div align="center"> <h2>Log In</h2></div>
+            <div align="center"> <index_header>Log In</index_header></div>
+            <br></br>
 
-            <div align="center" style="width:40%; background-color: #DCDCDC; margin:0 auto;">
+            <div align="center" style="width:40%; background-color: #FEFEFE; margin:0 auto;">
                 <h:form>
                     <br/>
                     <table cellspacing="10">
                         <tr>
-                            <td><h:outputLabel class="field-label" value="Username:" for="username" /></td>
+                            <td><index_regular>Username</index_regular></td>
                         </tr>
                         <tr>
                             <td>
-                                <p:inputText id="username" value="#{loginManager.username}" required="true" 
+                                <p:inputText id="username" style="font-family: Lato; width:250px; box-shadow: none;" value="#{loginManager.username}" required="true" 
                                              requiredMessage="#{bundle.CreateCustomerRequiredMessage_username}" label="Username">
                                 </p:inputText>
                             </td>
@@ -36,27 +37,25 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                         <tr></tr>
                         <tr></tr>
                         <tr>
-                            <td>
-                                <h:outputLabel class="field-label" value="Password:" for="password" />
-                            </td>
+                            <td><index_regular>Password</index_regular></td>
                         </tr>
 
                         <tr>
                             <td>
-                                <p:password id="password" value="#{loginManager.password}" feedback="false">
+                                <p:password id="password" style="font-family: Lato; width: 250px; box-shadow: none;" value="#{loginManager.password}" feedback="false">
                                 </p:password>
                             </td>
                         </tr>
 
                         <tr>
                             <td>
-                                <a href="ComputeCylinder.xhtml" class="password_retrieve">Forgot password?</a>
+                                <h:link outcome="ForgotPassword.xhtml"><b>Forgot password?</b></h:link>
                             </td>
                         </tr>
                     </table>
                     <br/>
-                    <p:commandButton id="create" class="button" value="Log In" action="#{loginManager.createCustomer()}" ajax="false"/>
-
+                    <p:button id="create" class="login" value="LOG IN" onclick="#{loginManager.createCustomer()}"/>
+                    <br/>
                     <br/>
                 </h:form>
             </div>
