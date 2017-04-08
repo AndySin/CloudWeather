@@ -28,27 +28,20 @@ Copyright © 2017 Andy Sin. All rights reserved.
                     <br />
                     <h:panelGrid columns="2" columnClasses="rightAlign, leftAlign">
                         <!-- Columns 1 & 2 -->
-                        <h:outputText value="City: " />                  
-                        <h:outputText value="#{searchedWeatherController.searchResults.locationName}" />
+                        <h:outputText value="Latitude: " />                  
+                        <h:outputText value="#{searchedWeatherController.result.latitude}" />
 
                         <!-- Columns 1 & 2 -->
-                        <h:outputText value="Weather: " />                  
-                        <h:outputText value="#{searchedWeatherController.searchResults.weatherDescription}" />
+                        <h:outputText value="Longitude: " />                  
+                        <h:outputText value="#{searchedWeatherController.result.longitude}" />
 
                         <!-- Columns 1 & 2 -->
                         <h:outputText value="Current Temperature: " />  
-                        <h:outputText value="#{searchedWeatherController.searchResults.celsius} °C 
-                                      / #{searchedWeatherController.searchResults.fahrenheit} °F" />  
+                        <h:outputText value="#{searchedWeatherController.result.currently.temperature}°" />  
 
                         <!-- Columns 1 & 2 -->
-                        <h:outputText value="Minimum Temperature: " />  
-                        <h:outputText value="#{searchedWeatherController.searchResults.celsiusMin} °C 
-                                      / #{searchedWeatherController.searchResults.fahrenheitMin} °F" />  
-
-                        <!-- Columns 1 & 2 -->
-                        <h:outputText value="Maximum Temperature: " />  
-                        <h:outputText value="#{searchedWeatherController.searchResults.celsiusMax} °C 
-                                      / #{searchedWeatherController.searchResults.fahrenheitMax} °F" />  
+                        <h:outputText value="Weather: " />                  
+                        <h:outputText value="#{searchedWeatherController.result.currently.summary}" />
 
                     </h:panelGrid>
                     <br />

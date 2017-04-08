@@ -33,23 +33,21 @@ Copyright © 2017 Andy Sin. All rights reserved.
 
             <h:form id="searchDialogForm">
                 <div align="center" bgcolor="#FDF5E6" >
-                    <br />
-                    <h:outputLabel for="searchQueryField" value="Enter city name to search:" />
-                    <br /><br />
+                    <h:outputLabel for="searchQueryFieldLat" value="Latitude:" />
+                    <h:inputText id="searchQueryFieldLat" style="width:200px"
+                                 value="#{searchedWeatherController.searchLatitude}" 
+                                 required="true" >
+                        <f:validateDoubleRange minimum="-90.0" maximum="90.0"></f:validateDoubleRange>
+                    </h:inputText>
 
-                    <h:inputText id="searchQueryField" style="width:200px"
-                                 value="#{searchedWeatherController.searchQuery}" >
-                    </h:inputText>  
-                    
                     <br /><br />
-
-                    <p:selectOneMenu id="selectOne" class="formItemText"
-                                     value="#{searchedWeatherController.searchParameter}"
-                                     required="true">
-                        <f:selectItem itemLabel="Select One" itemValue="" />
-                        <f:selectItem itemLabel="City Name" itemValue="q" />
-                        <f:selectItem itemLabel="Zip Code (US)" itemValue="zip" />
-                    </p:selectOneMenu>        
+                    <h:outputLabel for="searchQueryFieldLong" value="Longitude:" />
+                    <h:inputText id="searchQueryFieldLong" style="width:200px"
+                                 label="Longitude"
+                                 value="#{searchedWeatherController.searchLongitude}" 
+                                 required="true" >
+                                 <f:validateDoubleRange minimum="-180.0" maximum="180.0"></f:validateDoubleRange>
+                    </h:inputText>
 
                     <br /><br /><br />
 
