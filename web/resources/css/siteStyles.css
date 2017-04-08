@@ -22,7 +22,7 @@ html, body {
     /* background-color: #F5F5DC;   /* Beige */
     /* background-color: #DCDCDC;   /* Gainsboro */
     /* background-color: #FFFFF0;   /* Ivory */
-    background-color: #FAF0E6;   /* Linen */
+    background-color: #f5f5f8;   /* Linen */
     /* background-color: #FDF5E6;   /* OldLace */
     /* background-color: #FFEFD5;   /* PapayaWhip */
     /* background-color: #F5DEB3;   /* Wheat */
@@ -34,14 +34,16 @@ html, body {
     -moz-background-size: cover;    /* For Mozilla */
     -o-background-size: cover;      /* For Opera */
     background-size: cover;         /* Generic */
-    background-repeat: repeat-x;   /* Do not repeat the image */
-    background-image: url('http://bgfons.com/upload/sky_texture1967.jpg');
+    /*background-repeat: repeat-x;   /* Do not repeat the image */
+    /*background-image: url('http://bgfons.com/upload/sky_texture1967.jpg');
 
-    animation: animatedBackground 30s linear infinite;
+    animation: animatedBackground 30s linear infinite;*/
 
     width: 100%;                    /* Set page width horizontally 100% */
     height: 100%;                   /* Set page height vertically 100% */
 }
+
+
 
 @keyframes animatedBackground {
 	from { background-position: 0 0; }
@@ -80,6 +82,54 @@ h1 {
     color: #006400; /* Dark Green */
 }
 
+index_header {
+    font-family: Lato;
+    font-size: 40px;
+    font-weight: bolder;
+    text-decoration: none;
+    color: black; /* Dark Green */
+}
+
+index_regular {
+    
+    font-family: Lato;
+    font-size: 20px;
+    text-decoration: none;
+    color: black; /* Dark Green */
+}
+
+index_bottom {
+    
+     font-family: Lato;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black; /* Dark Green */
+    
+}
+
+#topMain {
+    
+    height: 500px;
+    width: 100%;
+    
+    background: #f5f5f8;
+    font-family: Lato; 
+    text-align: center;
+
+}
+
+#bottomMain {
+    
+    height: 650px;
+    width: 100%;
+    
+    background: #EEEEEE;
+    font-family: Lato; 
+    text-align: center;
+
+}
+
 .field-label{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 15pt;
@@ -96,7 +146,7 @@ h1 {
 
 button[type=submit] {
   display: block;
-  background-color: #4c4c4c;
+  background: transparent;
   border: 0;
   border-radius: 0.25rem;
   padding: 0.5rem 1.5rem;
@@ -109,7 +159,7 @@ button[type=submit] {
 }
 
 button[type=submit]:hover {
-  background-color: #00BFFF;
+  background: transparent;
 }
 
 /* Style the text used under the standard HTML tag "h2" for header 2 */
@@ -147,7 +197,7 @@ a:visited {
 }
 
 a:hover {
-    text-decoration: underline; /* Underline the link in hover state */
+    text-decoration: none; /* Underline the link in hover state */
 }
 
 a:active {
@@ -188,15 +238,17 @@ Style the div component whose unique id is "header" per reference
 <div id="header"> in siteTemplate.xhtml
 */
 #header {
-    background-color: transparent;
+    background-color: #313134;
     width: 100%;
-    height: 84px;
+    height: 70px;
     position: absolute;
     left: 0px;
     top: 0px;
     right: 0px;
     margin-bottom: 16px;
 }
+
+
 /* 
 Style the div component whose unique id is "editableContent" per reference 
 <div id="editableContent"> in siteTemplate.xhtml
@@ -207,7 +259,7 @@ Style the div component whose unique id is "editableContent" per reference
     width: 100%;
     margin-left: 0px;
     margin-right: 0px;
-    margin-top: 0px;
+    margin-top: 150px;
     margin-bottom: 0px;
 }
 /* 
@@ -215,6 +267,7 @@ Style the div component whose unique id is "footer" per reference
 <div id="footer"> in siteTemplate.xhtml
 */
 #footer {
+    background-color: #EEEEEE;
     height: 100px;
     width: 100%;
     left: 0px;
@@ -226,7 +279,7 @@ Style the div component whose unique id is "footerPanelGrid" per reference
 <h:panelGrid id="footerPanelGrid" columns="2"> in footerTemplate.xhtml 
 */
 #footerPanelGrid {
-    width: 80%;
+    width: 100%;
 }
 /* 
 Style the div component whose unique id is "rightAlignPanelGroup" per reference
@@ -234,6 +287,89 @@ Style the div component whose unique id is "rightAlignPanelGroup" per reference
 */
 #rightAlignPanelGroup {
     float: right;
+}
+
+
+.header_tab {
+    font-family: Lato;
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+    
+}
+
+.login_button {
+    font-family: Lato;
+    font-size: 14px;
+    font-weight: 300;
+    color: white;
+    text-decoration: none;
+    border-color: white;
+    background: transparent;
+    border-width: 1px;
+    border-style: solid;
+    box-shadow: none;
+    
+}
+
+.signup_button {
+    font-family: Lato;
+    font-size: 14px;
+    font-weight: 300;
+    color: #313134;
+    text-decoration: none;
+    background: white;
+    border-width: 1px;
+    border-style: solid;
+    box-shadow: none;
+    
+}
+
+.signup_button:hover {
+    border-color: #0aa9f7;
+}
+
+.login_button:hover {
+    border-color: #0aa9f7;
+}
+
+.index_login:hover {
+    border-color: #0aa9f7;
+}
+
+.index_signup:hover {
+    border-color: #0aa9f7;
+}
+
+.index_login {
+    
+    font-family: Lato;
+    font-size: 30px;
+    font-weight: 300;
+    color: #313134;
+    text-decoration: none;
+    border-color: #313134;
+    background: transparent;
+    border-width: 1px;
+    border-style: solid;
+    box-shadow: none;
+    width: 180px;
+}
+
+.index_signup {
+    
+    font-family: Lato;
+    font-size: 30px;
+    font-weight: 300;
+    color: #313134;
+    text-decoration: none;
+    border-color: #313134;
+    background: transparent;
+    border-width: 1px;
+    border-style: solid;
+    box-shadow: none;
+    width: 180px;
+
 }
 /* 
 Place the logo image on the left top corner per reference
@@ -267,6 +403,7 @@ in Create.xhtml, View.xhtml, and Edit.xhtml.
     text-align: right;
     white-space: nowrap;  /* Disallow line break */
 }
+
 /* 
 Left align column 2 text and disallow line breaks per reference
 <p:panelGrid columns="2" columnClasses="columnOne, columnTwo">

@@ -6,18 +6,50 @@ Copyright © 2017 Andy Sin. All rights reserved.
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
     <!-- This page is constructed based on the siteTemplate -->
     <ui:composition template="/template/siteTemplate.xhtml" >
 
 
         <ui:define name="editableContent" >
+            
+            <div id="topMain">
+                
+                <index_header>Weather-Proof Activity Planner</index_header>
+                
+                <br></br>
+                <br></br>
+                
+                <index_regular>The easiest, most advanced, way to plan an activity.</index_regular>
+                
+                <br></br><br></br>
+                <br></br><br></br>
+                
+                <p:button styleClass="index_signup" outcome="WeatherForecastResults" value="TRY IT NOW"/>
 
-            <div align="center">
-                <iframe width='90%' frameBorder='0' style='height: 60vh; margin: 25px 0;' 
-                        src='https://maps.darksky.net/@temperature,39.000,-95.000,4?embed=true&amp;timeControl=false&amp;fieldControl=false&amp;defaultField=temperature&amp;defaultUnits=_f'></iframe>
+                <br></br><br></br>
+                
+                <img src="resources/images/divider.png" width="600px" height="auto"/>
+                
+                <br></br>
+                
+                <p:button styleClass="index_login" outcome="SignIn" value="LOG IN"/> 
+                
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                
+                <p:button styleClass="index_signup" outcome="SignUp" value="SIGN UP"/>
+
             </div>
+            
+            <div id="bottomMain">
+                
+            </div>
+
+            
+
+            
         </ui:define>
 
     </ui:composition>
