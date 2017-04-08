@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created by Akhil Gangu on 2017.04.08
+Copyright © 2017 Akhil Gangu. All rights reserved.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <!-- Do not enter tags before the composition line since they are ignored by JSF -->
+
+    <!-- This page is constructed based on the siteTemplate -->
+    <ui:composition template="/template/siteTemplate.xhtml">
+
+        <!-- Create the content for this page below -->
+        <ui:define name="editableContent">
+            <div align="center"> <h2>Check Weather For Your Event</h2></div>
+            <div align="center" style="width:40%; background-color: #DCDCDC; margin:0 auto;">
+                <h:form>
+                    <br/>
+                    <table cellspacing="10">
+                        <tr>
+                            <td align="right"><h:outputLabel class="field-label" value="Location:" for="location" /></td>
+
+
+                            <td align="left">
+                                <p:inputText id="location" value="#{loginManager.username}" required="true" 
+                                             requiredMessage="#{bundle.CreateCustomerRequiredMessage_username}" label="Location">
+                                </p:inputText>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                <h:outputLabel class="field-label" value="Day:" for="day" />
+                            </td>
+
+
+                            <td align="left">
+                                <p:calendar id="eventDay" pattern="MM/dd/yyyy" value="#{publicVideoController.selected.datePublished}" 
+                                            title="#{bundle.CreatePublicVideoTitle_datePublished}" required="true" 
+                                            requiredMessage="#{bundle.CreatePublicVideoRequiredMessage_datePublished}" showOn="button"/>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td align="right">
+                                <h:outputLabel class="field-label" value="Start Time:" for="startTime" />
+                            </td>
+
+
+                            <td align="left">
+                                <p:calendar id="startTime" pattern="HH:mm" timeOnly="true" value="#{publicVideoController.selected.datePublished}" 
+                                            title="#{bundle.CreatePublicVideoTitle_datePublished}" required="true" 
+                                            requiredMessage="#{bundle.CreatePublicVideoRequiredMessage_datePublished}" showOn="button"/>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td align="right">
+                                <h:outputLabel class="field-label" value="End Time:" for="endTime" />
+                            </td>
+
+
+                            <td align="left">
+                                <p:calendar id="endTime" pattern="HH:mm" timeOnly="true" value="#{publicVideoController.selected.datePublished}" 
+                                            title="#{bundle.CreatePublicVideoTitle_datePublished}" required="true" 
+                                            requiredMessage="#{bundle.CreatePublicVideoRequiredMessage_datePublished}" showOn="button"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <p:commandButton id="check" class="button" value="Check" action="#{loginManager.createCustomer()}" ajax="false"/>
+
+                    <br/>
+                </h:form>
+            </div>
+
+        </ui:define>
+
+    </ui:composition>
+    <!-- Do not enter tags after the composition line since they are ignored by JSF -->
+
+</html>
