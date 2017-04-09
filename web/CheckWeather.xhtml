@@ -35,58 +35,50 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                     });
                 });
             </script>
-            <div align="center"> <h2>Check Weather For Your Event</h2></div>
-            <div align="center" style="width:40%; background-color: #DCDCDC; margin:0 auto;">
-                <h:form>
+            
+            <div align="center"><index_header>Check Weather For Your Event</index_header></div>
+            <br/>
+            <div align="center" style="width:40%; background-color: #FEFEFE; margin:0 auto;">
+                <h:form prependId="false">
                     <br/>
                     <table cellspacing="10">
                         <tr>
-                            <td align="right"><h:outputLabel class="field-label" value="Location:" for="geocomplete" /></td>
-
-
+                            <td><index_regular>Location:</index_regular></td>
+                        </tr>
+                        <tr>
                             <td align="left">
-                                <input id="geocomplete" style="width: 300px; height:20px" type="text"/>
+                                <p:inputText id="geocomplete" style="font-family: Lato; width:250px; box-shadow: none;" required="true">
+                                </p:inputText>
                             </td>
 
                         </tr>
                         <tr>
-                            <td align="right">
-                                <h:outputLabel class="field-label" value="Day:" for="day" />
-                            </td>
-
-
+                            <td><index_regular id="eventDay">Event Date:</index_regular></td>
+                        </tr>
+                        <tr>
                             <td align="left">
-                                <p:calendar id="eventDay" pattern="MM/dd/yyyy"  
-                                            required="true" 
-                                            showOn="button"/>
+                                <p:calendar id="eventDay" pattern="MM/dd/yyyy" required="true" styleClass="calendarClass"/>
                             </td>
                         </tr>
 
                         <tr>
-                            <td align="right">
-                                <h:outputLabel class="field-label" value="Start Time:" for="startTime" />
-                            </td>
-
-
-                            <td align="left">
-                                <p:calendar id="startTime" pattern="HH:mm" timeOnly="true" 
-                                            required="true" 
-                                            showOn="button"/>
-                            </td>
+                            <td><index_regular id="startTime">Event Start Time:</index_regular></td>
                         </tr>
-
                         <tr>
-                            <td align="right">
-                                <h:outputLabel class="field-label" value="End Time:" for="endTime" />
-                            </td>
-
-
                             <td align="left">
-                                <p:calendar id="endTime" pattern="HH:mm" timeOnly="true"
-                                            required="true" 
-                                            showOn="button"/>
+                                <p:calendar id="startTime" pattern="HH:mm" timeOnly="true" required="true" styleClass="calendarClass"/>
                             </td>
                         </tr>
+                        <tr>
+                            <td><index_regular id="endTime">Event End Time:</index_regular></td>
+                        </tr>
+                        <tr>
+
+                            <td align="left">
+                                <p:calendar id="endTime" pattern="HH:mm" timeOnly="true" required="true" styleClass="calendarClass"/>
+                            </td>
+                        </tr>
+                        
                     </table>
                     <div class="latlng" style="display:none;">
                         <h:inputText id="searchQueryFieldLat" class="lat"
@@ -98,7 +90,7 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                         </h:inputText>
                     </div>
                     <br/>
-                    <p:commandButton id="check" class="button" value="Check" action="#{searchedWeatherController.getForecast()}" ajax="false"/>
+                    <p:commandButton id="check" class="login" value="SEARCH" action="#{searchedWeatherController.getForecast()}" ajax="false"/>
 
                     <br/>
                 </h:form>
