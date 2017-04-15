@@ -57,7 +57,8 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                         </tr>
                         <tr>
                             <td align="left">
-                                <p:calendar id="eventDay" pattern="MM/dd/yyyy" required="true" styleClass="calendarClass"/>
+                                <p:calendar id="eventDay"  value="#{searchedWeatherController.eventDate}"
+                                            pattern="MM/dd/yyyy" required="true" styleClass="calendarClass"/>
                             </td>
                         </tr>
 
@@ -66,7 +67,8 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                         </tr>
                         <tr>
                             <td align="left">
-                                <p:calendar id="startTime" pattern="HH:mm" timeOnly="true" required="true" styleClass="calendarClass"/>
+                                <p:calendar id="startTime" value="#{searchedWeatherController.eventStartTime}" 
+                                            pattern="HH:mm" timeOnly="true" required="true" styleClass="calendarClass"/>
                             </td>
                         </tr>
                         <tr>
@@ -75,7 +77,8 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                         <tr>
 
                             <td align="left">
-                                <p:calendar id="endTime" pattern="HH:mm" timeOnly="true" required="true" styleClass="calendarClass"/>
+                                <p:calendar id="endTime" value="#{searchedWeatherController.eventEndTime}"
+                                            pattern="HH:mm" timeOnly="true" required="true" styleClass="calendarClass"/>
                             </td>
                         </tr>
                         

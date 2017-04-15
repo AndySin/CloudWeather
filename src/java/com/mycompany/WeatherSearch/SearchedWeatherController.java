@@ -21,6 +21,9 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import org.primefaces.json.JSONArray;
 import org.primefaces.json.JSONObject;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -44,6 +47,11 @@ public class SearchedWeatherController implements Serializable {
     // Object returned from API call for weather forecast
     private Response result;
 
+    // set by user in web form
+    private Date eventDate;
+    private Date eventStartTime;
+    private Date eventEndTime;
+
     private static final String CURRENT = "currently";
     private static final String MINUTE = "minutely";
     private static final String HOUR = "hourly";
@@ -52,10 +60,14 @@ public class SearchedWeatherController implements Serializable {
     private static final String DATA = "data";
 
     public String getForecast() {
+        // TODO: error handling if past date is provided by user
 
         try {
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            String formattedDate = df.format(eventDate);
             String weatherAPICall = weatherAPIUrl + weatherAPIKey
-                    + "/" + searchLatitude + "," + searchLongitude;
+                    + "/" + searchLatitude + "," + searchLongitude + ","
+                    + formattedDate + "T00:00:00?";
             JSONObject jsonData = readUrlContent(weatherAPICall);
 
             result = createResponse(jsonData);
@@ -64,7 +76,35 @@ public class SearchedWeatherController implements Serializable {
             e.printStackTrace();
             return "WeatherForecastResultsError?faces-redirect=true";
         }
+
+        processHourlyData();
+
         return "WeatherForecastResults?faces-redirect=true";
+    }
+
+    /**
+     * Trims hourly results in Response to match event timings and also
+     * calculates stats for display on results page.
+     */
+    private void processHourlyData() {
+        DateFormat df = new SimpleDateFormat("HH:mm");
+        String startTimeFormatted = df.format(eventStartTime);
+        String endTimeFormatted = df.format(eventEndTime);
+
+        int startIndexHour = Integer.parseInt(startTimeFormatted.split(":")[0]);
+        int endIndexHour = (int) Math.ceil(Integer.parseInt(endTimeFormatted.split(":")[0]));
+
+        // iterate through hourly data for the event's day
+        for (int hour = 0; hour < 24; hour++) {
+            // this information not needed for display
+            if (hour < startIndexHour || hour > endIndexHour) {
+                result.getHourly().getData().remove(hour);
+            } else {
+                // TODO:
+                // also need to change time label so it can be easily shown on results page?
+                // Stat calculation should go here... are we doing min/max for the event?
+            }
+        }
     }
 
     /**
@@ -235,4 +275,29 @@ public class SearchedWeatherController implements Serializable {
     public void setResult(Response result) {
         this.result = result;
     }
+
+    public Date getEventDate() {
+        return eventDate;
+    }
+
+    public void setEventDate(Date eventDate) {
+        this.eventDate = eventDate;
+    }
+
+    public Date getEventStartTime() {
+        return eventStartTime;
+    }
+
+    public void setEventStartTime(Date eventStartTime) {
+        this.eventStartTime = eventStartTime;
+    }
+
+    public Date getEventEndTime() {
+        return eventEndTime;
+    }
+
+    public void setEventEndTime(Date eventEndTime) {
+        this.eventEndTime = eventEndTime;
+    }
+
 }
