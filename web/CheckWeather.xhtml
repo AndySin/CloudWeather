@@ -53,32 +53,22 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
 
                         </tr>
                         <tr>
-                            <td><index_regular id="eventDay">Event Date:</index_regular></td>
-                        </tr>
-                        <tr>
-                            <td align="left">
-                                <p:calendar id="eventDay"  value="#{searchedWeatherController.eventDate}"
-                                            pattern="MM/dd/yyyy" required="true" styleClass="calendarClass"/>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td><index_regular id="startTime">Event Start Time:</index_regular></td>
+                            <td><index_regular id="startTime">Event Start:</index_regular></td>
                         </tr>
                         <tr>
                             <td align="left">
                                 <p:calendar id="startTime" value="#{searchedWeatherController.eventStartTime}" 
-                                            pattern="HH:mm" timeOnly="true" required="true" styleClass="calendarClass"/>
+                                            pattern="MM/dd/yyyy HH:mm" required="true" styleClass="calendarClass"/>
                             </td>
                         </tr>
                         <tr>
-                            <td><index_regular id="endTime">Event End Time:</index_regular></td>
+                            <td><index_regular id="endTime">Event End:</index_regular></td>
                         </tr>
                         <tr>
 
                             <td align="left">
                                 <p:calendar id="endTime" value="#{searchedWeatherController.eventEndTime}"
-                                            pattern="HH:mm" timeOnly="true" required="true" styleClass="calendarClass"/>
+                                            pattern="MM/dd/yyyy HH:mm" required="true" styleClass="calendarClass"/>
                             </td>
                         </tr>
                         

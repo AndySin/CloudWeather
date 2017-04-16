@@ -4,13 +4,14 @@
  */
 package com.mycompany.Data;
 
+import java.util.Date;
+
 /**
  * Represents the average weather pattern over a specific period of time.
  *
  * @author Andy
  */
 public class DataPoint {
-    private String timeFormatted;
     private final Double apparentTemperature;
     private final Double apparentTemperatureMax;
     private final Long apparentTemperatureMaxTime;
@@ -171,13 +172,8 @@ public class DataPoint {
     public Double getWindSpeed() {
         return windSpeed;
     }
-
-    public String getTimeFormatted() {
-        return timeFormatted;
-    }
-
-    public void setTimeFormatted(String timeFormatted) {
-        this.timeFormatted = timeFormatted;
-    }
     
+    public Date getDate() {
+        return new Date(time * 1000);
+    }
 }

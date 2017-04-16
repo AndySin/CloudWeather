@@ -8,9 +8,6 @@ import com.mycompany.Data.Alert;
 import com.mycompany.Data.DataBlock;
 import com.mycompany.Data.DataPoint;
 import com.mycompany.Data.Response;
-import com.mycompany.Weather.SearchedWeather;
-import com.mycompany.Weather.WeatherForecast;
-import com.mycompany.Weather.WeatherTimestamp;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.Serializable;
@@ -48,7 +45,6 @@ public class SearchedWeatherController implements Serializable {
     private Response result;
 
     // set by user in web form
-    private Date eventDate;
     private Date eventStartTime;
     private Date eventEndTime;
 
@@ -62,55 +58,57 @@ public class SearchedWeatherController implements Serializable {
     private static final String DATA = "data";
 
     public String getForecast() {
+        long unixStart = eventStartTime.getTime() / 1000;
+        long unixEnd = eventEndTime.getTime() / 1000;
+        try {
+            eventHourlyWeather = new ArrayList<>();
+            for (long x = unixStart; x <= unixEnd; x += 86400) {
+                getDayForecast(x);
+                processHourlyData();
+            }
+            if (eventHourlyWeather.get(eventHourlyWeather.size() - 1).getTime() < eventEndTime.
+                    getTime()) {
+                getDayForecast(eventEndTime.getTime() / 1000);
+                processHourlyData();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "WeatherForecastResultsError?faces-redirect=true";
+        }
+        return "WeatherForecastResults?faces-redirect=true";
+    }
+
+    private void getDayForecast(long unixTime) {
         // TODO: error handling if past date is provided by user
 
         try {
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-            String formattedDate = df.format(eventDate);
             String weatherAPICall = weatherAPIUrl + weatherAPIKey
                     + "/" + searchLatitude + "," + searchLongitude + ","
-                    + formattedDate + "T00:00:00?";
+                    + unixTime;
             JSONObject jsonData = readUrlContent(weatherAPICall);
 
             result = createResponse(jsonData);
 
         } catch (Exception e) {
             e.printStackTrace();
-            return "WeatherForecastResultsError?faces-redirect=true";
         }
-
-        processHourlyData();
-
-        return "WeatherForecastResults?faces-redirect=true";
     }
 
     /**
      * Generates a list filled with hourly info appropriate for the event
      */
     private void processHourlyData() {
-        DateFormat df = new SimpleDateFormat("HH:mm");
-        String startTimeFormatted = df.format(eventStartTime);
-        String endTimeFormatted = df.format(eventEndTime);
-
-        int startIndexHour = Integer.parseInt(startTimeFormatted.split(":")[0]);
-        int endIndexHour = (int) Math.ceil(Integer.parseInt(endTimeFormatted.split(":")[0]));
-
-        eventHourlyWeather = new ArrayList<DataPoint>();
+        List<DataPoint> hours = result.getHourly().getData();
 
         // iterate through hourly data for the event's day
-        for (int hour = startIndexHour; hour <= endIndexHour; hour++) {
-            try{
-                // format time for making it easy to display on web page
-                String time = (hour - 12) + " " + ((hour < 12)? "AM" : "PM");
-                result.getHourly().getData().get(hour).setTimeFormatted(time);
-                
-                eventHourlyWeather.add(result.getHourly().getData().get(hour));
-                
-            } catch (Exception e) { // ArrayOutOfBounds mainly
+        for (DataPoint datapoint : hours) {
+            if (datapoint.getDate().compareTo(eventEndTime) > 0) {
                 break;
             }
-            
-            // TODO: Add statistic calculations here for event
+            if (datapoint.getDate().compareTo(eventStartTime) >= 0 && datapoint.
+                    getDate().compareTo(eventEndTime) <= 0) {
+                eventHourlyWeather.add(datapoint);
+            }
         }
     }
 
@@ -283,14 +281,6 @@ public class SearchedWeatherController implements Serializable {
         this.result = result;
     }
 
-    public Date getEventDate() {
-        return eventDate;
-    }
-
-    public void setEventDate(Date eventDate) {
-        this.eventDate = eventDate;
-    }
-
     public Date getEventStartTime() {
         return eventStartTime;
     }
@@ -307,4 +297,7 @@ public class SearchedWeatherController implements Serializable {
         this.eventEndTime = eventEndTime;
     }
 
+    public List<DataPoint> getEventHourlyWeather() {
+        return eventHourlyWeather;
+    }
 }
