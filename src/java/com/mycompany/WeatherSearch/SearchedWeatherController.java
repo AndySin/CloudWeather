@@ -66,8 +66,8 @@ public class SearchedWeatherController implements Serializable {
                 getDayForecast(x);
                 processHourlyData();
             }
-            if (eventHourlyWeather.get(eventHourlyWeather.size() - 1).getTime() < eventEndTime.
-                    getTime()) {
+            if (eventHourlyWeather.get(eventHourlyWeather.size() - 1).getTime() + (3600 - 1) < (eventEndTime.
+                    getTime() / 1000)) {
                 getDayForecast(eventEndTime.getTime() / 1000);
                 processHourlyData();
             }
