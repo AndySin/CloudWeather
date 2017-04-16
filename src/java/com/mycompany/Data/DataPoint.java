@@ -10,7 +10,7 @@ package com.mycompany.Data;
  * @author Andy
  */
 public class DataPoint {
-
+    private String timeFormatted;
     private final Double apparentTemperature;
     private final Double apparentTemperatureMax;
     private final Long apparentTemperatureMaxTime;
@@ -170,6 +170,14 @@ public class DataPoint {
 
     public Double getWindSpeed() {
         return windSpeed;
+    }
+
+    public String getTimeFormatted() {
+        return timeFormatted;
+    }
+
+    public void setTimeFormatted(String timeFormatted) {
+        this.timeFormatted = timeFormatted;
     }
     
 }

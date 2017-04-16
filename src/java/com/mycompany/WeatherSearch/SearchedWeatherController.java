@@ -52,6 +52,8 @@ public class SearchedWeatherController implements Serializable {
     private Date eventStartTime;
     private Date eventEndTime;
 
+    private List<DataPoint> eventHourlyWeather;
+
     private static final String CURRENT = "currently";
     private static final String MINUTE = "minutely";
     private static final String HOUR = "hourly";
@@ -83,8 +85,7 @@ public class SearchedWeatherController implements Serializable {
     }
 
     /**
-     * Trims hourly results in Response to match event timings and also
-     * calculates stats for display on results page.
+     * Generates a list filled with hourly info appropriate for the event
      */
     private void processHourlyData() {
         DateFormat df = new SimpleDateFormat("HH:mm");
@@ -94,16 +95,22 @@ public class SearchedWeatherController implements Serializable {
         int startIndexHour = Integer.parseInt(startTimeFormatted.split(":")[0]);
         int endIndexHour = (int) Math.ceil(Integer.parseInt(endTimeFormatted.split(":")[0]));
 
+        eventHourlyWeather = new ArrayList<DataPoint>();
+
         // iterate through hourly data for the event's day
-        for (int hour = 0; hour < 24; hour++) {
-            // this information not needed for display
-            if (hour < startIndexHour || hour > endIndexHour) {
-                result.getHourly().getData().remove(hour);
-            } else {
-                // TODO:
-                // also need to change time label so it can be easily shown on results page?
-                // Stat calculation should go here... are we doing min/max for the event?
+        for (int hour = startIndexHour; hour <= endIndexHour; hour++) {
+            try{
+                // format time for making it easy to display on web page
+                String time = (hour - 12) + " " + ((hour < 12)? "AM" : "PM");
+                result.getHourly().getData().get(hour).setTimeFormatted(time);
+                
+                eventHourlyWeather.add(result.getHourly().getData().get(hour));
+                
+            } catch (Exception e) { // ArrayOutOfBounds mainly
+                break;
             }
+            
+            // TODO: Add statistic calculations here for event
         }
     }
 
