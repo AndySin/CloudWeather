@@ -21,6 +21,8 @@ import org.primefaces.json.JSONObject;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -56,10 +58,30 @@ public class SearchedWeatherController implements Serializable {
     private static final String DAY = "daily";
     private static final String ALERT = "alerts";
     private static final String DATA = "data";
+    
+    // Resulting FacesMessage produced
+    FacesMessage resultMsg;
 
     public String getForecast() {
         long unixStart = eventStartTime.getTime() / 1000;
         long unixEnd = eventEndTime.getTime() / 1000;
+        
+        // event start/end time validation check
+        if(unixStart > unixEnd){
+            resultMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Please Verify Your Event End Date/Time!", null);
+            FacesContext.getCurrentInstance().addMessage(null, resultMsg);
+            return null;
+        }
+        
+        // multiday event forecast only for users
+        // TODO: check if user is signed in
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        if(!formatter.format(eventStartTime).equals(formatter.format(eventEndTime))){
+            resultMsg = new FacesMessage("Multiday Event Forecast Is Only For Registered Users. Please Register OR Sign In!");
+            FacesContext.getCurrentInstance().addMessage(null, resultMsg);
+            return null;
+        }
+        
         try {
             eventHourlyWeather = new ArrayList<>();
             for (long x = unixStart; x <= unixEnd; x += 86400) {
@@ -73,7 +95,9 @@ public class SearchedWeatherController implements Serializable {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return "WeatherForecastResultsError?faces-redirect=true";
+            resultMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid Input. Please Verify Location!", null);
+            FacesContext.getCurrentInstance().addMessage(null, resultMsg);
+            return null;
         }
         return "WeatherForecastResults?faces-redirect=true";
     }
