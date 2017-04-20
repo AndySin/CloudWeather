@@ -24,11 +24,11 @@ Copyright © 2017 Abhiroop Singh. All rights reserved.
     <!-- Do not enter tags before the composition line since they are ignored by JSF -->
     <ui:composition>
         <h:form>
-            <h:panelGrid columns="2" columnClasses="rightTopCornerAlign, leftTopCornerAlign">
+            <h:panelGrid columns="2" columnClasses="leftTopCornerAlign, rightTopCornerAlign">
 
                 <!-- Use absolute path for the image file since it will be accessed from all pages -->
-                <div>
-                    <h:link outcome="index"><svg width="220" height="62" xmlns="http://www.w3.org/2000/svg">
+                
+                    <h:link outcome="index"><svg width="220" height="62">
                             <defs>
                                 <style>.cls-1{fill:#71bae8;}.cls-2{fill:#b2b2b2;}.cls-3{fill:#fcfcfc;}.cls-4{fill:grey;}.cls-5{fill:#eaeaea;}.cls-6{font-size:2.21px;fill:#336;font-family:Georgia, Georgia;}</style>
                             </defs>
@@ -80,7 +80,6 @@ Copyright © 2017 Abhiroop Singh. All rights reserved.
                             </g>
                         </svg>
                 </h:link>
-                    </div>
 
                 <h:panelGroup>
                     <!-- 
