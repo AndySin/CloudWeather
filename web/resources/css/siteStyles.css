@@ -286,7 +286,7 @@ Style the div component whose unique id is "header" per reference
 #header {
     background-color: #313134;
     width: 100%;
-    height: 70px;
+    height: 75px;
     position: absolute;
     left: 0px;
     top: 0px;
@@ -589,4 +589,21 @@ cascading hierarchy, use the !important attribute.
     font-family: Lato;
     width: 250px;
     box-shadow: none;
+}
+
+.logo {
+    width:62px;
+    height:62px;
+}
+
+.companyName {
+    width: 100px;
+    height: 62px;
+}
+
+.header-logo {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+    width: 20%;
 }
