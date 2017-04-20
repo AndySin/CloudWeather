@@ -324,4 +324,10 @@ public class SearchedWeatherController implements Serializable {
     public List<DataPoint> getEventHourlyWeather() {
         return eventHourlyWeather;
     }
+    
+    public void clearSearchFields() {
+        
+        eventStartTime = null;
+        eventEndTime = null;        
+    }
 }

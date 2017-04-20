@@ -19,79 +19,57 @@ Copyright © 2017 Andy Sin. All rights reserved.
         </ui:define>
 
         <ui:define name="editableContent">
-
+            <div align="center"> <index_header>Activity Forecast</index_header></div>
+            <br/>
             <div align="center">
 
                 <h:form id="WeatherResultsForm">
-                    <h:graphicImage value="resources/images/WeatherHeader.png" styleClass="headerImage" />
-                    <br /><br />
-                    <h1>Weather Forecast Results</h1>
-                    <br />
-                    <h:panelGrid columns="2" columnClasses="rightAlign, leftAlign">
+                    <h:panelGrid columns="2" columnClasses="weatherResults, weatherResults">
                         <!-- Columns 1 & 2 -->
                         <h:outputText value="Latitude: " />                  
                         <h:outputText value="#{searchedWeatherController.result.latitude}" />
 
                         <!-- Columns 1 & 2 -->
-                        <h:outputText value="Longitude: " />                  
-                        <h:outputText value="#{searchedWeatherController.result.longitude}" />
+                        <h:outputText value="Activity Analysis:" />     
+                        <h:outputText value="#{searchedWeatherController.result.hourly.summary}" />
                     </h:panelGrid>
+                    
                     <br />
                     <br />
 
-                    <p:dataTable id="datalist" value="#{searchedWeatherController.eventHourlyWeather}" var="item"
-                                 paginator="true"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
-                                 class="dataTable">
-
-                        <p:column sortBy="#{item.temperature}">
+                    <p:carousel value="#{searchedWeatherController.eventHourlyWeather}" headerText="Activity Hourly Forecast" var="item" itemStyle="text-align:center" responsive="true" styleClass="weatherResults" style="font-size: 18px" numVisible="5" >
+                        <p:panelGrid columns="2" style="width:100%;margin:10px 0px;" columnClasses="weatherResults,weatherResults" layout="grid" styleClass="ui-panelgrid-blank">
                             <f:facet name="header">
-                                <h:outputText value="Temperature"/>
+                                <h:outputText styleClass="weatherResults" value="#{item.date.toString().substring(0,3)} #{item.convertedDate(item.date)}"/>
+                                <br/>
+                                <p:graphicImage url="resources/images/weatherIcons/Cloud.png"/>
                             </f:facet>
-                            <h:outputText value="#{item.temperature}°F"/>
-                        </p:column>
 
-                        <p:column sortBy="#{item.date}">
-                            <f:facet name="header">
-                                <h:outputText value="Date"/>
-                            </f:facet>
-                            <h:outputText value="#{item.date}"/>
-                        </p:column>
-
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Status"/>
-                            </f:facet>
+                            <h:outputText value="Description:" />
                             <h:outputText value="#{item.summary}"/>
-                        </p:column>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Humidity"/>
-                            </f:facet>
-                            <h:outputText value="#{item.humidity}"/>
-                        </p:column>
+                            <h:outputText value="Temperatue:" />
+                            <h:outputText value="#{item.temperature.intValue()}°F"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Dewpoint"/>
-                            </f:facet>
-                            <h:outputText value="#{item.dewPoint}"/>
-                        </p:column>
+                            <h:outputText value="Precipitation:" />
+                            <h:outputText value="#{(item.precipProbability * 100).intValue()}%"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Precipitation Chance"/>
-                            </f:facet>
-                            <h:outputText value="#{item.precipProbability}"/>
-                        </p:column>
-                    </p:dataTable>
+                            <h:outputText value="Humidity:" />
+                            <h:outputText value="#{(item.humidity * 100).intValue()}%"/>
+
+                            <h:outputText value="Wind:" />
+                            <h:outputText value="#{item.windBearing} #{(item.windSpeed).intValue()} mph"/>
+                        </p:panelGrid>
+
+                    </p:carousel>
+
+                    <br/>
+                    <br/>   
 
                     <!-- When the "Go Back" button is clicked on, the index.xhtml page is shown. -->
 
-                    <p:commandButton value="Go Back" ajax="false" styleClass="commandButton" 
-                                     icon="ui-icon-arrowthick-1-w" action="index?faces-redirect=true" />
+                    <p:commandButton value="Go Back" ajax="false" styleClass="login" action="CheckWeather?faces-redirect=true"
+                                     onclick="#{searchedWeatherController.clearSearchFields()}"/>
                 </h:form>
             </div>
         </ui:define>

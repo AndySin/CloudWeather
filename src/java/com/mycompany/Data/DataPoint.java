@@ -4,6 +4,7 @@
  */
 package com.mycompany.Data;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -71,21 +72,21 @@ public class DataPoint {
         }
         int wind = (int) windBearing;
         if (337.5 < wind || wind < 22.5) {
-            return "north";
+            return "N";
         } else if (wind < 67.5) {
-            return "northeast";
+            return "NE";
         } else if (wind < 112.5) {
-            return "east";
+            return "E";
         } else if (wind < 157.5) {
-            return "southeast";
+            return "SE";
         } else if (wind < 202.5) {
-            return "south";
+            return "S";
         } else if (wind < 247.5) {
-            return "southwest";
+            return "SW";
         } else if (wind < 292.5) {
-            return "west";
+            return "W";
         } else {
-            return "northwest";
+            return "NW";
         }
     }
 
@@ -175,5 +176,12 @@ public class DataPoint {
     
     public Date getDate() {
         return new Date(time * 1000);
+    }
+    
+    public String convertedDate(Date date) {
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("h:mm aa");
+        String formattedDate = dateFormat.format(date).toString();
+        return formattedDate;
     }
 }
