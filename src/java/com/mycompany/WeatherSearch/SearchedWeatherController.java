@@ -8,9 +8,6 @@ import com.mycompany.Data.Alert;
 import com.mycompany.Data.DataBlock;
 import com.mycompany.Data.DataPoint;
 import com.mycompany.Data.Response;
-import com.mycompany.Weather.SearchedWeather;
-import com.mycompany.Weather.WeatherForecast;
-import com.mycompany.Weather.WeatherTimestamp;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.Serializable;
@@ -21,6 +18,11 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import org.primefaces.json.JSONArray;
 import org.primefaces.json.JSONObject;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -44,27 +46,94 @@ public class SearchedWeatherController implements Serializable {
     // Object returned from API call for weather forecast
     private Response result;
 
+    // set by user in web form
+    private Date eventStartTime;
+    private Date eventEndTime;
+
+    private List<DataPoint> eventHourlyWeather;
+
     private static final String CURRENT = "currently";
     private static final String MINUTE = "minutely";
     private static final String HOUR = "hourly";
     private static final String DAY = "daily";
     private static final String ALERT = "alerts";
     private static final String DATA = "data";
+    
+    // Resulting FacesMessage produced
+    FacesMessage resultMsg;
 
     public String getForecast() {
+        long unixStart = eventStartTime.getTime() / 1000;
+        long unixEnd = eventEndTime.getTime() / 1000;
+        
+        // event start/end time validation check
+        if(unixStart > unixEnd){
+            resultMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Please Verify Your Event End Date/Time!", null);
+            FacesContext.getCurrentInstance().addMessage(null, resultMsg);
+            return null;
+        }
+        
+        // multiday event forecast only for users
+        // TODO: check if user is signed in
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        if(!formatter.format(eventStartTime).equals(formatter.format(eventEndTime))){
+            resultMsg = new FacesMessage("Multiday Event Forecast Is Only For Registered Users. Please Register OR Sign In!");
+            FacesContext.getCurrentInstance().addMessage(null, resultMsg);
+            return null;
+        }
+        
+        try {
+            eventHourlyWeather = new ArrayList<>();
+            for (long x = unixStart; x <= unixEnd; x += 86400) {
+                getDayForecast(x);
+                processHourlyData();
+            }
+            if (eventHourlyWeather.get(eventHourlyWeather.size() - 1).getTime() + (3600 - 1) < (eventEndTime.
+                    getTime() / 1000)) {
+                getDayForecast(eventEndTime.getTime() / 1000);
+                processHourlyData();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid Input. Please Verify Location!", null);
+            FacesContext.getCurrentInstance().addMessage(null, resultMsg);
+            return null;
+        }
+        return "WeatherForecastResults?faces-redirect=true";
+    }
+
+    private void getDayForecast(long unixTime) {
+        // TODO: error handling if past date is provided by user
 
         try {
             String weatherAPICall = weatherAPIUrl + weatherAPIKey
-                    + "/" + searchLatitude + "," + searchLongitude;
+                    + "/" + searchLatitude + "," + searchLongitude + ","
+                    + unixTime;
             JSONObject jsonData = readUrlContent(weatherAPICall);
 
             result = createResponse(jsonData);
 
         } catch (Exception e) {
             e.printStackTrace();
-            return "WeatherForecastResultsError?faces-redirect=true";
         }
-        return "WeatherForecastResults?faces-redirect=true";
+    }
+
+    /**
+     * Generates a list filled with hourly info appropriate for the event
+     */
+    private void processHourlyData() {
+        List<DataPoint> hours = result.getHourly().getData();
+
+        // iterate through hourly data for the event's day
+        for (DataPoint datapoint : hours) {
+            if (datapoint.getDate().compareTo(eventEndTime) > 0) {
+                break;
+            }
+            if (datapoint.getDate().compareTo(eventStartTime) >= 0 && datapoint.
+                    getDate().compareTo(eventEndTime) <= 0) {
+                eventHourlyWeather.add(datapoint);
+            }
+        }
     }
 
     /**
@@ -234,5 +303,25 @@ public class SearchedWeatherController implements Serializable {
 
     public void setResult(Response result) {
         this.result = result;
+    }
+
+    public Date getEventStartTime() {
+        return eventStartTime;
+    }
+
+    public void setEventStartTime(Date eventStartTime) {
+        this.eventStartTime = eventStartTime;
+    }
+
+    public Date getEventEndTime() {
+        return eventEndTime;
+    }
+
+    public void setEventEndTime(Date eventEndTime) {
+        this.eventEndTime = eventEndTime;
+    }
+
+    public List<DataPoint> getEventHourlyWeather() {
+        return eventHourlyWeather;
     }
 }

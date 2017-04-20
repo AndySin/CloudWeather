@@ -8,6 +8,7 @@ Copyright © 2017 Andy Sin. All rights reserved.
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
     <!-- This page is constructed based on the siteTemplate -->
@@ -34,18 +35,59 @@ Copyright © 2017 Andy Sin. All rights reserved.
                         <!-- Columns 1 & 2 -->
                         <h:outputText value="Longitude: " />                  
                         <h:outputText value="#{searchedWeatherController.result.longitude}" />
-
-                        <!-- Columns 1 & 2 -->
-                        <h:outputText value="Current Temperature: " />  
-                        <h:outputText value="#{searchedWeatherController.result.currently.temperature}°" />  
-
-                        <!-- Columns 1 & 2 -->
-                        <h:outputText value="Weather: " />                  
-                        <h:outputText value="#{searchedWeatherController.result.currently.summary}" />
-
                     </h:panelGrid>
                     <br />
                     <br />
+
+                    <p:dataTable id="datalist" value="#{searchedWeatherController.eventHourlyWeather}" var="item"
+                                 paginator="true"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 class="dataTable">
+
+                        <p:column sortBy="#{item.temperature}">
+                            <f:facet name="header">
+                                <h:outputText value="Temperature"/>
+                            </f:facet>
+                            <h:outputText value="#{item.temperature}°F"/>
+                        </p:column>
+
+                        <p:column sortBy="#{item.date}">
+                            <f:facet name="header">
+                                <h:outputText value="Date"/>
+                            </f:facet>
+                            <h:outputText value="#{item.date}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Status"/>
+                            </f:facet>
+                            <h:outputText value="#{item.summary}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Humidity"/>
+                            </f:facet>
+                            <h:outputText value="#{item.humidity}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Dewpoint"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dewPoint}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Precipitation Chance"/>
+                            </f:facet>
+                            <h:outputText value="#{item.precipProbability}"/>
+                        </p:column>
+                    </p:dataTable>
+
                     <!-- When the "Go Back" button is clicked on, the index.xhtml page is shown. -->
 
                     <p:commandButton value="Go Back" ajax="false" styleClass="commandButton" 

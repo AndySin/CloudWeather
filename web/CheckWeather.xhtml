@@ -35,7 +35,7 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                     });
                 });
             </script>
-            
+            <p:growl id="growl" life="7000"/>
             <div align="center"><index_header>Check Weather For Your Event</index_header></div>
             <br/>
             <div align="center" style="width:40%; background-color: #FEFEFE; margin:0 auto;">
@@ -53,29 +53,22 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
 
                         </tr>
                         <tr>
-                            <td><index_regular id="eventDay">Event Date:</index_regular></td>
+                            <td><index_regular id="startTime">Event Start:</index_regular></td>
                         </tr>
                         <tr>
                             <td align="left">
-                                <p:calendar id="eventDay" pattern="MM/dd/yyyy" required="true" styleClass="calendarClass"/>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td><index_regular id="startTime">Event Start Time:</index_regular></td>
-                        </tr>
-                        <tr>
-                            <td align="left">
-                                <p:calendar id="startTime" pattern="HH:mm" timeOnly="true" required="true" styleClass="calendarClass"/>
+                                <p:calendar id="startTime" value="#{searchedWeatherController.eventStartTime}" 
+                                            pattern="MM/dd/yyyy HH:mm" required="true" styleClass="calendarClass"/>
                             </td>
                         </tr>
                         <tr>
-                            <td><index_regular id="endTime">Event End Time:</index_regular></td>
+                            <td><index_regular id="endTime">Event End:</index_regular></td>
                         </tr>
                         <tr>
 
                             <td align="left">
-                                <p:calendar id="endTime" pattern="HH:mm" timeOnly="true" required="true" styleClass="calendarClass"/>
+                                <p:calendar id="endTime" value="#{searchedWeatherController.eventEndTime}"
+                                            pattern="MM/dd/yyyy HH:mm" required="true" styleClass="calendarClass"/>
                             </td>
                         </tr>
                         

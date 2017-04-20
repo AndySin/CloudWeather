@@ -1,15 +1,138 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Created by Abhiroop Singh on 2017.04.08 
-Copyright © 2017 Abhiroop Singh. All rights reserved.
+Created by Tanya Sutan-Tanon on 2017.04.17
+Copyright © 2017 Osman Balci. All rights reserved.
 -->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <!-- Do not enter tags before the composition line since they are ignored by JSF -->
+
+    <!-- This page is constructed based on the siteTemplate -->
+    <ui:composition template="template/siteTemplate.xhtml">
+
+        <ui:define name="title">
+            <!-- Set the page title -->
+            <h:outputText value="Create Account"></h:outputText>
+        </ui:define>
+
+        <!-- Create the content for this page below -->
+        <ui:define name="editableContent">
+
+            <div align="center" style="width:50%; margin:0 auto;">
+
+                <!-- Error messages will be shown here if any  -->
+                <p:messages id="msgs" showIcon="false"/>
+                <h:outputLabel id="form-error-message" class="errorMessages" value="#{accountManager.statusMessage}"/>
+
+                <h:form id="AccountCreationForm">
+
+                    <div align="center"> <index_header>Create Account</index_header></div>
+                    <br></br>
+
+                    <!-- f:event allows ComponentSystemEventListener instances on a UI component in a JSF page. 
+                    The following f:event assigns an event listener with the UI component "form" - AccountCreationForm.
+                    
+                    type="postValidate" directs the listener event to invoke the accountManager.validateInformation method
+                    AFTER the UI component "form" is validated with the validation statements included below.
+                    -->
+                    <f:event listener="#{accountManager.validateInformation}" type="postValidate"/>
+
+                    <p:panelGrid columns="2" columnClasses="columnOne, columnTwo" style="border: none">
+
+                        <p:outputLabel style="font-family: Lato; font-size: 15px; font-weight:bold;" value="First Name" for="firstName" />
+                        <p:inputText id="firstName" value="#{accountManager.firstName}" required="true" styleClass="accountInputTextField"
+                                     requiredMessage="#{bundle.CreateCustomerRequiredMessage_firstName}" label="First Name">
+                            <f:validateLength minimum="2" />
+                        </p:inputText>   
+
+                        <p:outputLabel style="font-family: Lato; font-size: 15px; font-weight:bold;" value="Middle Name" for="middleName" />
+                        <p:inputText id="middleName" value="#{accountManager.middleName}"
+                                     required="false" styleClass="accountInputTextField" label="Middle Name">
+                        </p:inputText>
+
+                        <p:outputLabel style="font-family: Lato; font-size: 15px; font-weight:bold;" value="Last Name" for="lastName" />
+                        <p:inputText id="lastName" value="#{accountManager.lastName}" required="true" styleClass="accountInputTextField"
+                                     requiredMessage="#{bundle.CreateCustomerRequiredMessage_lastName}" label="Last Name">
+                            <f:validateLength minimum="2" />
+                        </p:inputText>
+
+                        <p:outputLabel style="font-family: Lato; font-size: 15px; font-weight:bold;" value="Address Line 1" for="address1" />
+                        <p:inputText id="address1" value="#{accountManager.address1}" required="true" styleClass="accountInputTextField"
+                                     requiredMessage="#{bundle.CreateCustomerRequiredMessage_address1}" label="Address Line 1">
+                            <f:validateLength minimum="2" />
+                        </p:inputText>
+
+                        <p:outputLabel style="font-family: Lato; font-size: 15px; font-weight:bold;" value="Address Line 2" for="address2" />
+                        <p:inputText id="address2" value="#{accountManager.address2}" label="Address Line 2" styleClass="accountInputTextField">
+                        </p:inputText>
+
+                        <p:outputLabel style="font-family: Lato; font-size: 15px; font-weight:bold;" value="City" for="city" />
+                        <p:inputText id="city" value="#{accountManager.city}" required="true" styleClass="accountInputTextField"
+                                     requiredMessage="#{bundle.CreateCustomerRequiredMessage_city}" label="City">
+                            <f:validateLength minimum="2" />
+                        </p:inputText>
+
+                        <p:outputLabel style="font-family: Lato; font-size: 15px; font-weight:bold;" value="State" for="state" />
+                        <h:selectOneMenu id="state" value="#{accountManager.state}" required="true">
+                            <f:selectItems value="#{accountManager.listOfStates}" var="state"
+                                           itemLabel="#{state}" itemValue="#{state}" />
+                        </h:selectOneMenu>
+
+                        <p:outputLabel style="font-family: Lato; font-size: 15px; font-weight:bold;" value="Zip Code" for="zipcode" />
+                        <p:inputText id="zipcode" value="#{accountManager.zipcode}" required="true" styleClass="accountInputTextField"
+                                     requiredMessage="#{bundle.CreateCustomerRequiredMessage_zipcode}" label="Zip Code">
+
+                        </p:inputText>
+
+                        <p:outputLabel style="font-family: Lato; font-size: 15px; font-weight:bold;" value="Email" for="email" />
+                        <p:inputText id="email" value="#{accountManager.email}" required="true" styleClass="accountInputTextField"
+                                     requiredMessage="#{bundle.CreateCustomerRequiredMessage_email}" label="Email">
+
+                        </p:inputText>
+
+                        <p:outputLabel style="font-family: Lato; font-size: 15px; font-weight:bold;" value="Username" for="username" />
+                        <p:inputText id="username" value="#{accountManager.username}" required="true" styleClass="accountInputTextField"
+                                     requiredMessage="#{bundle.CreateCustomerRequiredMessage_username}" label="Username">
+
+                        </p:inputText>
+
+                        <h:outputLabel style="font-family: Lato; font-size: 15px; font-weight:bold;" value="Password *" for="password" />
+                        <p:password id="password" value="#{accountManager.password}" feedback="true" required="true" styleClass="accountInputTextField">
+                            <!-- Execute the "validate" method in the "PasswordValidator.java" class file to validate the password entered. -->
+                        </p:password>
+
+                        <h:outputLabel style="font-family: Lato; font-size: 15px; font-weight:bold;" value="Confirm Password: *" for="confirmPassword" />
+                        <p:password id="confirmPassword" value="ToBeReadFromThisFieldByAccountManager" required="true" styleClass="accountInputTextField"/>
+
+                        <p:outputLabel style="font-family: Lato; font-size: 15px; font-weight:bold;" value="Security Question" for="securityQuestion" />
+                        <p:selectOneMenu id="securityQuestion" label="Security Questions"
+                                         value="#{accountManager.securityQuestion}" required="true" >
+                            <f:selectItems value="#{accountManager.security_questions}"/>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel style="font-family: Lato; font-size: 15px; font-weight:bold;" value="Security Answer" for="securityAnswer" />
+                        <p:inputText id="securityAnswer" value="#{accountManager.securityAnswer}" required="true" styleClass="accountInputTextField"
+                                     requiredMessage="#{bundle.CreateCustomerRequiredMessage_securityAnswer}" label="Security Answer">
+                            <f:validateLength minimum="2" />
+                        </p:inputText>
+                    </p:panelGrid>
+                    <p:spacer height="20px"/>
+                    <div align="center">
+                        <p:commandButton style="display:inline;font-size: 15px;padding: 4px 10px;" id="submit" value="Submit" action="#{accountManager.createAccount()}" ajax="false" icon="ui-icon-extlink" />
+                        <p:spacer width="10px"/>
+                        <p:button style="display:inline" outcome="index" value="Cancel" icon="ui-icon-cancel"></p:button>
+                    </div>
+                </h:form>
+                <p:spacer height="40px"/>
+            </div>
+        </ui:define>
+
+    </ui:composition>
+    <!-- Do not enter tags after the composition line since they are ignored by JSF -->
+
 </html>
