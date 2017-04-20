@@ -54,7 +54,8 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                         </tr>
                     </table>
                     <br/>
-                    <p:commandButton id="create" class="login" value="LOG IN" onclick="#{loginManager.createCustomer()}"/>
+                    <p:commandButton id="login" value="Sign In" action="#{loginManager.loginUser()}" 
+                                     class="login" ajax="false" icon="ui-icon-arrowthick-1-e" />
                     <br/>
                     <br/>
                 </h:form>
