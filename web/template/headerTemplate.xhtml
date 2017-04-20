@@ -9,7 +9,8 @@ Copyright © 2017 Abhiroop Singh. All rights reserved.
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
 
     <!--
@@ -27,58 +28,58 @@ Copyright © 2017 Abhiroop Singh. All rights reserved.
             <h:panelGrid columns="2" columnClasses="leftTopCornerAlign, rightTopCornerAlign">
 
                 <!-- Use absolute path for the image file since it will be accessed from all pages -->
-                
-                    <h:link outcome="index"><svg width="220" height="62">
-                            <defs>
-                                <style>.cls-1{fill:#71bae8;}.cls-2{fill:#b2b2b2;}.cls-3{fill:#fcfcfc;}.cls-4{fill:grey;}.cls-5{fill:#eaeaea;}.cls-6{font-size:2.21px;fill:#336;font-family:Georgia, Georgia;}</style>
-                            </defs>
-                            <title>logo</title>
-                            <g>
-                                <title>background</title>
-                                <rect fill="none" id="canvas_background" height="64" width="164" y="-1" x="-1"/>
-                            </g>
-                            <g>
-                                <title>Layer 1</title>
-                                <path id="svg_1" d="m30.77,14.66a1,1 0 0 1 -1.89,-0.64a1,1 0 0 1 0.58,-0.61a1.89,1.89 0 0 0 1,-1a1.89,1.89 0 0 0 0.21,1.39a1,1 0 0 1 0.1,0.86z" class="cls-1"/>
-                                <path id="svg_2" d="m18.92,14.66a1,1 0 0 1 -1.89,-0.64a1,1 0 0 1 0.58,-0.61a1.89,1.89 0 0 0 1,-1a1.89,1.89 0 0 0 0.21,1.39a1,1 0 0 1 0.1,0.86z" class="cls-1"/>
-                                <path id="svg_3" d="m20.72,16.86l0,-1.56a0.45,0.45 0 1 0 -0.89,0l0,1.56l0.89,0z" class="cls-2"/>
-                                <path id="svg_4" d="m20.33,16.85l-0.5,0a20.28,20.28 0 0 0 -19.83,20.28a5.07,5.07 0 0 1 10.13,0c0,-17.28 10.03,-20.23 10.2,-20.28z" class="cls-3"/>
-                                <path id="svg_5" d="m20.33,16.85l0,0l-0.07,0l0,20c0,0.1 0,0.21 0,0.31a5.07,5.07 0 0 1 10.13,0c0.01,-17.3 -9.89,-20.26 -10.06,-20.31z" class="cls-3"/>
-                                <path id="svg_6" d="m10.13,37.13a5.07,5.07 0 0 1 10.12,-0.31l0,-20c-0.93,0.36 -10.12,3.77 -10.12,20.31z" class="cls-4"/>
-                                <path id="svg_7" d="m20.72,16.86l-0.39,0c0.17,0 10.07,3 10.07,20.28a5.07,5.07 0 0 1 10.13,0l0,0a20.28,20.28 0 0 0 -19.81,-20.28z" class="cls-4"/>
-                                <path id="svg_8" d="m20.66,35.17a5.06,5.06 0 0 0 -0.4,2a5,5 0 0 0 -0.37,-1.89l0,14.07l0.77,0l0,-14.18z" class="cls-2"/>
-                                <path id="svg_9" d="m20.66,49.35l-0.77,0l0,2.76c0,0.07 0,0.14 0,0.22a2.61,2.61 0 0 1 -0.39,1.79a1.35,1.35 0 0 1 -1,0.33a1.09,1.09 0 0 1 -0.86,-0.34a2.66,2.66 0 0 1 -0.41,-1.8a0.38,0.38 0 1 0 -0.76,-0.09a3.45,3.45 0 0 0 0.6,2.39a1.83,1.83 0 0 0 1.44,0.6a2.09,2.09 0 0 0 1.55,-0.56a3.2,3.2 0 0 0 0.61,-2.34l-0.01,-2.96z" class="cls-3"/>
-                                <path id="svg_10" d="m25.15,0.01a9.36,9.36 0 0 0 -5.29,1.4a6.69,6.69 0 0 0 -6.07,2.61l-0.41,0a5.9,5.9 0 0 0 -5.06,8.93l33.49,0a5.9,5.9 0 0 0 -5.06,-8.95l-0.41,0a6.69,6.69 0 0 0 -6.08,-2.59a9.36,9.36 0 0 0 -5.29,-1.4" class="cls-5"/>
-                                <path id="svg_11" d="m11.34,15.66a1,1 0 0 1 -1.89,-0.64a1,1 0 0 1 0.58,-0.61a1.89,1.89 0 0 0 1,-1a1.89,1.89 0 0 0 0.21,1.39a1,1 0 0 1 0.1,0.86z" class="cls-1"/>
-                                <path id="svg_12" d="m15.14,17.11a1,1 0 1 1 -1.89,-0.61a1,1 0 0 1 0.58,-0.61a1.89,1.89 0 0 0 1,-1a1.89,1.89 0 0 0 0.21,1.39a1,1 0 0 1 0.1,0.83z" class="cls-1"/>
-                                <path id="svg_13" d="m8.51,19.1a1,1 0 0 1 -1.9,-0.6a1,1 0 0 1 0.58,-0.61a1.89,1.89 0 0 0 1,-1a1.89,1.89 0 0 0 0.21,1.39a1,1 0 0 1 0.11,0.82z" class="cls-1"/>
-                                <path id="svg_14" d="m25.01,16.11a1,1 0 1 1 -1.9,-0.61a1,1 0 0 1 0.58,-0.61a1.89,1.89 0 0 0 1,-1a1.89,1.89 0 0 0 0.21,1.39a1,1 0 0 1 0.11,0.83z" class="cls-1"/>
-                                <path id="svg_15" d="m31.35,19.01a1,1 0 0 1 -1.89,-0.64a1,1 0 0 1 0.58,-0.61a1.89,1.89 0 0 0 1,-1a1.89,1.89 0 0 0 0.21,1.39a1,1 0 0 1 0.1,0.86z" class="cls-1"/>
-                                <path id="svg_16" d="m36.56,15.66a1,1 0 0 1 -1.89,-0.64a1,1 0 0 1 0.58,-0.61a1.89,1.89 0 0 0 1,-1a1.89,1.89 0 0 0 0.21,1.39a1,1 0 0 1 0.1,0.86z" class="cls-1"/>
-                                <path id="svg_17" d="m36.56,22a1,1 0 0 1 -1.89,-0.64a1,1 0 0 1 0.58,-0.61a1.89,1.89 0 0 0 1,-1a1.89,1.89 0 0 0 0.21,1.39a1,1 0 0 1 0.1,0.86z" class="cls-1"/>
-                                <rect id="svg_18" height="14.6" width="10.78" y="38.08" x="4.34" class="cls-2"/>
-                                <rect id="svg_19" height="2.31" width="1.27" y="39.46" x="15.12" class="cls-3"/>
-                                <rect stroke-opacity="0" fill="#ffffff" id="svg_20" height="2.31" width="1.27" y="44.22" x="15.12" class="cls-4"/>
-                                <rect id="svg_21" height="2.31" width="1.27" y="48.98" x="15.12" class="cls-3"/>
-                                <rect id="svg_22" height="14.6" width="1.56" y="38.08" x="2.78" class="cls-4"/>
-                                <circle id="svg_23" cy="40.62" cx="3.56" class="cls-1"/>
-                                <circle id="svg_24" cy="43.26" cx="17.98" class="cls-1"/>
-                                <circle id="svg_25" cy="42.26" cx="-3.27" class="cls-1"/>
-                                <circle id="svg_26" r="0.26" cy="50.09" cx="3.48"/>
-                                <rect id="svg_27" ry="0.03" fill="#ffffff" rx="0.03" height="0.08" width="1.14" y="40.58" x="2.42"/>
-                                <rect id="svg_28" ry="0.03" fill="#ffffff" rx="0.03" height="0.08" width="1.14" y="45.38" x="2.42"/>
-                                <rect id="svg_29" ry="0.03" fill="#ffffff" rx="0.03" height="0.08" width="1.14" y="50.06" x="2.42"/>
-                                <circle id="svg_30" r="0.26" cy="45.41" cx="3.56"/>
-                                <circle id="svg_31" r="0.26" cy="40.62" cx="3.56"/>
-                                <text id="svg_32" y="-0.5" x="-8.44"/>
-                                <text id="svg_33" y="-0.5" x="-8.44" class="cls-6">
-                                    <tspan id="svg_34" y="44.43" x="5.79">Activity</tspan>
-                                    <tspan id="svg_35" y="47.09" x="5.79">Planner</tspan>
-                                </text>
-                                <text font-weight="normal" stroke="#000" transform="matrix(1.1044262279304915,0,0,1.7245554440796604,-1.9342390368110007,-22.651186719875355) "  text-anchor="start" font-family="'Lato', sans-serif;" font-size="22" id="svg_36" y="38.55292" x="46.579544" stroke-width="0" fill="#ffffff">Weather-Proof</text>
-                                <text text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="15" id="svg_37" y="25.910713" x="127.499998" stroke-width="0" stroke="#000" fill="#000000"/>
-                            </g>
-                        </svg>
+
+                <h:link outcome="index"><svg width="220" height="62">
+                        <defs>
+                            <style>.cls-1{fill:#71bae8;}.cls-2{fill:#b2b2b2;}.cls-3{fill:#fcfcfc;}.cls-4{fill:grey;}.cls-5{fill:#eaeaea;}.cls-6{font-size:2.21px;fill:#336;font-family:Georgia, Georgia;}</style>
+                        </defs>
+                        <title>logo</title>
+                        <g>
+                            <title>background</title>
+                            <rect fill="none" id="canvas_background" height="64" width="164" y="-1" x="-1"/>
+                        </g>
+                        <g>
+                            <title>Layer 1</title>
+                            <path id="svg_1" d="m30.77,14.66a1,1 0 0 1 -1.89,-0.64a1,1 0 0 1 0.58,-0.61a1.89,1.89 0 0 0 1,-1a1.89,1.89 0 0 0 0.21,1.39a1,1 0 0 1 0.1,0.86z" class="cls-1"/>
+                            <path id="svg_2" d="m18.92,14.66a1,1 0 0 1 -1.89,-0.64a1,1 0 0 1 0.58,-0.61a1.89,1.89 0 0 0 1,-1a1.89,1.89 0 0 0 0.21,1.39a1,1 0 0 1 0.1,0.86z" class="cls-1"/>
+                            <path id="svg_3" d="m20.72,16.86l0,-1.56a0.45,0.45 0 1 0 -0.89,0l0,1.56l0.89,0z" class="cls-2"/>
+                            <path id="svg_4" d="m20.33,16.85l-0.5,0a20.28,20.28 0 0 0 -19.83,20.28a5.07,5.07 0 0 1 10.13,0c0,-17.28 10.03,-20.23 10.2,-20.28z" class="cls-3"/>
+                            <path id="svg_5" d="m20.33,16.85l0,0l-0.07,0l0,20c0,0.1 0,0.21 0,0.31a5.07,5.07 0 0 1 10.13,0c0.01,-17.3 -9.89,-20.26 -10.06,-20.31z" class="cls-3"/>
+                            <path id="svg_6" d="m10.13,37.13a5.07,5.07 0 0 1 10.12,-0.31l0,-20c-0.93,0.36 -10.12,3.77 -10.12,20.31z" class="cls-4"/>
+                            <path id="svg_7" d="m20.72,16.86l-0.39,0c0.17,0 10.07,3 10.07,20.28a5.07,5.07 0 0 1 10.13,0l0,0a20.28,20.28 0 0 0 -19.81,-20.28z" class="cls-4"/>
+                            <path id="svg_8" d="m20.66,35.17a5.06,5.06 0 0 0 -0.4,2a5,5 0 0 0 -0.37,-1.89l0,14.07l0.77,0l0,-14.18z" class="cls-2"/>
+                            <path id="svg_9" d="m20.66,49.35l-0.77,0l0,2.76c0,0.07 0,0.14 0,0.22a2.61,2.61 0 0 1 -0.39,1.79a1.35,1.35 0 0 1 -1,0.33a1.09,1.09 0 0 1 -0.86,-0.34a2.66,2.66 0 0 1 -0.41,-1.8a0.38,0.38 0 1 0 -0.76,-0.09a3.45,3.45 0 0 0 0.6,2.39a1.83,1.83 0 0 0 1.44,0.6a2.09,2.09 0 0 0 1.55,-0.56a3.2,3.2 0 0 0 0.61,-2.34l-0.01,-2.96z" class="cls-3"/>
+                            <path id="svg_10" d="m25.15,0.01a9.36,9.36 0 0 0 -5.29,1.4a6.69,6.69 0 0 0 -6.07,2.61l-0.41,0a5.9,5.9 0 0 0 -5.06,8.93l33.49,0a5.9,5.9 0 0 0 -5.06,-8.95l-0.41,0a6.69,6.69 0 0 0 -6.08,-2.59a9.36,9.36 0 0 0 -5.29,-1.4" class="cls-5"/>
+                            <path id="svg_11" d="m11.34,15.66a1,1 0 0 1 -1.89,-0.64a1,1 0 0 1 0.58,-0.61a1.89,1.89 0 0 0 1,-1a1.89,1.89 0 0 0 0.21,1.39a1,1 0 0 1 0.1,0.86z" class="cls-1"/>
+                            <path id="svg_12" d="m15.14,17.11a1,1 0 1 1 -1.89,-0.61a1,1 0 0 1 0.58,-0.61a1.89,1.89 0 0 0 1,-1a1.89,1.89 0 0 0 0.21,1.39a1,1 0 0 1 0.1,0.83z" class="cls-1"/>
+                            <path id="svg_13" d="m8.51,19.1a1,1 0 0 1 -1.9,-0.6a1,1 0 0 1 0.58,-0.61a1.89,1.89 0 0 0 1,-1a1.89,1.89 0 0 0 0.21,1.39a1,1 0 0 1 0.11,0.82z" class="cls-1"/>
+                            <path id="svg_14" d="m25.01,16.11a1,1 0 1 1 -1.9,-0.61a1,1 0 0 1 0.58,-0.61a1.89,1.89 0 0 0 1,-1a1.89,1.89 0 0 0 0.21,1.39a1,1 0 0 1 0.11,0.83z" class="cls-1"/>
+                            <path id="svg_15" d="m31.35,19.01a1,1 0 0 1 -1.89,-0.64a1,1 0 0 1 0.58,-0.61a1.89,1.89 0 0 0 1,-1a1.89,1.89 0 0 0 0.21,1.39a1,1 0 0 1 0.1,0.86z" class="cls-1"/>
+                            <path id="svg_16" d="m36.56,15.66a1,1 0 0 1 -1.89,-0.64a1,1 0 0 1 0.58,-0.61a1.89,1.89 0 0 0 1,-1a1.89,1.89 0 0 0 0.21,1.39a1,1 0 0 1 0.1,0.86z" class="cls-1"/>
+                            <path id="svg_17" d="m36.56,22a1,1 0 0 1 -1.89,-0.64a1,1 0 0 1 0.58,-0.61a1.89,1.89 0 0 0 1,-1a1.89,1.89 0 0 0 0.21,1.39a1,1 0 0 1 0.1,0.86z" class="cls-1"/>
+                            <rect id="svg_18" height="14.6" width="10.78" y="38.08" x="4.34" class="cls-2"/>
+                            <rect id="svg_19" height="2.31" width="1.27" y="39.46" x="15.12" class="cls-3"/>
+                            <rect stroke-opacity="0" fill="#ffffff" id="svg_20" height="2.31" width="1.27" y="44.22" x="15.12" class="cls-4"/>
+                            <rect id="svg_21" height="2.31" width="1.27" y="48.98" x="15.12" class="cls-3"/>
+                            <rect id="svg_22" height="14.6" width="1.56" y="38.08" x="2.78" class="cls-4"/>
+                            <circle id="svg_23" cy="40.62" cx="3.56" class="cls-1"/>
+                            <circle id="svg_24" cy="43.26" cx="17.98" class="cls-1"/>
+                            <circle id="svg_25" cy="42.26" cx="-3.27" class="cls-1"/>
+                            <circle id="svg_26" r="0.26" cy="50.09" cx="3.48"/>
+                            <rect id="svg_27" ry="0.03" fill="#ffffff" rx="0.03" height="0.08" width="1.14" y="40.58" x="2.42"/>
+                            <rect id="svg_28" ry="0.03" fill="#ffffff" rx="0.03" height="0.08" width="1.14" y="45.38" x="2.42"/>
+                            <rect id="svg_29" ry="0.03" fill="#ffffff" rx="0.03" height="0.08" width="1.14" y="50.06" x="2.42"/>
+                            <circle id="svg_30" r="0.26" cy="45.41" cx="3.56"/>
+                            <circle id="svg_31" r="0.26" cy="40.62" cx="3.56"/>
+                            <text id="svg_32" y="-0.5" x="-8.44"/>
+                            <text id="svg_33" y="-0.5" x="-8.44" class="cls-6">
+                                <tspan id="svg_34" y="44.43" x="5.79">Activity</tspan>
+                                <tspan id="svg_35" y="47.09" x="5.79">Planner</tspan>
+                            </text>
+                            <text font-weight="normal" stroke="#000" transform="matrix(1.1044262279304915,0,0,1.7245554440796604,-1.9342390368110007,-22.651186719875355) "  text-anchor="start" font-family="'Lato', sans-serif;" font-size="22" id="svg_36" y="38.55292" x="46.579544" stroke-width="0" fill="#ffffff">Weather-Proof</text>
+                            <text text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="15" id="svg_37" y="25.910713" x="127.499998" stroke-width="0" stroke="#000" fill="#000000"/>
+                        </g>
+                    </svg>
                 </h:link>
 
                 <h:panelGroup>
@@ -87,11 +88,33 @@ Copyright © 2017 Abhiroop Singh. All rights reserved.
                     its class name. For this to work, the following must be specified in the siteTemplate file:
                     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" />
                     -->
-                    <!-- Clicking "Home" displays the index.xhtml file -->
-                    <h:link outcome="index" styleClass="header_tab">Home</h:link> &nbsp;&nbsp;
 
-                    <p:button styleClass="login_button" outcome="SignIn" value="LOG IN"/> &nbsp;&nbsp;
-                    <p:button styleClass="signup_button" outcome="SignUp" value="SIGN UP"/>
+
+
+                    <!-- "Sign Out" and "My Account" if a user is signed in -->
+                    <c:if test="#{accountManager.isLoggedIn() == true}">
+                        <!-- Clicking "Home" displays the index.xhtml file -->
+                        <h:link outcome="UserHomePage" styleClass="header_tab">Home</h:link> &nbsp;&nbsp;
+                        <h:link outcome="CheckWeather" styleClass="header_tab">Plan Activity</h:link> &nbsp;&nbsp;
+                        <!-- Clicking "Sign Out" invokes accountManager's logout() method -->
+                        <h:commandLink action="#{accountManager.logout()}" styleClass="header_tab">
+                            <i class="fa fa-sign-out">&nbsp;</i>Sign Out
+                        </h:commandLink>&nbsp;&nbsp;
+
+                        <!-- Clicking "My Files" displays the UserFiles.xhtml file -->
+                        <h:link outcome="index" styleClass="header_tab">
+                            <i class="fa fa-files-o">&nbsp;</i>My Planner
+                        </h:link>&nbsp;&nbsp;
+                    </c:if>
+
+                    <!-- "Sign In" and "Create an Account" if no user is signed in -->
+                    <c:if test="#{accountManager.isLoggedIn() == false}">
+                        <!-- Clicking "Home" displays the index.xhtml file -->
+                        <h:link outcome="index" styleClass="header_tab">Home</h:link> &nbsp;&nbsp;
+                        <h:link outcome="CheckWeather" styleClass="header_tab">Plan Activity</h:link> &nbsp;&nbsp;
+                        <p:button styleClass="login_button" outcome="SignIn" value="LOG IN"/> &nbsp;&nbsp;
+                        <p:button styleClass="signup_button" outcome="SignUp" value="SIGN UP"/>
+                    </c:if>
 
                 </h:panelGroup>
             </h:panelGrid>
