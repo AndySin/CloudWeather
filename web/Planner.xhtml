@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created by Akhil Gangu on 2017.04.07
+Copyright © 2017 Akhil Gangu. All rights reserved.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <!-- Do not enter tags before the composition line since they are ignored by JSF -->
+
+    <!-- This page is constructed based on the siteTemplate -->
+    <ui:composition template="/template/siteTemplate.xhtml">
+
+        <!-- Create the content for this page below -->
+        <ui:define name="editableContent">
+
+            <h:form>
+                <h:panelGrid columns="2" columnClasses="weatherResults, weatherResults" style="width:100%; height: 100%;">
+                    <h:panelGrid>
+                        <p:commandButton id="login" value="Sign In" action="#{loginManager.loginUser()}" 
+                                         class="login" ajax="false" icon="ui-icon-arrowthick-1-e" style=""/>
+                        <p:spacer height="20px"/>
+
+                        <p:commandButton id="lgin" value="Sign In" action="#{loginManager.loginUser()}" 
+                                         class="login" ajax="false" icon="ui-icon-arrowthick-1-e" style=""/>
+
+                        <p:commandButton id="loin" value="Sign In" action="#{loginManager.loginUser()}" 
+                                         class="login" ajax="false" icon="ui-icon-arrowthick-1-e" style=""/>
+                    </h:panelGrid>
+
+
+                    <p:schedule id="schedule" value="#{scheduleView.eventModel}" view="basicWeek"
+                                timeFormat="h:mmt" rightHeaderTemplate="" leftHeaderTemplate="">
+                        <p:ajax event="eventSelect" listener="#{scheduleView.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+                    </p:schedule>
+
+                </h:panelGrid>
+                
+                <p:spacer height="1000px;"/>
+
+
+                <p:spacer height="20px"/>
+
+                <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">
+                    <h:panelGrid id="eventDetails" columns="2">
+                        <p:outputLabel for="title" value="Titles:" />
+                        <p:inputText id="title" value="#{scheduleView.event.title}" required="true" />
+
+                        <p:outputLabel for="from" value="From:" />
+                        <p:calendar id="from" value="#{scheduleView.event.startDate}" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"/>
+
+                        <p:outputLabel for="to" value="To:" />
+                        <p:calendar id="to" value="#{scheduleView.event.endDate}" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"/>
+
+                        <p:outputLabel for="allDay" value="All Day:" />
+                        <h:selectBooleanCheckbox id="allDay" value="#{scheduleView.event.allDay}" />
+
+                        <p:commandButton type="reset" value="Reset" />
+                        <p:commandButton id="addButton" value="Save" actionListener="#{scheduleView.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
+                    </h:panelGrid>
+
+                </p:dialog>    
+            </h:form>
+
+
+        </ui:define>
+
+    </ui:composition>
+    <!-- Do not enter tags after the composition line since they are ignored by JSF -->
+
+</html>

@@ -97,14 +97,10 @@ Copyright © 2017 Abhiroop Singh. All rights reserved.
                         <h:link outcome="UserHomePage" styleClass="header_tab">Home</h:link> &nbsp;&nbsp;
                         <h:link outcome="CheckWeather" styleClass="header_tab">Plan Activity</h:link> &nbsp;&nbsp;
                         <!-- Clicking "Sign Out" invokes accountManager's logout() method -->
-                        <h:commandLink action="#{accountManager.logout()}" styleClass="header_tab">
-                            <i class="fa fa-sign-out">&nbsp;</i>Sign Out
-                        </h:commandLink>&nbsp;&nbsp;
+                        <h:commandLink action="#{accountManager.logout()}" styleClass="header_tab">Sign Out</h:commandLink>&nbsp;&nbsp;
 
                         <!-- Clicking "My Files" displays the UserFiles.xhtml file -->
-                        <h:link outcome="index" styleClass="header_tab">
-                            <i class="fa fa-files-o">&nbsp;</i>My Planner
-                        </h:link>&nbsp;&nbsp;
+                        <h:link outcome="Planner" styleClass="header_tab">My Planner</h:link>&nbsp;&nbsp;
                     </c:if>
 
                     <!-- "Sign In" and "Create an Account" if no user is signed in -->
