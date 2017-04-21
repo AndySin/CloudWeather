@@ -561,12 +561,13 @@ cascading hierarchy, use the !important attribute.
     font-weight: normal;
     text-decoration: none;
 }
-.ui-widget,.ui-widget-header,.ui-widget-content,.ui-widget-header .ui-widget-header,.ui-widget-content .ui-widget-content,.ui-widget input,.ui-widget select,.ui-widget textarea,.ui-widget {
-    font-family: Lato; 
-    font-size: 20px; 
+
+.monthCal .ui-widget, .ui-widget-content .ui-widget-content {
+    font-family: Lato;
+    font-size: 18pt;
     text-decoration: none;
-    color: black;
 }
+
 /* Approach 2: Override PrimeFaces p:commandButton style */
 .commandButton {
     border-radius: 2em !important;
@@ -625,8 +626,4 @@ cascading hierarchy, use the !important attribute.
     font-family: Lato;
     font-size: 20px;
     text-decoration: none;
-}
-
-.custom {
-    height: 100px;
 }

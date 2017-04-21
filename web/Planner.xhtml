@@ -19,31 +19,17 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
         <ui:define name="editableContent">
 
             <h:form>
-                <h:panelGrid columns="2" columnClasses="weatherResults, weatherResults" style="width:100%; height: 100%;">
-                    <h:panelGrid>
-                        <p:commandButton id="login" value="Sign In" action="#{loginManager.loginUser()}" 
-                                         class="login" ajax="false" icon="ui-icon-arrowthick-1-e" style=""/>
-                        <p:spacer height="20px"/>
-
-                        <p:commandButton id="lgin" value="Sign In" action="#{loginManager.loginUser()}" 
-                                         class="login" ajax="false" icon="ui-icon-arrowthick-1-e" style=""/>
-
-                        <p:commandButton id="loin" value="Sign In" action="#{loginManager.loginUser()}" 
-                                         class="login" ajax="false" icon="ui-icon-arrowthick-1-e" style=""/>
-                    </h:panelGrid>
-
-
-                    <p:schedule id="schedule" value="#{scheduleView.eventModel}" view="basicWeek"
-                                timeFormat="h:mmt" rightHeaderTemplate="" leftHeaderTemplate="">
+                <h:panelGrid columns="1" columnClasses="weatherResults">
+                    <p:schedule id="monthCal" value="#{scheduleView.eventModel}" styleClass="monthCal" aspectRatio="5" view="basicWeek"
+                                timeFormat="h:mmt" rightHeaderTemplate="">
                         <p:ajax event="eventSelect" listener="#{scheduleView.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+                        <p:ajax event="dateSelect" listener="#{scheduleView.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+
                     </p:schedule>
 
+
+                    <p:spacer style="height: 10px;"/>
                 </h:panelGrid>
-                
-                <p:spacer height="1000px;"/>
-
-
-                <p:spacer height="20px"/>
 
                 <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">
                     <h:panelGrid id="eventDetails" columns="2">
