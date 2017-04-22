@@ -49,6 +49,8 @@ public class SearchedWeatherController implements Serializable {
     // set by user in web form
     private Date eventStartTime;
     private Date eventEndTime;
+    
+    private String eventName;
 
     private List<DataPoint> eventHourlyWeather;
 
@@ -324,10 +326,16 @@ public class SearchedWeatherController implements Serializable {
     public List<DataPoint> getEventHourlyWeather() {
         return eventHourlyWeather;
     }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
+    
     
     public void clearSearchFields() {
-        
-        eventStartTime = null;
-        eventEndTime = null;        
-    }
+            }
 }
