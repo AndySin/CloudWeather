@@ -29,6 +29,7 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                         detailsAttribute: "class",
                         types: ["geocode", "establishment"]
                     });
+
                     $(".commandButton").click(function () {
                         $(this).parents(".location").find("#geocomplete").trigger("geocode");
                     });
@@ -38,7 +39,7 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
             <h:form>
 
                 <h:panelGrid columns="1" columnClasses="weatherResults">
-                    <p:schedule id="monthCal" value="#{scheduleView.eventModel}" styleClass="monthCal" aspectRatio="5" view="basicWeek"
+                    <p:schedule id="monthCal" value="#{scheduleView.eventModel}" styleClass="monthCal"
                                 timeFormat="h:mmt" rightHeaderTemplate="">
                         <p:ajax event="eventSelect" listener="#{scheduleView.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
                         <p:ajax event="dateSelect" listener="#{scheduleView.onDateSelect}" update="createEvent" oncomplete="PF('createEventDialog').show();" />
