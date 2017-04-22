@@ -70,20 +70,17 @@ Copyright © 2017 Andy Sin. All rights reserved.
 
             </h:form>
             <br/>
-
-
+            
             <div align="center">
 
                 <h:form id="WeatherResultsForm">
 
-                    <h:panelGrid columns="2" columnClasses="weatherResults, weatherResults">
+                    <h:panelGrid columns="2" columnClasses="weatherResults, weatherResults" style="width:100%">
                         <!-- Columns 1 & 2 -->
-                        <h:outputText value="Latitude: " />                  
-                        <h:outputText value="#{searchedWeatherController.result.latitude}" />
-
+                        <h:outputText value="Latitude: " /> 
+                        
                         <!-- Columns 1 & 2 -->
                         <h:outputText value="Activity Analysis:" />     
-                        <h:outputText value="#{searchedWeatherController.result.hourly.summary}" />
                     </h:panelGrid>
 
                     <br />
@@ -94,7 +91,7 @@ Copyright © 2017 Andy Sin. All rights reserved.
                             <f:facet name="header">
                                 <h:outputText styleClass="weatherResults" value="#{item.date.toString().substring(0,3)} #{item.convertedDate(item.date)}"/>
                                 <br/>
-                                <p:graphicImage url="resources/images/weatherIcons/Cloud.png"/>
+                                <p:graphicImage url="resources/images/weatherIcons/#{item.icon}.png"/>
                             </f:facet>
 
                             <h:outputText value="Description:" />
