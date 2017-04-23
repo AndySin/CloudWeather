@@ -17,6 +17,7 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
 
         <!-- Create the content for this page below -->
         <ui:define name="editableContent">
+            <p:growl id="growl" life="7000"/>
             <script type="text/javascript" src='http://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyCs6hxbEQ4A-fQ1ghb1KIPEAMcWfNYjMlk'></script>
 
             <script src="resources/js/jquery.geocomplete.js" type="text/javascript"></script>
@@ -60,7 +61,7 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                                 </tr>
                                 <tr>
                                     <td align="left">
-                                        <p:inputText id="eventTitle" style="font-family: Lato; width:250px; box-shadow: none;" required="true">
+                                        <p:inputText id="eventTitle" value="#{searchedWeatherController.eventName}" style="font-family: Lato; width:250px; box-shadow: none;" required="true">
                                         </p:inputText>
                                     </td>
 
@@ -106,7 +107,7 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                                 </h:inputText>
                             </div>
                             <br/>
-                            <p:commandButton id="check" class="login" value="CREATE" action="#{searchedWeatherController.getForecast()}" ajax="false"/>
+                            <p:commandButton id="check" class="login" value="CREATE" action="#{userEventsController.addEvent()}" ajax="false"/>
 
                             <br/>
                         </h:form>
