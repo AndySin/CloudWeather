@@ -17,7 +17,7 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
 
         <!-- Create the content for this page below -->
         <ui:define name="editableContent">
-            <div align="center"> <index_header>Password Recovery</index_header></div>
+            <div align="center"> <index_header>Security Question</index_header></div>
             <br></br>
 
             <div align="center" style="width:500px; background-color: #FEFEFE; margin:0 auto;">
@@ -25,24 +25,23 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                     <br/>
                     <table cellspacing="10">
                         <tr>
-                            <td><index_regular>Username</index_regular></td>
+                            <index_regular><h:outputLabel for="question" value="#{passwordResetManager.getSecurityQuestion()}" /></index_regular>
                         </tr>
                         <tr>
                             <td>
-                                <p:inputText id="username" style="font-family: Lato; width:250px; box-shadow: none;" value="#{passwordResetManager.username}" required="true" 
-                                             requiredMessage="Please enter a username." label="Username">
+                                <p:inputText id="answer" style="font-family: Lato; width:250px; box-shadow: none;" value="#{passwordResetManager.answer}" required="true" 
+                                             requiredMessage="Please enter the answer." label="Answer">
                                 </p:inputText>
 
                             </td>
                         </tr>
                     </table>
                     <br/>
-                    <p:commandButton id="login" value="Submit" action="#{passwordResetManager.usernameSubmit()}" 
-                                     class="login" ajax="false" style="display: inline"/>
+                    <p:commandButton id="submit" value="Submit" action="#{passwordResetManager.securityAnswerSubmit()}" style="display: inline" 
+                                     class="login" ajax="false"/>
+
                     &nbsp;
-
                     <p:commandButton action="SignIn?faces-redirect=true" value="Cancel" styleClass="login" style="display: inline" />
-
                     <br/>
                     <br/>
                 </h:form>
