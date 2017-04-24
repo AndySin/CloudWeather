@@ -19,9 +19,9 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
         <ui:define name="editableContent">
             <p:growl id="growl" life="7000"/>
 
-            <h:form>
+            <h:form id="PlannerDataForm">
                 <h:panelGrid columns="1" columnClasses="weatherResults">
-                    <p:schedule id="monthCal" value="#{scheduleView.eventModel}" styleClass="monthCal"
+                    <p:schedule id="monthCal" value="#{scheduleView.eventModel}" styleClass="monthCal" draggable="false"
                                 timeFormat="h:mmt" rightHeaderTemplate="">
                         <p:ajax event="eventSelect" listener="#{scheduleView.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
                         <p:ajax event="dateSelect" listener="#{scheduleView.onDateSelect}" update="createEvent" oncomplete="PF('createEventDialog').show();" />
