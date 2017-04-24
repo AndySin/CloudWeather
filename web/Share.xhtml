@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created by Tanya Sutan-Tanon on 2017.04.22 
+Copyright © 2017 Osman Balci. All rights reserved.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <!-- This page is constructed based on the siteTemplate -->
+    <ui:composition template="/template/siteTemplate.xhtml" >
+
+        <ui:define name="editableContent" >
+
+            <div id="topMain">
+                <index_header>Weather-Proof Activity Planner</index_header>
+
+                <br></br>
+                <br></br>
+
+                <index_regular>Share Weather-Proof with your friends!</index_regular>
+
+                <br></br><br></br>
+                <br></br><br></br>
+
+                <p:commandButton styleClass="index_signup" value="Invite via Email" type="button" onclick="PF('dlg2').show();"/>
+            </div>
+            <!--Share via email dialog form-->
+            <p:dialog header="SHARE VIA EMAIL" widgetVar="dlg2" modal="true" width="700" height="500">
+                <h:form>
+                    <br/>
+                    <!--From field-->
+                    <h:outputText value="From: " styleClass="emailLabels"/>
+                    <h:outputText value="#{accountManager.selected.email}" styleClass="emailLabels" style="font-weight: normal"/>
+                    <br/>
+                    <!--To field-->
+                    <h:outputText value="To:" styleClass="emailLabels"/>
+                    <br/>
+
+                    <p:inputText id="toField" styleClass="emailInputText" style="width: 600px" value="#{emailManager.emailTo}" 
+                                 title="Email To" required="true" requiredMessage="Please Enter an Email Address">
+                    </p:inputText>
+                    <p:watermark for="toField" value="Enter your friend's emails separated by commas"/>
+                    <br/>
+                    <!--Subject field-->
+                    <h:outputText value="Subject: " styleClass="emailLabels"/>
+                    <br/>
+                    <p:inputText id="subject" value="#{emailManager.emailSubject}" required="true" label="Subject" styleClass="emailInputText" style="width: 600px"/>                
+                    <p:watermark for="subject" value="Try Weather-Proof Activity Planner!"/>
+                    <br/>
+                    <!--Message field-->
+                    <h:outputText value="Message" styleClass="emailLabels"/>
+                    <br/>
+                    <p:inputTextarea id="message" value="#{emailManager.customizedMessage}" required="false" label="Message" styleClass="emailInputText" style="width: 600px;" rows="6" cols="33" />
+                    <p:watermark for="message" value="Insert customized message."/>
+                    <br/><br/>
+
+                    <div align="center">
+                        <p:commandButton styleClass="index_signup" ajax="false" action="#{emailManager.sendEmail(accountManager.selected.email)}" value="Send Email"/>
+                    </div>
+                </h:form>
+            </p:dialog>  
+
+
+        </ui:define>
+
+    </ui:composition>
+
+
+</html>
+

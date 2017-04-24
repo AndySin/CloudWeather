@@ -50,7 +50,7 @@ Copyright © 2017 Osman Balci. All rights reserved.
                             <td style="padding-left: 50px;">
                                 <p:inputText id="email" value="#{accountManager.email}" required="true" styleClass="accountInputTextField"
                                              requiredMessage="#{bundle.CreateCustomerRequiredMessage_email}" label="Email">
-
+                                    <f:validator validatorId="emailValidator" />  
                                 </p:inputText>
                             </td>
                         </tr>
@@ -71,7 +71,7 @@ Copyright © 2017 Osman Balci. All rights reserved.
                             <td style="padding-left: 50px;">
                                 <p:inputText id="username" value="#{accountManager.username}" required="true" styleClass="accountInputTextField"
                                              requiredMessage="#{bundle.CreateCustomerRequiredMessage_username}" label="Username">
-
+                                    <f:validator validatorId="usernameValidator"/> 
                                 </p:inputText>
                             </td>
                         </tr>
@@ -92,6 +92,7 @@ Copyright © 2017 Osman Balci. All rights reserved.
                             <td style="padding-left: 50px;">
                                 <p:password id="password" value="#{accountManager.password}" feedback="true" required="true" styleClass="accountInputTextField">
                                     <!-- Execute the "validate" method in the "PasswordValidator.java" class file to validate the password entered. -->
+                                    <f:validator validatorId="passwordValidator" /> 
                                 </p:password>
                             </td>
                         </tr>
