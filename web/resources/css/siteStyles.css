@@ -645,3 +645,21 @@ cascading hierarchy, use the !important attribute.
     font-size: 20px;
     text-decoration: none;
 }
+
+.resultsButton {
+    font-family: Lato;
+    font-size: 20px;
+    font-weight: 300;
+    color: white;
+    text-decoration: none;
+    background: #313134;
+    border-width: 1px;
+    border-style: solid;
+    box-shadow: none;
+    height: 70px;
+    width: 200px;
+}
+
+.resultsButton:hover {
+    border-color: #0aa9f7;
+}

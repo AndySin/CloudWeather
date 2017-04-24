@@ -30,3 +30,15 @@ CREATE TABLE User
     email VARCHAR (128) NOT NULL,      
     PRIMARY KEY (id)
 );
+
+CREATE TABLE UserEvents
+(
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    user_id INT UNSIGNED,
+    event_name VARCHAR(256) NOT NULL,
+    latitude FLOAT NOT NULL,
+    longitude FLOAT NOT NULL,   
+    start_time DATE NOT NULL,
+    end_time DATE NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE
+);

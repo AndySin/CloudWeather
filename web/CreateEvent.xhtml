@@ -1,33 +1,36 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!--
-Created by Akhil Gangu on 2017.04.08
+Created by Akhil Gangu on 2017.04.23 
 Copyright © 2017 Akhil Gangu. All rights reserved.
 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"   
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
 
+    <ui:composition>
 
-    <!-- Do not enter tags before the composition line since they are ignored by JSF -->
+        <p:dialog id="createEvent" widgetVar="createEventDialog" header="Create Event" showEffect="clip" hideEffect="clip">
 
-    <!-- This page is constructed based on the siteTemplate -->
-    <ui:composition template="/template/siteTemplate.xhtml">
-
-        <!-- Create the content for this page below -->
-        <ui:define name="editableContent">
             <script type="text/javascript" src='http://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyCs6hxbEQ4A-fQ1ghb1KIPEAMcWfNYjMlk'></script>
 
             <script src="resources/js/jquery.geocomplete.js" type="text/javascript"></script>
 
-
             <script>
                 $(document).ready(function () {
+                    var pacContainerInitialized = false;
+                    $('#geocomplete').keypress(function () {
+                        if (!pacContainerInitialized) {
+                            $('.pac-container').css('z-index', '9999');
+                            pacContainerInitialized = true;
+                        }
+                    });
+
                     $("#geocomplete").geocomplete({
                         details: ".latlng",
                         detailsAttribute: "class",
-                        types: ["geocode", "establishment"]
+                        types: ["geocode", "establishment"],
                     });
 
                     $(".commandButton").click(function () {
@@ -35,13 +38,21 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                     });
                 });
             </script>
-            <p:growl id="growl" life="7000"/>
-            <div align="center"><index_header>Check Weather For Your Event</index_header></div>
-            <br/>
-            <div align="center" style="width:500px; background-color: #FEFEFE; margin:0 auto;">
+
+            <div id="testing" align="center" style="width:100%; background-color: #FEFEFE; margin:0 auto;">
                 <h:form prependId="false">
                     <br/>
                     <table cellspacing="10">
+                        <tr>
+                            <td><index_regular>Event Name:</index_regular></td>
+                        </tr>
+                        <tr>
+                            <td align="left">
+                                <p:inputText id="eventTitle" value="#{searchedWeatherController.eventName}" style="font-family: Lato; width:250px; box-shadow: none;" required="true">
+                                </p:inputText>
+                            </td>
+
+                        </tr>
                         <tr>
                             <td><index_regular>Location:</index_regular></td>
                         </tr>
@@ -71,7 +82,6 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                                             pattern="MM/dd/yyyy HH:mm" required="true" styleClass="calendarClass"/>
                             </td>
                         </tr>
-                        
                     </table>
                     <div class="latlng" style="display:none;">
                         <h:inputText id="searchQueryFieldLat" class="lat"
@@ -83,15 +93,12 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                         </h:inputText>
                     </div>
                     <br/>
-                    <p:commandButton id="check" class="login" value="CHECK" action="#{searchedWeatherController.getForecast()}" ajax="false"/>
+                    <p:commandButton id="check" class="login" value="CREATE" actionListener="#{userEventsController.addEvent}" 
+                                     action="#{scheduleView.init}" ajax="false"  />
 
                     <br/>
                 </h:form>
             </div>
-
-        </ui:define>
-
+        </p:dialog>   
     </ui:composition>
-    <!-- Do not enter tags after the composition line since they are ignored by JSF -->
-
 </html>

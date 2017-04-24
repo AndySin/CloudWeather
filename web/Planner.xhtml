@@ -17,101 +17,19 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
 
         <!-- Create the content for this page below -->
         <ui:define name="editableContent">
-            <script type="text/javascript" src='http://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyCs6hxbEQ4A-fQ1ghb1KIPEAMcWfNYjMlk'></script>
+            <p:growl id="growl" life="7000"/>
 
-            <script src="resources/js/jquery.geocomplete.js" type="text/javascript"></script>
-
-
-            <script>
-                $(document).ready(function () {
-                    $("#geocomplete").geocomplete({
-                        details: ".latlng",
-                        detailsAttribute: "class",
-                        types: ["geocode", "establishment"]
-                    });
-
-                    $(".commandButton").click(function () {
-                        $(this).parents(".location").find("#geocomplete").trigger("geocode");
-                    });
-                });
-            </script>
-
-            <h:form>
-
+            <h:form id="PlannerDataForm">
                 <h:panelGrid columns="1" columnClasses="weatherResults">
-                    <p:schedule id="monthCal" value="#{scheduleView.eventModel}" styleClass="monthCal" aspectRatio="5" view="basicWeek"
-                                timeFormat="h:mmt" rightHeaderTemplate="">
+                    <p:schedule id="monthCal" value="#{scheduleView.eventModel}" styleClass="monthCal" draggable="false"
+                                timeFormat="h:mmt" rightHeaderTemplate="" >
                         <p:ajax event="eventSelect" listener="#{scheduleView.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
                         <p:ajax event="dateSelect" listener="#{scheduleView.onDateSelect}" update="createEvent" oncomplete="PF('createEventDialog').show();" />
-
                     </p:schedule>
 
 
                     <p:spacer style="height: 10px;"/>
                 </h:panelGrid>
-
-                <p:dialog id="createEvent" widgetVar="createEventDialog" header="Create Event" showEffect="clip" hideEffect="clip">
-                    <div align="center" style="width:100%; background-color: #FEFEFE; margin:0 auto;">
-                        <h:form prependId="false">
-                            <br/>
-                            <table cellspacing="10">
-                                <tr>
-                                    <td><index_regular>Event Name:</index_regular></td>
-                                </tr>
-                                <tr>
-                                    <td align="left">
-                                        <p:inputText id="eventTitle" style="font-family: Lato; width:250px; box-shadow: none;" required="true">
-                                        </p:inputText>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td><index_regular>Location:</index_regular></td>
-                                </tr>
-                                <tr>
-                                    <td align="left">
-                                        <p:inputText id="geocomplete" style="font-family: Lato; width:250px; box-shadow: none;" required="true">
-                                        </p:inputText>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td><index_regular id="startTime">Event Start:</index_regular></td>
-                                </tr>
-                                <tr>
-                                    <td align="left">
-                                        <p:calendar id="startTime" value="#{searchedWeatherController.eventStartTime}" 
-                                                    pattern="MM/dd/yyyy HH:mm" required="true" styleClass="calendarClass"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><index_regular id="endTime">Event End:</index_regular></td>
-                                </tr>
-                                <tr>
-
-                                    <td align="left">
-                                        <p:calendar id="endTime" value="#{searchedWeatherController.eventEndTime}"
-                                                    pattern="MM/dd/yyyy HH:mm" required="true" styleClass="calendarClass"/>
-                                    </td>
-                                </tr>
-
-                            </table>
-                            <div class="latlng" style="display:none;">
-                                <h:inputText id="searchQueryFieldLat" class="lat"
-                                             value="#{searchedWeatherController.searchLatitude}">
-                                </h:inputText>
-
-                                <h:inputText id="searchQueryFieldLng" class="lng"
-                                             value="#{searchedWeatherController.searchLongitude}">
-                                </h:inputText>
-                            </div>
-                            <br/>
-                            <p:commandButton id="check" class="login" value="CREATE" action="#{searchedWeatherController.getForecast()}" ajax="false"/>
-
-                            <br/>
-                        </h:form>
-                    </div>
-                </p:dialog>   
 
                 <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">
                     <h:panelGrid id="eventDetails" columns="2">
@@ -131,9 +49,10 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                         <p:commandButton id="addButton" value="Save" actionListener="#{scheduleView.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
                     </h:panelGrid>
 
-                </p:dialog>    
+                </p:dialog>
             </h:form>
 
+            <ui:include src="CreateEvent.xhtml"/> 
 
         </ui:define>
 
