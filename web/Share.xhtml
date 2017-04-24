@@ -17,6 +17,10 @@ Copyright © 2017 Osman Balci. All rights reserved.
         <ui:define name="editableContent" >
 
             <div id="topMain">
+                <!-- Error messages will be shown here if any  -->
+                
+                <h:outputText id="formMessage" class="errorMessages" value="#{emailManager.statusMessage}" />
+                <br/>
                 <index_header>Weather-Proof Activity Planner</index_header>
 
                 <br></br>
@@ -58,7 +62,6 @@ Copyright © 2017 Osman Balci. All rights reserved.
                     <p:inputTextarea id="message" value="#{emailManager.customizedMessage}" required="false" label="Message" styleClass="emailInputText" style="width: 600px;" rows="6" cols="33" />
                     <p:watermark for="message" value="Insert customized message."/>
                     <br/><br/>
-
                     <div align="center">
                         <p:commandButton styleClass="index_signup" ajax="false" action="#{emailManager.sendEmail(accountManager.selected.email)}" value="Send Email"/>
                     </div>

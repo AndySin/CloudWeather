@@ -167,7 +167,7 @@ public class EmailManager {
             // Close this service and terminate its connection
             transport.close();
 
-            statusMessage = "Email message is sent!";
+            statusMessage = "Email is sent!";
 
         } catch (AddressException ae) {
             statusMessage = "Email Address Exception Occurred!";
