@@ -1,3 +1,5 @@
+package com.mycompany.jsfclasses;
+
 
 import com.mycompany.entityclasses.UserEvents;
 import com.mycompany.jsfclasses.UserEventsController;

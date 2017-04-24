@@ -130,6 +130,17 @@ index_bottom_header {
 
 }
 
+#middleMain {
+
+    height: 300px;
+    width: 100%;
+
+    background: #f5f5f8;
+    font-family: Lato; 
+    text-align: center;
+
+}
+
 #bottomMain {
 
     height: 100%;

@@ -56,7 +56,7 @@ public class SearchedWeatherController implements Serializable {
 
     private String recurring;
     private String duration;
-    
+
     private List<DataPoint> eventHourlyWeather;
 
     private static final String CURRENT = "currently";
@@ -121,7 +121,7 @@ public class SearchedWeatherController implements Serializable {
             String weatherAPICall = weatherAPIUrl + weatherAPIKey
                     + "/" + searchLatitude + "," + searchLongitude + ","
                     + unixTime;
-            
+
             JSONObject jsonData = readUrlContent(weatherAPICall);
 
             result = createResponse(jsonData);
@@ -135,9 +135,9 @@ public class SearchedWeatherController implements Serializable {
         try {
             String weatherAPICall = weatherAPIUrl + weatherAPIKey
                     + "/" + searchLatitude + "," + searchLongitude;
-            
+
             JSONObject jsonData = readUrlContent(weatherAPICall);
-            
+
             result = createResponse(jsonData);
         } catch (Exception e) {
             e.printStackTrace();

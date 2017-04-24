@@ -67,22 +67,24 @@ Copyright © 2017 Andy Sin. All rights reserved.
                     </tr>
                 </table>
 
-
-            </h:form>
-            <br/>
-            
-            <div align="center">
-
-                <h:form id="WeatherResultsForm">
+                <div id="middleMain">
+                    <br/>
 
                     <h:panelGrid columns="2" columnClasses="weatherResults, weatherResults" style="width:100%">
                         <!-- Columns 1 & 2 -->
-                        <h:outputText value="Latitude: " /> 
-                        
+                        <p:graphicImage url="resources/images/weatherIcons/#{searchedWeatherController.result.hourly.icon}.png"/>
+
                         <!-- Columns 1 & 2 -->
                         <h:outputText value="Activity Analysis:" />     
                     </h:panelGrid>
+                </div>
 
+            </h:form>
+            <br/>
+
+            <div align="center">
+
+                <h:form id="WeatherResultsForm">
                     <br />
                     <br />
 

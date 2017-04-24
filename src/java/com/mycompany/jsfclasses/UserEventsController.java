@@ -46,6 +46,9 @@ public class UserEventsController implements Serializable {
 
     @Inject
     private SearchedWeatherController searchedWeatherController;
+    
+    @Inject
+    private Scheduler scheduleView;
 
     private List<UserEvents> items = null;
     private UserEvents selected;
@@ -172,7 +175,7 @@ public class UserEventsController implements Serializable {
         return getFacade().findAll();
     }
 
-    public void addEvent() {
+    public String addEvent() {
         if (accountManager.isLoggedIn()) {
             String eventName = searchedWeatherController.getEventName();
             float latitude = Float.valueOf(searchedWeatherController.getSearchLatitude());
@@ -217,6 +220,9 @@ public class UserEventsController implements Serializable {
                     break;
             }
         }
+        scheduleView.init();
+        
+        return "Planner?faces-redirect=true";
     }
 
     @FacesConverter(forClass = UserEvents.class)
