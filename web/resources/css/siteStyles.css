@@ -487,6 +487,24 @@ Other Style Definitions
 =======================
 */
 
+/* Style email label text */
+.emailLabels {
+    font-family: Lato;
+    font-size: 12pt;
+    font-style: normal;
+    font-weight: bolder;
+    color: black; 
+}
+
+/* Style email label text */
+.emailInputText {
+    font-family: Lato !important;
+    font-size: 12pt !important;
+    font-style: normal;
+    font-weight: normal;
+    color: black; 
+}
+
 /* Style the Create, View, and Edit data fields */
 .dataFields {
     width: 300px;
