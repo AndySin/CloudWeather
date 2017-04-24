@@ -7,6 +7,7 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition>
@@ -82,6 +83,35 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                                             pattern="MM/dd/yyyy HH:mm" required="true" styleClass="calendarClass"/>
                             </td>
                         </tr>
+                        <tr>
+                            <td><index_regular id="endTime">Recurring:</index_regular></td>
+                        </tr>
+                        <tr>
+                            <td align="left">
+                                <p:selectOneMenu id="recurrence" value="#{searchedWeatherController.recurring}"
+                                                 style="width:125px" requiredMessage="Select Recurrence of Event!">
+                                    <f:selectItem itemLabel="Select Reccurence of Event" itemValue="" noSelectionOption="true" />
+                                    <f:selectItem itemLabel="Daily" itemValue="daily"/>
+                                    <f:selectItem itemLabel="Weekly" itemValue="weekly"/>
+                                    <f:selectItem itemLabel="1-Time" itemValue="daily"/>
+                                </p:selectOneMenu>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><index_regular id="endTime">Duration:</index_regular></td>
+                        </tr>
+                        <tr>
+                            <td align="left">
+                                <p:selectOneMenu id="duration" value="#{searchedWeatherController.duration}"
+                                                 style="width:125px">
+                                    <f:selectItem itemLabel="Select Recurrence Duration If Applicable" itemValue="0" noSelectionOption="true" />
+                                    <f:selectItem itemLabel="Next 1 Week" itemValue="2"/>
+                                    <f:selectItem itemLabel="Next 2 Weeks" itemValue="2"/>
+                                    <f:selectItem itemLabel="Next 3 Weeks" itemValue="3"/>
+                                    <f:selectItem itemLabel="Next 4 Weeks" itemValue="4"/>
+                                </p:selectOneMenu>
+                            </td>
+                        </tr>
                     </table>
                     <div class="latlng" style="display:none;">
                         <h:inputText id="searchQueryFieldLat" class="lat"
@@ -93,8 +123,10 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                         </h:inputText>
                     </div>
                     <br/>
-                    <p:commandButton id="check" class="login" value="CREATE" actionListener="#{userEventsController.addEvent}" 
-                                     action="#{scheduleView.init}" ajax="false"  />
+                    <p:commandButton id="check" class="login" value="CREATE" action="#{userEventsController.addEvent}"
+                                     >
+
+                    </p:commandButton>
 
                     <br/>
                 </h:form>
