@@ -174,22 +174,49 @@ public class UserEventsController implements Serializable {
 
     public void addEvent() {
         if (accountManager.isLoggedIn()) {
-
             String eventName = searchedWeatherController.getEventName();
             float latitude = Float.valueOf(searchedWeatherController.getSearchLatitude());
             float longitude = Float.valueOf(searchedWeatherController.getSearchLongitude());
-            Date startTime = searchedWeatherController.getEventStartTime();
-            Date endTime = searchedWeatherController.getEventEndTime();
-
+            long unixStart = searchedWeatherController.getEventStartTime().getTime();
+            long unixEnd = searchedWeatherController.getEventEndTime().getTime();
             User user = accountManager.getSelected();
 
-            UserEvents event = new UserEvents(eventName, latitude, longitude, startTime, endTime, user);
+            // in weeks
+            int duration = Integer.parseInt(searchedWeatherController.getDuration());
 
-            userEventsFacade.create(event);
-            
-            userEventsController.refreshFileList();
+            switch (searchedWeatherController.getRecurring()) {
+                case "weekly":
+                    for (int k = 0; k <= duration; k++) {
+                        Date startTime = new Date(unixStart);
+                        Date endTime = new Date(unixEnd);
+
+                        UserEvents event = new UserEvents(eventName, latitude, longitude, startTime, endTime, user);
+
+                        userEventsFacade.create(event);
+
+                        userEventsController.refreshFileList();
+
+                        unixStart += 86400 * 1000 * 7;
+                        unixEnd += 86400 * 1000 * 7;
+                    }
+                    break;
+                default: // daily
+                    for (int k = 0; k <= 7 * duration; k++) {
+                        Date startTime = new Date(unixStart);
+                        Date endTime = new Date(unixEnd);
+
+                        UserEvents event = new UserEvents(eventName, latitude, longitude, startTime, endTime, user);
+
+                        userEventsFacade.create(event);
+
+                        userEventsController.refreshFileList();
+
+                        unixStart += 86400 * 1000;
+                        unixEnd += 86400 * 1000;
+                    }
+                    break;
+            }
         }
-
     }
 
     @FacesConverter(forClass = UserEvents.class)

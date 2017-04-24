@@ -54,6 +54,9 @@ public class SearchedWeatherController implements Serializable {
 
     private String eventName;
 
+    private String recurring;
+    private String duration;
+    
     private List<DataPoint> eventHourlyWeather;
 
     private static final String CURRENT = "currently";
@@ -354,6 +357,22 @@ public class SearchedWeatherController implements Serializable {
 
     public void setEventName(String eventName) {
         this.eventName = eventName;
+    }
+
+    public String getRecurring() {
+        return recurring;
+    }
+
+    public void setRecurring(String recurring) {
+        this.recurring = recurring;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 
     public void clearSearchFields() {
