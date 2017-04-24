@@ -75,14 +75,17 @@ public class SearchedWeatherController implements Serializable {
 
         // event start/end time validation check
         if (unixStart > unixEnd) {
-            resultMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Please Verify Your Event End Date/Time!", null);
+            resultMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "Please Verify Your Event End Date/Time!", null);
             FacesContext.getCurrentInstance().addMessage(null, resultMsg);
             return null;
         }
 
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-        if (!accountManager.isLoggedIn() && !formatter.format(eventStartTime).equals(formatter.format(eventEndTime))) {
-            resultMsg = new FacesMessage("Multiday Event Forecast Is Only For Registered Users. Please Register OR Sign In!");
+        if (!accountManager.isLoggedIn() && !formatter.format(eventStartTime).
+                equals(formatter.format(eventEndTime))) {
+            resultMsg = new FacesMessage(
+                    "Multiday Event Forecast Is Only For Registered Users. Please Register OR Sign In!");
             FacesContext.getCurrentInstance().addMessage(null, resultMsg);
             return null;
         }
@@ -100,7 +103,8 @@ public class SearchedWeatherController implements Serializable {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            resultMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid Input. Please Verify Location!", null);
+            resultMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "Invalid Input. Please Verify Location!", null);
             FacesContext.getCurrentInstance().addMessage(null, resultMsg);
             return null;
         }
@@ -114,10 +118,24 @@ public class SearchedWeatherController implements Serializable {
             String weatherAPICall = weatherAPIUrl + weatherAPIKey
                     + "/" + searchLatitude + "," + searchLongitude + ","
                     + unixTime;
+            
             JSONObject jsonData = readUrlContent(weatherAPICall);
 
             result = createResponse(jsonData);
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getCurrentlyForecast() {
+        try {
+            String weatherAPICall = weatherAPIUrl + weatherAPIKey
+                    + "/" + searchLatitude + "," + searchLongitude;
+            
+            JSONObject jsonData = readUrlContent(weatherAPICall);
+            
+            result = createResponse(jsonData);
         } catch (Exception e) {
             e.printStackTrace();
         }

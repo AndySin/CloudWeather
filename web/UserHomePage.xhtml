@@ -7,38 +7,76 @@ Copyright © 2017 Osman Balci. All rights reserved.
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
     <!-- This page is constructed based on the siteTemplate -->
     <ui:composition template="/template/siteTemplate.xhtml" >
 
-
         <ui:define name="editableContent" >
 
             <div id="topMain">
+                <h:form prependId="false">
+                    <div class="latlng" style="display:none;">
+                        <h:inputText id="searchQueryFieldLat"
+                                     value="#{searchedWeatherController.searchLatitude}">
+                        </h:inputText>
 
-                <index_header>User Area Weather Goes Here</index_header>
+                        <h:inputText id="searchQueryFieldLng"
+                                     value="#{searchedWeatherController.searchLongitude}">
+                        </h:inputText>
+                    </div>
 
-                
+                    <script>
+                        var lat = document.getElementById("searchQueryFieldLat");
+                        var lng = document.getElementById("searchQueryFieldLng");
+                        function getLocation() {
+                            if (navigator.geolocation) {
+                                navigator.geolocation.getCurrentPosition(showPosition);
+                            }
+                        }
 
-            </div>
+                        function showPosition(position) {
+                            lat.value = position.coords.latitude;
+                            lng.value = position.coords.longitude;
+                        }
 
-            <div id="bottomMain">
-                <br></br>
-                <index_bottom_header>Sign up for free and immediately get access to:</index_bottom_header>
-                <ul style="text-align: left; column-count: 2; column-gap: 35px; padding-left: 300px; width: auto">
-                    <li type="circle">Personalized Activity Calendar</li>
-                    <br></br>
-                    <li type="circle">Multiday Event Forecast</li>
-                    <br></br>
-                    <li type="circle">Real-Time Severe Weather Alerts</li>
-                    <br></br>
-                    <li type="circle">Minute-By-Minute Forecast Accuracy</li>
-                    <br></br>
-                    <li type="circle">Email Reminder Notifications</li>
-                    <br></br>
-                    <li type="circle">And Much More!</li>
-                </ul>
+                        window.onload = getLocation();
+                    </script>
+
+
+                    <h:commandButton id="checkWeatherButton" value="CHECK" action="#{searchedWeatherController.getCurrentlyForecast()}" style="display:none;">
+                        <f:ajax execute="@form" render="result" />
+                    </h:commandButton>
+                </h:form>
+
+                <script>
+                    var button = document.getElementById("checkWeatherButton");
+                    setTimeout(function () {
+                        button.click();
+                    }, 100);
+                </script>
+
+                <p:panelGrid id="result" columns="2" style="width:100%;margin:10px 0px;" columnClasses="weatherResults,weatherResults" layout="grid" styleClass="ui-panelgrid-blank">
+                    <f:facet name="header">
+                        <h:outputText styleClass="weatherResults" value="#{searchedWeatherController.result.currently.date}"/>
+                        <br/>
+                        <p:graphicImage url="resources/images/weatherIcons/#{searchedWeatherController.result.currently.icon}.png"/>
+                    </f:facet>
+
+                    <h:outputText value="Temperatue:" />
+                    <h:outputText value="#{searchedWeatherController.result.currently.temperature.intValue()}°F"/>
+
+                    <h:outputText value="Precipitation:" />
+                    <h:outputText value="#{searchedWeatherController.result.currently.precipProbability * 100}%"/>
+
+                    <h:outputText value="Humidity:" />
+                    <h:outputText value="#{searchedWeatherController.result.currently.humidity * 100}%"/>
+
+                    <h:outputText value="Wind:" />
+                    <h:outputText value="#{searchedWeatherController.result.currently.windBearing} #{searchedWeatherController.result.currently.windSpeed} mph"/>
+                </p:panelGrid>
+
             </div>
 
         </ui:define>
