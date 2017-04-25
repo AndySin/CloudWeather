@@ -1,8 +1,11 @@
 package com.mycompany.jsfclasses;
 
 
+import com.mycompany.WeatherSearch.SearchedWeatherController;
 import com.mycompany.entityclasses.UserEvents;
 import com.mycompany.jsfclasses.UserEventsController;
+import com.mycompany.managers.AccountManager;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
 import javax.annotation.PostConstruct;
@@ -31,6 +34,12 @@ public class Scheduler implements Serializable {
 
     @Inject
     private UserEventsController userEventsController;
+    
+    @Inject
+    private AccountManager accountManager;
+    
+    @Inject
+    private SearchedWeatherController searchedWeatherController;
 
     @PostConstruct
     public void init() {
@@ -71,8 +80,32 @@ public class Scheduler implements Serializable {
         event = new DefaultScheduleEvent();
     }
 
-    public void onEventSelect(SelectEvent selectEvent) {
+    public void onEventSelect(SelectEvent selectEvent) throws IOException {
         event = (ScheduleEvent) selectEvent.getObject();
+        
+        String event_name = event.getTitle();        
+        long start = event.getStartDate().getTime();
+        long end = event.getEndDate().getTime();
+        
+        String username = accountManager.getSelected().getUsername();
+        int userId = accountManager.getUserFacade().findByUsername(username).getId();
+        
+        float latitude = userEventsController.getUserEventsFacade().findLatitude(userId, event_name, start, end);
+        float longitude = userEventsController.getUserEventsFacade().findLongitude(userId, event_name, start, end);
+        
+        searchedWeatherController.setEventName(event_name);
+        searchedWeatherController.setEventStartTime(event.getStartDate());
+        searchedWeatherController.setEventEndTime(event.getEndDate());
+                
+        searchedWeatherController.setSearchLatitude(String.valueOf(latitude));
+        searchedWeatherController.setSearchLatitude(String.valueOf(longitude));
+        searchedWeatherController.getForecast();
+        
+        FacesContext.getCurrentInstance().getExternalContext().redirect("WeatherForecastResults.xhtml");
+        FacesContext.getCurrentInstance().responseComplete();
+        
+        
+        
     }
 
     public void onDateSelect(SelectEvent selectEvent) {

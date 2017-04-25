@@ -38,7 +38,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "UserEvents.findByLongitude", query = "SELECT u FROM UserEvents u WHERE u.longitude = :longitude")
     , @NamedQuery(name = "UserEvents.findByStartTime", query = "SELECT u FROM UserEvents u WHERE u.startTime = :startTime")
     , @NamedQuery(name = "UserEvents.findByEndTime", query = "SELECT u FROM UserEvents u WHERE u.endTime = :endTime")
-    , @NamedQuery(name = "UserEvents.findUserEventsByUserId", query = "SELECT u FROM UserEvents u WHERE u.userId.id = :userId")})
+    , @NamedQuery(name = "UserEvents.findUserEventsByUserId", query = "SELECT u FROM UserEvents u WHERE u.userId.id = :userId")
+    , @NamedQuery(name = "UserEvents.findLatitude", query = "Select u.latitude FROM UserEvents u WHERE u.userId.id = :userId AND u.eventName = :event_name AND u.startTime = :start_time AND u.endTime = :end_time")
+    , @NamedQuery(name = "UserEvents.findLongitude", query = "Select u.longitude FROM UserEvents u WHERE u.userId.id = :userId AND u.eventName = :event_name AND u.startTime = :start_time AND u.endTime = :end_time")})
 
 public class UserEvents implements Serializable {
 
@@ -89,7 +91,7 @@ public class UserEvents implements Serializable {
         this.startTime = startTime;
         this.endTime = endTime;
     }
-    
+
     public UserEvents(String eventName, float latitude, float longitude, long startTime, long endTime, User user) {
         this.eventName = eventName;
         this.latitude = latitude;
@@ -130,7 +132,7 @@ public class UserEvents implements Serializable {
     public void setLongitude(float longitude) {
         this.longitude = longitude;
     }
-    
+
     public User getUserId() {
         return userId;
     }
@@ -179,5 +181,5 @@ public class UserEvents implements Serializable {
     public void setEndTime(long endTime) {
         this.endTime = endTime;
     }
-    
+
 }

@@ -28,11 +28,12 @@ public class UserEventsFacade extends AbstractFacade<UserEvents> {
     public UserEventsFacade() {
         super(UserEvents.class);
     }
-    
+
     /**
      *
      * @param userID is the Primary Key of the user entity in the database
-     * @return a list of object references of userFiles that belong to the user whose DB Primary Key = userID
+     * @return a list of object references of userFiles that belong to the user
+     * whose DB Primary Key = userID
      */
     public List<UserEvents> findUserVideosByUserID(Integer userID) {
         /*
@@ -47,5 +48,30 @@ public class UserEventsFacade extends AbstractFacade<UserEvents> {
 
         return userEvent;
     }
-    
+
+    public float findLatitude(int userId, String name, long start, long end) {
+
+        float latitude = (float) em.createNamedQuery("UserEvents.findLatitude")
+                .setParameter("userId", userId)
+                .setParameter("event_name", name)
+                .setParameter("start_time", start)
+                .setParameter("end_time", end)
+                .getSingleResult();
+
+        return latitude;
+                
+    }
+
+        public float findLongitude(int userId, String name, long start, long end) {
+
+        float longitude = (float) em.createNamedQuery("UserEvents.findLongitude")
+                .setParameter("userId", userId)
+                .setParameter("event_name", name)
+                .setParameter("start_time", start)
+                .setParameter("end_time", end)
+                .getSingleResult();
+
+        return longitude;
+                
+    }
 }
