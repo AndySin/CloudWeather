@@ -38,7 +38,7 @@ CREATE TABLE UserEvents
     event_name VARCHAR(256) NOT NULL,
     latitude FLOAT NOT NULL,
     longitude FLOAT NOT NULL,   
-    start_time DATE NOT NULL,
-    end_time DATE NOT NULL,
+    start_time BIGINT NOT NULL,
+    end_time BIGINT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE
 );
