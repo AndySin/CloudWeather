@@ -193,7 +193,7 @@ public class UserEventsController implements Serializable {
                         Date startTime = new Date(unixStart);
                         Date endTime = new Date(unixEnd);
 
-                        UserEvents event = new UserEvents(eventName, latitude, longitude, startTime, endTime, user);
+                        UserEvents event = new UserEvents(eventName, latitude, longitude, unixStart, unixEnd, user);
 
                         userEventsFacade.create(event);
 
@@ -208,7 +208,7 @@ public class UserEventsController implements Serializable {
                         Date startTime = new Date(unixStart);
                         Date endTime = new Date(unixEnd);
 
-                        UserEvents event = new UserEvents(eventName, latitude, longitude, startTime, endTime, user);
+                        UserEvents event = new UserEvents(eventName, latitude, longitude, unixStart, unixEnd, user);
 
                         userEventsFacade.create(event);
 

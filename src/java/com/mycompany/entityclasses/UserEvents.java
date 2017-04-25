@@ -42,6 +42,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 public class UserEvents implements Serializable {
 
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "start_time")
+    private long startTime;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "end_time")
+    private long endTime;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,16 +70,6 @@ public class UserEvents implements Serializable {
     @NotNull
     @Column(name = "longitude")
     private float longitude;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "start_time")
-    @Temporal(TemporalType.DATE)
-    private Date startTime;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "end_time")
-    @Temporal(TemporalType.DATE)
-    private Date endTime;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne
     private User userId;
@@ -82,7 +81,7 @@ public class UserEvents implements Serializable {
         this.id = id;
     }
 
-    public UserEvents(Integer id, String eventName, float latitude, float longitude, Date startTime, Date endTime) {
+    public UserEvents(Integer id, String eventName, float latitude, float longitude, long startTime, long endTime) {
         this.id = id;
         this.eventName = eventName;
         this.latitude = latitude;
@@ -91,7 +90,7 @@ public class UserEvents implements Serializable {
         this.endTime = endTime;
     }
     
-    public UserEvents(String eventName, float latitude, float longitude, Date startTime, Date endTime, User user) {
+    public UserEvents(String eventName, float latitude, float longitude, long startTime, long endTime, User user) {
         this.eventName = eventName;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -131,23 +130,7 @@ public class UserEvents implements Serializable {
     public void setLongitude(float longitude) {
         this.longitude = longitude;
     }
-
-    public Date getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
-
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
-    }
-
+    
     public User getUserId() {
         return userId;
     }
@@ -179,6 +162,22 @@ public class UserEvents implements Serializable {
     @Override
     public String toString() {
         return "com.mycompany.entityclasses.UserEvents[ id=" + id + " ]";
+    }
+
+    public long getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
+    }
+
+    public long getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(long endTime) {
+        this.endTime = endTime;
     }
     
 }

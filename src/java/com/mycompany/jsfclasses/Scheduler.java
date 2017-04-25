@@ -40,7 +40,9 @@ public class Scheduler implements Serializable {
 
         for (UserEvents events : userEventsController.getItems()) {
 
-            eventModel.addEvent(new DefaultScheduleEvent(events.getEventName(), events.getStartTime(), events.getEndTime()));
+            Date start = new Date(events.getStartTime());
+            Date end = new Date(events.getEndTime());
+            eventModel.addEvent(new DefaultScheduleEvent(events.getEventName(), start, end));
 
         }
 
