@@ -57,34 +57,42 @@ Copyright © 2017 Osman Balci. All rights reserved.
                 }, 100);
             </script>
 
-            <div id="topMain">
-                <p:panelGrid id="result" columns="2" style="width:100%;margin:10px 0px;" columnClasses="weatherResults,weatherResults" layout="grid" styleClass="ui-panelgrid-blank">
-                    <f:facet name="header">
-                        <h:outputText styleClass="weatherResults" value="#{searchedWeatherController.result.currently.date}"/>
-                        <br/>
-                        <p:graphicImage url="resources/images/weatherIcons/#{searchedWeatherController.result.currently.icon}.png"/>
-                    </f:facet>
+            <div id="topMain" background-color="transparent">
+                <p:panelGrid id="topGrid" columns="3" layout="grid" styleClass="ui-panelgrid-blank">
 
-                    <h:outputText value="Temperatue:" />
-                    <h:outputText value="#{searchedWeatherController.result.currently.temperature.intValue()}°F"/>
+                    <h:form>
+                        <p:panelGrid id="buttons" columns="1" style="margin:15px 0px">
 
-                    <h:outputText value="Precipitation:" />
-                    <h:outputText value="#{searchedWeatherController.result.currently.precipProbability * 100}%"/>
+                            <p:commandButton value="Button 1" styleClass="login"/>
+                            <p:commandButton value="Button 2" styleClass="login"/>
+                            <p:commandButton value="Button 3" styleClass="login"/>
+                            <p:commandButton value="Button 4" styleClass="login"/>
+                            <p:commandButton value="Button 5" styleClass="login"/>
+                        </p:panelGrid>
+                    </h:form>
 
-                    <h:outputText value="Humidity:" />
-                    <h:outputText value="#{searchedWeatherController.result.currently.humidity * 100}%"/>
+                    <p:panelGrid id="result" columns="2" style="width:100%;margin:10px 0px;" columnClasses="weatherResults,weatherResults" layout="grid" styleClass="ui-panelgrid-blank">
+                        <f:facet name="header">
+                            <h:outputText styleClass="weatherResults" value="#{searchedWeatherController.result.currently.date}"/>
+                            <br/>
+                            <p:graphicImage rendered="#{searchedWeatherController.result.currently.icon != null}" url="resources/images/weatherIcons/#{searchedWeatherController.result.currently.icon}.png"/>
+                        </f:facet>
 
-                    <h:outputText value="Wind:" />
-                    <h:outputText value="#{searchedWeatherController.result.currently.windBearing} #{searchedWeatherController.result.currently.windSpeed} mph"/>
-                </p:panelGrid>
+                        <h:outputText value="Temperatue:" />
+                        <h:outputText value="#{searchedWeatherController.result.currently.temperature.intValue()}°F"/>
 
-                <p:panelGrid id="result2" columns="1" style="width:100%;margin:10px 0px;" columnClasses="weatherResults,weatherResults" layout="grid" styleClass="ui-panelgrid-blank">
-                    <f:facet name="header">
-                        <h:outputText styleClass="weatherResults" value="Weather Alerts for Your Area"/>
-                    </f:facet>
+                        <h:outputText value="Precipitation:" />
+                        <h:outputText value="#{searchedWeatherController.result.currently.precipProbability * 100}%"/>
 
-                    <p:carousel value="#{searchedWeatherController.result.alerts}" headerText="Alerts" var="item" itemStyle="text-align:center" responsive="true" style="font-size: 18px" numVisible="5" >
-                        <p:panelGrid columns="2" style="width:100%;margin:10px 0px;" columnClasses="weatherResults,weatherResults" layout="grid" styleClass="ui-panelgrid-blank">
+                        <h:outputText value="Humidity:" />
+                        <h:outputText value="#{searchedWeatherController.result.currently.humidity * 100}%"/>
+
+                        <h:outputText value="Wind:" />
+                        <h:outputText value="#{searchedWeatherController.result.currently.windBearing} #{searchedWeatherController.result.currently.windSpeed} mph"/>
+                    </p:panelGrid>
+
+                    <p:carousel value="#{searchedWeatherController.result.alerts}" headerText="Alerts" var="item" itemStyle="text-align:center" responsive="true" style="font-size: 18px" numVisible="1" >
+                        <p:panelGrid columns="2" id="result2" style="width:100%;margin:10px 0px;" columnClasses="weatherResults,weatherResults" layout="grid" styleClass="ui-panelgrid-blank">
 
                             <h:outputText value="Summary:" />
                             <h:outputText value="#{item.description}"/>
