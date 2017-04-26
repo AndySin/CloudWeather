@@ -68,10 +68,7 @@ Copyright © 2017 Andy Sin. All rights reserved.
                 </table>
 
                 <div id="middleMain">
-                    <br/>
-                    <br/>
-                    <p:graphicImage url="resources/images/weatherIcons/#{item.icon}.png"/>
-                    <br/>
+                    <p:graphicImage url="resources/images/weatherIcons/#{searchedWeatherController.freqIcon}.png"/>
                     <br/>
 
                     <table align="center">
@@ -80,24 +77,24 @@ Copyright © 2017 Andy Sin. All rights reserved.
                                 <h:outputText value="Min. Temp: "/> 
 
                             </td>
-                            <td align="left" class="val">
-                                <h:outputText value="0"/> 
+                            <td align="left" class="val" style="font-weight: bold;" >
+                                <h:outputText value="#{searchedWeatherController.minTemp.intValue()}°F"/> 
 
                             </td>
                             <td align="left" class="val">
                                 <h:outputText value="Max. Temp: "/> 
 
                             </td> 
-                            <td align="left" class="val">
-                                <h:outputText value="0"/> 
+                            <td align="left" class="val" style="font-weight: bold;">
+                                <h:outputText value="#{searchedWeatherController.maxTemp.intValue()}°F"/> 
 
                             </td>
                             <td align="left" class="val">
                                 <h:outputText value="Avg. Temp: "/> 
 
                             </td>
-                            <td align="left" class="val">
-                                <h:outputText value="0"/> 
+                            <td align="left" class="val" style="font-weight: bold;">
+                                <h:outputText value="#{searchedWeatherController.avgTemp.intValue()}°F"/> 
 
                             </td>
                         </tr>
@@ -107,24 +104,24 @@ Copyright © 2017 Andy Sin. All rights reserved.
                                 <h:outputText value="Avg. Wind: "/>
 
                             </td>
-                            <td align="left" class="val">
-                                <h:outputText value="0"/> 
+                            <td align="left" class="val" style="font-weight: bold;">
+                                <h:outputText value="#{searchedWeatherController.avgWind.intValue()} mph"/> 
 
                             </td>
                             <td align="left" class="val">
                                 <h:outputText value="Avg. Humidity: "/>
 
                             </td> 
-                            <td align="left" class="val">
-                                <h:outputText value="0"/> 
+                            <td align="left" class="val" style="font-weight: bold;">
+                                <h:outputText value="#{(searchedWeatherController.avgHumidity * 100).intValue()}%"/> 
 
                             </td>
                             <td align="left" class="val">
                                 <h:outputText value="Avg. Precip: "/>
 
                             </td>
-                            <td align="left" class="val">
-                                <h:outputText value="0"/> 
+                            <td align="left" class="val" style="font-weight: bold;">
+                                <h:outputText value="#{(searchedWeatherController.avgPrecipChance * 100).intValue()}%"/> 
 
                             </td>
                         </tr>
@@ -134,24 +131,24 @@ Copyright © 2017 Andy Sin. All rights reserved.
                                 <h:outputText value="Min. Cloudcover: "/> 
 
                             </td>
-                            <td align="left" class="val">
-                                <h:outputText value="0"/> 
+                            <td align="left" class="val" style="font-weight: bold;">
+                                <h:outputText value="#{(searchedWeatherController.minCloudCover * 100).intValue()}%"/> 
 
                             </td>
                             <td align="left" class="val">
                                 <h:outputText value="Max. Cloudcover: "/> 
 
                             </td> 
-                            <td align="left" class="val">
-                                <h:outputText value="0"/> 
+                            <td align="left" class="val" style="font-weight: bold;">
+                                <h:outputText value="#{(searchedWeatherController.maxCloudCover * 100).intValue()}%"/> 
 
                             </td>
                             <td align="left" class="val">
                                 <h:outputText value="Avg. Cloudcover: "/> 
 
                             </td>
-                            <td align="left" class="val">
-                                <h:outputText value="0"/> 
+                            <td align="left" class="val" style="font-weight: bold;">
+                                <h:outputText value="#{(searchedWeatherController.avgCloudCover * 100).intValue()}%"/> 
 
                             </td>
                         </tr>
@@ -161,24 +158,24 @@ Copyright © 2017 Andy Sin. All rights reserved.
                                 <h:outputText value="Min. Visibility: "/> 
 
                             </td>
-                            <td align="left" class="val">
-                                <h:outputText value="0"/> 
+                            <td align="left" class="val" style="font-weight: bold;">
+                                <h:outputText value="#{(searchedWeatherController.minVisibility).intValue()} miles"/> 
 
                             </td>
                             <td align="left" class="val">
                                 <h:outputText value="Max. Visibility: "/> 
 
                             </td> 
-                            <td align="left" class="val">
-                                <h:outputText value="0"/> 
+                            <td align="left" class="val" style="font-weight: bold;">
+                                <h:outputText value="#{(searchedWeatherController.maxVisibility).intValue()} miles"/> 
 
                             </td>
                             <td align="left" class="val">
                                 <h:outputText value="Avg. Visibility: "/> 
 
                             </td>
-                            <td align="left" class="val">
-                                <h:outputText value="0"/> 
+                            <td align="left" class="val" style="font-weight: bold;">
+                                <h:outputText value="#{(searchedWeatherController.avgVisibility).intValue()} miles"/> 
 
                             </td>
                         </tr>

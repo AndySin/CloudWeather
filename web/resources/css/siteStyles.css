@@ -360,6 +360,9 @@ Style the div component whose unique id is "rightAlignPanelGroup" per reference
 
 }
 
+.header_tab:hover {
+    color: #0aa9f7;
+}
 .login_button {
     font-family: Lato;
     font-size: 14px;
@@ -696,3 +699,4 @@ td.val {
     font-family: Lato;
     font-size: 20px;
 }
+

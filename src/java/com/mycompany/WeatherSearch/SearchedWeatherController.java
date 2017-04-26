@@ -172,6 +172,8 @@ public class SearchedWeatherController implements Serializable {
             avgCloudCover += numHours * dp.getCloudCover();
             avgVisibility += numHours * dp.getVisibility();
             avgPrecipChance += numHours * dp.getPrecipProbability();
+            avgWind += numHours * dp.getWindSpeed();
+            avgHumidity += numHours * dp.getHumidity();
 
             if(iconFreqs.containsKey(dp.getIcon())){
                 iconFreqs.put(dp.getIcon(), iconFreqs.get(dp.getIcon()) + 1);
@@ -450,4 +452,125 @@ public class SearchedWeatherController implements Serializable {
 
     public void clearSearchFields() {
     }
+
+    public double getMaxTemp() {
+        return maxTemp;
+    }
+
+    public void setMaxTemp(double maxTemp) {
+        this.maxTemp = maxTemp;
+    }
+
+    public double getMinTemp() {
+        return minTemp;
+    }
+
+    public void setMinTemp(double minTemp) {
+        this.minTemp = minTemp;
+    }
+
+    public double getAvgTemp() {
+        return avgTemp;
+    }
+
+    public void setAvgTemp(double avgTemp) {
+        this.avgTemp = avgTemp;
+    }
+
+    public double getMaxCloudCover() {
+        return maxCloudCover;
+    }
+
+    public void setMaxCloudCover(double maxCloudCover) {
+        this.maxCloudCover = maxCloudCover;
+    }
+
+    public double getMinCloudCover() {
+        return minCloudCover;
+    }
+
+    public void setMinCloudCover(double minCloudCover) {
+        this.minCloudCover = minCloudCover;
+    }
+
+    public double getAvgCloudCover() {
+        return avgCloudCover;
+    }
+
+    public void setAvgCloudCover(double avgCloudCover) {
+        this.avgCloudCover = avgCloudCover;
+    }
+
+    public double getMaxVisibility() {
+        return maxVisibility;
+    }
+
+    public void setMaxVisibility(double maxVisibility) {
+        this.maxVisibility = maxVisibility;
+    }
+
+    public double getMinVisibility() {
+        return minVisibility;
+    }
+
+    public void setMinVisibility(double minVisibility) {
+        this.minVisibility = minVisibility;
+    }
+
+    public double getAvgVisibility() {
+        return avgVisibility;
+    }
+
+    public void setAvgVisibility(double avgVisibility) {
+        this.avgVisibility = avgVisibility;
+    }
+
+    public double getAvgWind() {
+        return avgWind;
+    }
+
+    public void setAvgWind(double avgWind) {
+        this.avgWind = avgWind;
+    }
+
+    public double getAvgHumidity() {
+        return avgHumidity;
+    }
+
+    public void setAvgHumidity(double avgHumidity) {
+        this.avgHumidity = avgHumidity;
+    }
+
+    public double getAvgPrecipChance() {
+        return avgPrecipChance;
+    }
+
+    public void setAvgPrecipChance(double avgPrecipChance) {
+        this.avgPrecipChance = avgPrecipChance;
+    }
+
+    public String getFreqIcon() {
+        return freqIcon;
+    }
+
+    public void setFreqIcon(String freqIcon) {
+        this.freqIcon = freqIcon;
+    }
+
+    public AccountManager getAccountManager() {
+        return accountManager;
+    }
+
+    public void setAccountManager(AccountManager accountManager) {
+        this.accountManager = accountManager;
+    }
+
+    public FacesMessage getResultMsg() {
+        return resultMsg;
+    }
+
+    public void setResultMsg(FacesMessage resultMsg) {
+        this.resultMsg = resultMsg;
+    }
+    
 }
