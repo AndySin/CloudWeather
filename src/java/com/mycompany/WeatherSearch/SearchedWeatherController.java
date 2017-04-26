@@ -20,7 +20,8 @@ import javax.inject.Named;
 import org.primefaces.json.JSONArray;
 import org.primefaces.json.JSONObject;
 import java.util.Date;
-import java.text.DateFormat;
+import java.util.Map;
+import java.util.HashMap;
 import java.text.SimpleDateFormat;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -58,6 +59,24 @@ public class SearchedWeatherController implements Serializable {
     private String duration;
 
     private List<DataPoint> eventHourlyWeather;
+
+    private double maxTemp;
+    private double minTemp;
+    private double avgTemp;
+
+    private double maxCloudCover;
+    private double minCloudCover;
+    private double avgCloudCover;
+
+    private double maxVisibility;
+    private double minVisibility;
+    private double avgVisibility;
+
+    private double avgWind;
+    private double avgHumidity;
+    private double avgPrecipChance;
+   
+    private String freqIcon;
 
     private static final String CURRENT = "currently";
     private static final String MINUTE = "minutely";
@@ -111,9 +130,63 @@ public class SearchedWeatherController implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, resultMsg);
             return null;
         }
+
+        updateEventStats();
+
         return "WeatherForecastResults?faces-redirect=true";
     }
 
+    private void updateEventStats() {
+        // reset values
+        maxTemp = Double.MIN_VALUE;
+        minTemp = Double.MAX_VALUE;
+        avgTemp = 0;
+
+        maxCloudCover = Double.MIN_VALUE;
+        minCloudCover = Double.MAX_VALUE;
+        avgCloudCover = 0;
+
+        maxVisibility = Double.MIN_VALUE;
+        minVisibility = Double.MAX_VALUE;
+        avgVisibility = 0;
+
+        avgWind = 0;
+        avgHumidity = 0;
+        avgPrecipChance = 0;
+
+        Map<String, Integer> iconFreqs = new HashMap<String, Integer>();
+        int maxFreq = 0;
+        double numHours = 1.0 / eventHourlyWeather.size();
+
+        for (DataPoint dp : eventHourlyWeather) {
+            maxTemp = Math.max(maxTemp, dp.getTemperature());
+            minTemp = Math.min(minTemp, dp.getTemperature());
+
+            maxCloudCover = Math.max(maxCloudCover, dp.getCloudCover());
+            minCloudCover = Math.min(minCloudCover, dp.getCloudCover());
+
+            maxVisibility = Math.max(maxVisibility, dp.getVisibility());
+            minVisibility = Math.min(minVisibility, dp.getVisibility());
+
+            avgTemp += numHours * dp.getTemperature();
+            avgCloudCover += numHours * dp.getCloudCover();
+            avgVisibility += numHours * dp.getVisibility();
+            avgPrecipChance += numHours * dp.getPrecipProbability();
+
+            if(iconFreqs.containsKey(dp.getIcon())){
+                iconFreqs.put(dp.getIcon(), iconFreqs.get(dp.getIcon()) + 1);
+            }
+            else{
+                iconFreqs.put(dp.getIcon(), 1);
+            }
+            
+            if(maxFreq < iconFreqs.get(dp.getIcon())){
+                maxFreq = iconFreqs.get(dp.getIcon());
+                freqIcon = dp.getIcon();
+            }
+        }
+    }
+    
     private void getDayForecast(long unixTime) {
         // TODO: error handling if past date is provided by user
 
