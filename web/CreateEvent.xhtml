@@ -49,7 +49,7 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                         </tr>
                         <tr>
                             <td align="left">
-                                <p:inputText id="eventTitle" value="#{searchedWeatherController.eventName}" style="font-family: Lato; width:250px; box-shadow: none;" required="true">
+                                <p:inputText id="eventTitle" value="#{searchedWeatherController.eventName}" style="font-family: Lato; width:325px; box-shadow: none;" required="true">
                                 </p:inputText>
                             </td>
 
@@ -59,7 +59,7 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                         </tr>
                         <tr>
                             <td align="left">
-                                <p:inputText id="geocomplete" style="font-family: Lato; width:250px; box-shadow: none;" required="true">
+                                <p:inputText id="geocomplete" style="font-family: Lato; width:325px; box-shadow: none;" required="true">
                                 </p:inputText>
                             </td>
 
@@ -88,13 +88,13 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                         </tr>
                         <tr>
                             <td align="left">
-                                <p:selectOneMenu id="recurrence" value="#{searchedWeatherController.recurring}"
-                                                 style="width:125px" requiredMessage="Select Recurrence of Event!">
+                                <h:selectOneMenu id="recurrence" value="#{searchedWeatherController.recurring}" style="font-family: Lato; width:325px; box-shadow: none;"
+                                                 requiredMessage="Select Recurrence of Event">
                                     <f:selectItem itemLabel="Select Reccurence of Event" itemValue="" noSelectionOption="true" />
                                     <f:selectItem itemLabel="Daily" itemValue="daily"/>
                                     <f:selectItem itemLabel="Weekly" itemValue="weekly"/>
                                     <f:selectItem itemLabel="1-Time" itemValue="daily"/>
-                                </p:selectOneMenu>
+                                </h:selectOneMenu>
                             </td>
                         </tr>
                         <tr>
@@ -102,14 +102,14 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                         </tr>
                         <tr>
                             <td align="left">
-                                <p:selectOneMenu id="duration" value="#{searchedWeatherController.duration}"
-                                                 style="width:125px">
-                                    <f:selectItem itemLabel="Select Recurrence Duration If Applicable" itemValue="0" noSelectionOption="true" />
+                                <h:selectOneMenu id="duration" value="#{searchedWeatherController.duration}"
+                                                 style="font-family: Lato; width:325px; box-shadow: none;">
+                                    <f:selectItem itemLabel="Select Recurrence Duration" itemValue="0" noSelectionOption="true" />
                                     <f:selectItem itemLabel="Next 1 Week" itemValue="2"/>
                                     <f:selectItem itemLabel="Next 2 Weeks" itemValue="2"/>
                                     <f:selectItem itemLabel="Next 3 Weeks" itemValue="3"/>
                                     <f:selectItem itemLabel="Next 4 Weeks" itemValue="4"/>
-                                </p:selectOneMenu>
+                                </h:selectOneMenu>
                             </td>
                         </tr>
                     </table>
@@ -123,10 +123,15 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                         </h:inputText>
                     </div>
                     <br/>
-                    <p:commandButton id="check" class="login" value="CREATE" action="#{userEventsController.addEvent}"
-                                     >
+                    <div>
+                        <p:commandButton id="create_event" class="login"
+                                         style="font-family: Lato; background: #666; color: white; font-weight: 300; box-shadow: none; text-decoration: none; font-size: 20px; border-style: solid; border-width: 1px;"
+                                         value="CREATE" action="#{userEventsController.addEvent}"
+                                         >
 
-                    </p:commandButton>
+                        </p:commandButton>     
+                    </div>
+
 
                     <br/>
                 </h:form>
