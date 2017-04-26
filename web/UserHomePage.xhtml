@@ -108,6 +108,26 @@ Copyright © 2017 Osman Balci. All rights reserved.
                 </p:panelGrid>
             </div>
 
+            <div id="bottomMain">
+
+                <h:form id="PlannerDataForm2">
+                    <h:panelGrid columns="1" columnClasses="weatherResults">
+                        <p:schedule id="weekCal" value="#{scheduleView.eventModel}" draggable="false" view="basicWeek" aspectRatio="5"
+                                    timeFormat="h:mmt" rightHeaderTemplate="" timeZone="GMT-4">
+                            <p:ajax event="eventSelect" listener="#{scheduleView.onEventSelect}"/>
+                            <p:ajax event="dateSelect" listener="#{scheduleView.onDateSelect}" update="fromMain:createEvent" oncomplete="PF('createEventDialog').show();" />   
+                        </p:schedule>
+
+                        <p:spacer style="height: 10px;"/>
+                    </h:panelGrid>
+
+                </h:form>
+            </div>
+
+            <f:subview id="fromMain">
+                <ui:include src="CreateEvent.xhtml"/> 
+            </f:subview>
+
         </ui:define>
 
     </ui:composition>
