@@ -59,10 +59,10 @@ public class UserEventsFacade extends AbstractFacade<UserEvents> {
                 .getSingleResult();
 
         return latitude;
-                
+
     }
 
-        public float findLongitude(int userId, String name, long start, long end) {
+    public float findLongitude(int userId, String name, long start, long end) {
 
         float longitude = (float) em.createNamedQuery("UserEvents.findLongitude")
                 .setParameter("userId", userId)
@@ -72,6 +72,19 @@ public class UserEventsFacade extends AbstractFacade<UserEvents> {
                 .getSingleResult();
 
         return longitude;
-                
+
+    }
+
+    public UserEvents findEvent(int userId, String name, long start, long end) {
+
+        UserEvents event = (UserEvents) em.createNamedQuery("UserEvents.findEvent")
+                .setParameter("userId", userId)
+                .setParameter("event_name", name)
+                .setParameter("start_time", start)
+                .setParameter("end_time", end)
+                .getSingleResult();
+
+        return event;
+
     }
 }

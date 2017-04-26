@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created by Andy Sin on 2017.03.04 
+Copyright © 2017 Andy Sin. All rights reserved.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <!-- This page is constructed based on the siteTemplate -->
+    <ui:composition template="/template/siteTemplate.xhtml">
+        <ui:define name="title">
+            <!-- Set the page title -->
+            <h:outputText value="Forecast Results"></h:outputText>
+        </ui:define>
+
+        <ui:define name="editableContent">
+            <h:form id="WeatherResultsHeader" style="width: 100%">
+
+                <table style="width:100%">
+
+                    <tr>
+                        <th align="left">
+                            <p:commandButton value="Go Back" ajax="false" styleClass="resultsButton" action="Planner?faces-redirect=true"
+                                             onclick="#{searchedWeatherController.clearSearchFields()}"/>
+                        </th>
+                        <th align="center">
+                            <index_header>Activity Forecast</index_header>
+
+                        </th> 
+                        <th align="right">
+
+                            <c:if test="#{accountManager.isLoggedIn() == true}">
+
+                                <p:commandButton value="Delete Activity" styleClass="resultsButton" actionListener="#{userEventsController.deleteEvent}"/>
+                            </c:if>
+
+                            <c:if test="#{accountManager.isLoggedIn() == false}">
+
+                                <p:spacer style="height:70px; width:200px;" />
+
+                            </c:if>
+
+                        </th>
+                    </tr>
+                </table>
+
+                <div id="middleMain">
+                    <br/>
+
+                    <h:panelGrid columns="2" columnClasses="weatherResults, weatherResults" style="width:100%">
+                        <!-- Columns 1 & 2 -->
+                        <p:graphicImage url="resources/images/weatherIcons/#{searchedWeatherController.result.hourly.icon}.png"/>
+
+                        <!-- Columns 1 & 2 -->
+                        <h:outputText value="Activity Analysis:" />     
+                    </h:panelGrid>
+                </div>
+
+            </h:form>
+            <br/>
+
+            <div align="center">
+
+                <h:form id="WeatherResultsForm">
+                    <br />
+                    <br />
+
+                    <p:carousel value="#{searchedWeatherController.eventHourlyWeather}" headerText="Activity Hourly Forecast" var="item" itemStyle="text-align:center" responsive="true" styleClass="weatherResults" style="font-size: 18px" numVisible="5" >
+                        <p:panelGrid columns="2" style="width:100%;margin:10px 0px;" columnClasses="weatherResults,weatherResults" layout="grid" styleClass="ui-panelgrid-blank">
+                            <f:facet name="header">
+                                <h:outputText styleClass="weatherResults" value="#{item.date.toString().substring(0,3)} #{item.convertedDate(item.date)}"/>
+                                <br/>
+                                <p:graphicImage url="resources/images/weatherIcons/#{item.icon}.png"/>
+                            </f:facet>
+
+                            <h:outputText value="Description:" />
+                            <h:outputText value="#{item.summary}"/>
+
+                            <h:outputText value="Temperatue:" />
+                            <h:outputText value="#{item.temperature.intValue()}°F"/>
+
+                            <h:outputText value="Precipitation:" />
+                            <h:outputText value="#{(item.precipProbability * 100).intValue()}%"/>
+
+                            <h:outputText value="Humidity:" />
+                            <h:outputText value="#{(item.humidity * 100).intValue()}%"/>
+
+                            <h:outputText value="Wind:" />
+                            <h:outputText value="#{item.windBearing} #{(item.windSpeed).intValue()} mph"/>
+                        </p:panelGrid>
+
+                    </p:carousel>
+
+                    <br/>
+                    <br/>   
+                </h:form>
+            </div>
+        </ui:define>
+
+    </ui:composition>
+</html>

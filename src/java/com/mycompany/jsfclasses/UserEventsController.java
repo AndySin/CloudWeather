@@ -8,6 +8,7 @@ import com.mycompany.jsfclasses.util.JsfUtil.PersistAction;
 import com.mycompany.managers.AccountManager;
 import com.mycompany.sessionbeans.UserEventsFacade;
 import com.mycompany.sessionbeans.UserFacade;
+import java.io.IOException;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -46,7 +47,7 @@ public class UserEventsController implements Serializable {
 
     @Inject
     private SearchedWeatherController searchedWeatherController;
-    
+
     @Inject
     private Scheduler scheduleView;
 
@@ -175,6 +176,26 @@ public class UserEventsController implements Serializable {
         return getFacade().findAll();
     }
 
+    public void deleteEvent() throws IOException {
+
+        String eventName = searchedWeatherController.getEventName();
+        long unixStart = searchedWeatherController.getEventStartTime().getTime();
+        long unixEnd = searchedWeatherController.getEventEndTime().getTime();
+
+        String username = accountManager.getSelected().getUsername();
+        int userId = accountManager.getUserFacade().findByUsername(username).getId();
+
+        UserEvents event = userEventsController.getUserEventsFacade().findEvent(userId, eventName, unixStart, unixEnd);
+
+        userEventsFacade.remove(event);
+
+        FacesContext.getCurrentInstance().getExternalContext().redirect("UserHomePage.xhtml");
+        FacesContext.getCurrentInstance().responseComplete();
+        
+        scheduleView.init();
+
+    }
+
     public String addEvent() {
         if (accountManager.isLoggedIn()) {
             String eventName = searchedWeatherController.getEventName();
@@ -221,7 +242,7 @@ public class UserEventsController implements Serializable {
             }
         }
         scheduleView.init();
-        
+
         return "Planner?faces-redirect=true";
     }
 

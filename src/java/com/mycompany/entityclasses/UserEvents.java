@@ -40,7 +40,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "UserEvents.findByEndTime", query = "SELECT u FROM UserEvents u WHERE u.endTime = :endTime")
     , @NamedQuery(name = "UserEvents.findUserEventsByUserId", query = "SELECT u FROM UserEvents u WHERE u.userId.id = :userId")
     , @NamedQuery(name = "UserEvents.findLatitude", query = "Select u.latitude FROM UserEvents u WHERE u.userId.id = :userId AND u.eventName = :event_name AND u.startTime = :start_time AND u.endTime = :end_time")
-    , @NamedQuery(name = "UserEvents.findLongitude", query = "Select u.longitude FROM UserEvents u WHERE u.userId.id = :userId AND u.eventName = :event_name AND u.startTime = :start_time AND u.endTime = :end_time")})
+    , @NamedQuery(name = "UserEvents.findLongitude", query = "Select u.longitude FROM UserEvents u WHERE u.userId.id = :userId AND u.eventName = :event_name AND u.startTime = :start_time AND u.endTime = :end_time")
+    , @NamedQuery(name = "UserEvents.findEvent", query = "Select u FROM UserEvents u WHERE u.userId.id = :userId AND u.eventName = :event_name AND u.startTime = :start_time AND u.endTime = :end_time")})
 
 public class UserEvents implements Serializable {
 

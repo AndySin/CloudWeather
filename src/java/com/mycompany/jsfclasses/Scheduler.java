@@ -92,11 +92,6 @@ public class Scheduler implements Serializable {
         float latitude = userEventsController.getUserEventsFacade().findLatitude(userId, event_name, start, end);
         float longitude = userEventsController.getUserEventsFacade().findLongitude(userId, event_name, start, end);
 
-        System.out.println("------------");
-        System.out.println("Float Lat: " + latitude);
-        System.out.println("Float Long: " + longitude);
-        System.out.println("------------");
-
         searchedWeatherController.setEventName(event_name);
         searchedWeatherController.setEventStartTime(event.getStartDate());
         searchedWeatherController.setEventEndTime(event.getEndDate());
@@ -110,7 +105,7 @@ public class Scheduler implements Serializable {
 
         searchedWeatherController.getForecast();
 
-        FacesContext.getCurrentInstance().getExternalContext().redirect("WeatherForecastResults.xhtml");
+        FacesContext.getCurrentInstance().getExternalContext().redirect("PlannerResults.xhtml");
         FacesContext.getCurrentInstance().responseComplete();
 
     }
