@@ -689,3 +689,10 @@ cascading hierarchy, use the !important attribute.
 .resultsButton:hover {
     border-color: #0aa9f7;
 }
+
+td.val {
+    width: 150px;
+    padding-bottom: 25px;
+    font-family: Lato;
+    font-size: 20px;
+}

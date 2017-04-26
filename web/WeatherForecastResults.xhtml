@@ -69,14 +69,120 @@ Copyright © 2017 Andy Sin. All rights reserved.
 
                 <div id="middleMain">
                     <br/>
+                    <br/>
+                    <p:graphicImage url="resources/images/weatherIcons/#{item.icon}.png"/>
+                    <br/>
+                    <br/>
 
-                    <h:panelGrid columns="2" columnClasses="weatherResults, weatherResults" style="width:100%">
-                        <!-- Columns 1 & 2 -->
-                        <p:graphicImage url="resources/images/weatherIcons/#{searchedWeatherController.result.hourly.icon}.png"/>
+                    <table align="center">
+                        <tr>
+                            <td align="left" class="val">
+                                <h:outputText value="Min. Temp: "/> 
 
-                        <!-- Columns 1 & 2 -->
-                        <h:outputText value="Activity Analysis:" />     
-                    </h:panelGrid>
+                            </td>
+                            <td align="left" class="val">
+                                <h:outputText value="0"/> 
+
+                            </td>
+                            <td align="left" class="val">
+                                <h:outputText value="Max. Temp: "/> 
+
+                            </td> 
+                            <td align="left" class="val">
+                                <h:outputText value="0"/> 
+
+                            </td>
+                            <td align="left" class="val">
+                                <h:outputText value="Avg. Temp: "/> 
+
+                            </td>
+                            <td align="left" class="val">
+                                <h:outputText value="0"/> 
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="val">
+                                <h:outputText value="Avg. Wind: "/>
+
+                            </td>
+                            <td align="left" class="val">
+                                <h:outputText value="0"/> 
+
+                            </td>
+                            <td align="left" class="val">
+                                <h:outputText value="Avg. Humidity: "/>
+
+                            </td> 
+                            <td align="left" class="val">
+                                <h:outputText value="0"/> 
+
+                            </td>
+                            <td align="left" class="val">
+                                <h:outputText value="Avg. Precip: "/>
+
+                            </td>
+                            <td align="left" class="val">
+                                <h:outputText value="0"/> 
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="val">
+                                <h:outputText value="Min. Cloudcover: "/> 
+
+                            </td>
+                            <td align="left" class="val">
+                                <h:outputText value="0"/> 
+
+                            </td>
+                            <td align="left" class="val">
+                                <h:outputText value="Max. Cloudcover: "/> 
+
+                            </td> 
+                            <td align="left" class="val">
+                                <h:outputText value="0"/> 
+
+                            </td>
+                            <td align="left" class="val">
+                                <h:outputText value="Avg. Cloudcover: "/> 
+
+                            </td>
+                            <td align="left" class="val">
+                                <h:outputText value="0"/> 
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="val">
+                                <h:outputText value="Min. Visibility: "/> 
+
+                            </td>
+                            <td align="left" class="val">
+                                <h:outputText value="0"/> 
+
+                            </td>
+                            <td align="left" class="val">
+                                <h:outputText value="Max. Visibility: "/> 
+
+                            </td> 
+                            <td align="left" class="val">
+                                <h:outputText value="0"/> 
+
+                            </td>
+                            <td align="left" class="val">
+                                <h:outputText value="Avg. Visibility: "/> 
+
+                            </td>
+                            <td align="left" class="val">
+                                <h:outputText value="0"/> 
+
+                            </td>
+                        </tr>
+                    </table>
                 </div>
 
             </h:form>
