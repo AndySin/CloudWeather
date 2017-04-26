@@ -15,48 +15,49 @@ Copyright © 2017 Osman Balci. All rights reserved.
 
         <ui:define name="editableContent" >
 
-            <div id="topMain">
-                <h:form prependId="false">
-                    <div class="latlng" style="display:none;">
-                        <h:inputText id="searchQueryFieldLat"
-                                     value="#{searchedWeatherController.searchLatitude}">
-                        </h:inputText>
 
-                        <h:inputText id="searchQueryFieldLng"
-                                     value="#{searchedWeatherController.searchLongitude}">
-                        </h:inputText>
-                    </div>
+            <h:form prependId="false">
+                <div class="latlng" style="display:none;">
+                    <h:inputText id="searchQueryFieldLat"
+                                 value="#{searchedWeatherController.searchLatitude}">
+                    </h:inputText>
 
-                    <script>
-                        var lat = document.getElementById("searchQueryFieldLat");
-                        var lng = document.getElementById("searchQueryFieldLng");
-                        function getLocation() {
-                            if (navigator.geolocation) {
-                                navigator.geolocation.getCurrentPosition(showPosition);
-                            }
-                        }
-
-                        function showPosition(position) {
-                            lat.value = position.coords.latitude;
-                            lng.value = position.coords.longitude;
-                        }
-
-                        window.onload = getLocation();
-                    </script>
-
-
-                    <h:commandButton id="checkWeatherButton" value="CHECK" action="#{searchedWeatherController.getCurrentlyForecast()}" style="display:none;">
-                        <f:ajax execute="@form" render="result" />
-                    </h:commandButton>
-                </h:form>
+                    <h:inputText id="searchQueryFieldLng"
+                                 value="#{searchedWeatherController.searchLongitude}">
+                    </h:inputText>
+                </div>
 
                 <script>
-                    var button = document.getElementById("checkWeatherButton");
-                    setTimeout(function () {
-                        button.click();
-                    }, 100);
+                    var lat = document.getElementById("searchQueryFieldLat");
+                    var lng = document.getElementById("searchQueryFieldLng");
+                    function getLocation() {
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(showPosition);
+                        }
+                    }
+
+                    function showPosition(position) {
+                        lat.value = position.coords.latitude;
+                        lng.value = position.coords.longitude;
+                    }
+
+                    window.onload = getLocation();
                 </script>
 
+
+                <h:commandButton id="checkWeatherButton" value="CHECK" action="#{searchedWeatherController.getCurrentlyForecast()}" style="display:none;">
+                    <f:ajax execute="@form" render="result result2" />
+                </h:commandButton>
+            </h:form>
+
+            <script>
+                var button = document.getElementById("checkWeatherButton");
+                setTimeout(function () {
+                    button.click();
+                }, 100);
+            </script>
+
+            <div id="topMain">
                 <p:panelGrid id="result" columns="2" style="width:100%;margin:10px 0px;" columnClasses="weatherResults,weatherResults" layout="grid" styleClass="ui-panelgrid-blank">
                     <f:facet name="header">
                         <h:outputText styleClass="weatherResults" value="#{searchedWeatherController.result.currently.date}"/>
@@ -77,6 +78,15 @@ Copyright © 2017 Osman Balci. All rights reserved.
                     <h:outputText value="#{searchedWeatherController.result.currently.windBearing} #{searchedWeatherController.result.currently.windSpeed} mph"/>
                 </p:panelGrid>
 
+                <p:panelGrid id="result2" columns="1" style="width:100%;margin:10px 0px;" columnClasses="weatherResults,weatherResults" layout="grid" styleClass="ui-panelgrid-blank">
+                    <f:facet name="header">
+                        <h:outputText styleClass="weatherResults" value="Weather Alerts for Your Area"/>
+                    </f:facet>
+
+                    <p:carousel value="#{searchedWeatherController.result.alerts}" headerText="Alerts" var="item" itemStyle="text-align:center" responsive="true" style="font-size: 18px" numVisible="5" >
+                        <h:outputText value="#{item.description}"/>
+                    </p:carousel>
+                </p:panelGrid>
             </div>
 
         </ui:define>
