@@ -75,7 +75,7 @@ public class SearchedWeatherController implements Serializable {
     private double avgWind;
     private double avgHumidity;
     private double avgPrecipChance;
-   
+
     private String freqIcon;
 
     private static final String CURRENT = "currently";
@@ -175,20 +175,19 @@ public class SearchedWeatherController implements Serializable {
             avgWind += numHours * dp.getWindSpeed();
             avgHumidity += numHours * dp.getHumidity();
 
-            if(iconFreqs.containsKey(dp.getIcon())){
+            if (iconFreqs.containsKey(dp.getIcon())) {
                 iconFreqs.put(dp.getIcon(), iconFreqs.get(dp.getIcon()) + 1);
-            }
-            else{
+            } else {
                 iconFreqs.put(dp.getIcon(), 1);
             }
-            
-            if(maxFreq < iconFreqs.get(dp.getIcon())){
+
+            if (maxFreq < iconFreqs.get(dp.getIcon())) {
                 maxFreq = iconFreqs.get(dp.getIcon());
                 freqIcon = dp.getIcon();
             }
         }
     }
-    
+
     private void getDayForecast(long unixTime) {
         // TODO: error handling if past date is provided by user
 
@@ -450,7 +449,7 @@ public class SearchedWeatherController implements Serializable {
         this.duration = duration;
     }
 
-    public void clearSearchFields() {
+    public void clearSearchFields() {;
     }
 
     public double getMaxTemp() {
@@ -572,5 +571,5 @@ public class SearchedWeatherController implements Serializable {
     public void setResultMsg(FacesMessage resultMsg) {
         this.resultMsg = resultMsg;
     }
-    
+
 }

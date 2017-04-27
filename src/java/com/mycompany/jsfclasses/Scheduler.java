@@ -96,10 +96,9 @@ public class Scheduler implements Serializable {
         searchedWeatherController.setEventStartTime(event.getStartDate());
         searchedWeatherController.setEventEndTime(event.getEndDate());
 
-        
         String lat = String.valueOf(latitude);
         String longi = String.valueOf(longitude);
-        
+
         searchedWeatherController.setSearchLatitude(lat);
         searchedWeatherController.setSearchLongitude(longi);
 

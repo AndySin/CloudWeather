@@ -513,10 +513,9 @@ Other Style Definitions
 /* Style email label text */
 .emailLabels {
     font-family: Lato;
-    font-size: 12pt;
+    font-size: 18pt;
     font-style: normal;
-    font-weight: bolder;
-    color: black; 
+    color: black;
 }
 
 /* Style email label text */

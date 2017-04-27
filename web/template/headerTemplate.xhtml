@@ -95,7 +95,7 @@ Copyright © 2017 Abhiroop Singh. All rights reserved.
                     <c:if test="#{accountManager.isLoggedIn() == true}">
                         <!-- Clicking "Home" displays the index.xhtml file -->
                         <h:link outcome="UserHomePage" styleClass="header_tab">Profile</h:link> &nbsp;&nbsp;
-                        <h:link outcome="CheckWeather" styleClass="header_tab">Check Weather</h:link> &nbsp;&nbsp;
+                        <h:link outcome="CheckWeather" styleClass="header_tab" onclick="#{searchedWeatherController.clearSearchFields()}">Check Weather</h:link> &nbsp;&nbsp;
                         <!-- Clicking "Sign Out" invokes accountManager's logout() method -->
                         <!-- Clicking "My Files" displays the UserFiles.xhtml file -->
                         <h:link outcome="Planner" styleClass="header_tab">My Planner</h:link>&nbsp;&nbsp;
@@ -108,7 +108,7 @@ Copyright © 2017 Abhiroop Singh. All rights reserved.
                     <c:if test="#{accountManager.isLoggedIn() == false}">
                         <!-- Clicking "Home" displays the index.xhtml file -->
                         <h:link outcome="index" styleClass="header_tab">Home</h:link> &nbsp;&nbsp;
-                        <h:link outcome="CheckWeather" styleClass="header_tab">Check Weather</h:link> &nbsp;&nbsp;
+                        <h:link outcome="CheckWeather" styleClass="header_tab" onclick="#{searchedWeatherController.clearSearchFields()}">Check Weather</h:link> &nbsp;&nbsp;
                         <p:button styleClass="login_button" outcome="SignIn" value="LOG IN"/> &nbsp;&nbsp;
                         <p:button styleClass="signup_button" outcome="SignUp" value="SIGN UP"/>
                     </c:if>

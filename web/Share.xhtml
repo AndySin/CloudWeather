@@ -18,20 +18,57 @@ Copyright © 2017 Osman Balci. All rights reserved.
 
             <div id="topMain">
                 <!-- Error messages will be shown here if any  -->
-                
+
                 <h:outputText id="formMessage" class="errorMessages" value="#{emailManager.statusMessage}" />
                 <br/>
-                <index_header>Weather-Proof Activity Planner</index_header>
-
-                <br></br>
-                <br></br>
-
-                <index_regular>Share Weather-Proof with your friends!</index_regular>
+                <index_header>Share Weather-Proof with your friends!</index_header>
 
                 <br></br><br></br>
-                <br></br><br></br>
 
-                <p:commandButton styleClass="index_signup" value="Invite via Email" type="button" onclick="PF('dlg2').show();"/>
+                <h:form style="padding-left: 25%; padding-right: 25%">
+                    <br/>
+                    <!--From field-->
+                    <br/>
+                    <!--To field-->
+                    <div style="background-color: #FEFEFE;">
+                        <br/>
+                        <h:outputText value="To:" styleClass="emailLabels"/>
+                        <br/>
+                        <br/>
+
+                        <p:inputText id="toField" styleClass="emailInputText" style="width: 568px; box-shadow: none" value="#{emailManager.emailTo}" 
+                                     title="Email To" required="true" requiredMessage="Please Enter an Email Address">
+                        </p:inputText>
+                        <p:watermark for="toField" value="Enter your friend's emails separated by commas"/>
+                        <br/>
+                        <br/>
+                        
+                        <!-- 
+                        <h:outputText value="Subject: " styleClass="emailLabels"/>
+                        <br/>
+                        <br/>
+
+                        <p:inputText id="subject" value="#{emailManager.emailSubject}" required="true" label="Subject" styleClass="emailInputText" style="width: 568px"/>                
+                        <p:watermark for="subject" value="Try Weather-Proof Activity Planner!"/>
+                        <br/>
+                        <br/>
+                        -->
+
+                        <!--Message field-->
+                        <h:outputText value="Message:" styleClass="emailLabels"/>
+                        <br/>
+                        <br/>
+
+                        <p:inputTextarea id="message" value="#{emailManager.customizedMessage}" required="false" label="Message" styleClass="emailInputText" style="width: 568px; box-shadow: none" rows="6" cols="33" />
+                        <p:watermark for="message" value="Insert customized message."/>
+                        <br/><br/>
+                        <div align="center">
+                            <p:commandButton styleClass="index_signup" ajax="false" action="#{emailManager.sendEmail(accountManager.selected.email)}" value="Send Email"/>
+                        </div>
+                        <br/>
+                    </div>
+                </h:form>
+
             </div>
             <!--Share via email dialog form-->
             <p:dialog header="SHARE VIA EMAIL" widgetVar="dlg2" modal="true" width="700" height="500">
