@@ -14,6 +14,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named(value = "passwordResetManager")
@@ -41,6 +42,9 @@ public class PasswordResetManager implements Serializable {
      */
     @EJB
     private UserFacade userFacade;
+    
+    @Inject
+    private AccountManager accountManager;
 
     /*
     =========================
@@ -218,6 +222,10 @@ public class PasswordResetManager implements Serializable {
             }
 
             // Redirect to show the index (Home) page
+            if(accountManager.isLoggedIn()){
+                return "UserHomePage?faces-redirect=true";
+            }
+            
             return "index?faces-redirect=true";
 
         } else {
