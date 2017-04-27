@@ -86,13 +86,13 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                         </tr>
                         <tr>
                             <td align="left">
-                                <p:selectOneMenu id="recurrence" value="#{searchedWeatherController.recurring}" style="font-family: Lato; width:325px; box-shadow: none;"
+                                <h:selectOneMenu id="recurrence" value="#{searchedWeatherController.recurring}" style="font-family: Lato; width:335px; box-shadow: none; font-size: 20px"
                                                  requiredMessage="Select Recurrence of Event">
                                     <f:selectItem itemLabel="Select Reccurence of Event" itemValue="" noSelectionOption="true" />
                                     <f:selectItem itemLabel="Daily" itemValue="daily"/>
                                     <f:selectItem itemLabel="Weekly" itemValue="weekly"/>
                                     <f:selectItem itemLabel="1-Time" itemValue="daily"/>
-                                </p:selectOneMenu>
+                                </h:selectOneMenu>
                             </td>
                         </tr>
                         <tr>
@@ -100,14 +100,14 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                         </tr>
                         <tr>
                             <td align="left">
-                                <p:selectOneMenu id="duration" value="#{searchedWeatherController.duration}"
-                                                 style="font-family: Lato; width:325px; box-shadow: none;">
+                                <h:selectOneMenu id="duration" value="#{searchedWeatherController.duration}"
+                                                 style="font-family: Lato; width:335px; box-shadow: none; font-size: 20px">
                                     <f:selectItem itemLabel="Select Recurrence Duration" itemValue="0" noSelectionOption="true" />
                                     <f:selectItem itemLabel="Next 1 Week" itemValue="1"/>
                                     <f:selectItem itemLabel="Next 2 Weeks" itemValue="2"/>
                                     <f:selectItem itemLabel="Next 3 Weeks" itemValue="3"/>
                                     <f:selectItem itemLabel="Next 4 Weeks" itemValue="4"/>
-                                </p:selectOneMenu>
+                                </h:selectOneMenu>
                             </td>
                         </tr>
                     </table>
@@ -129,11 +129,15 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
 
                         </p:commandButton>     
                     </div>
-
+                    <br/>
 
                     <br/>
                 </h:form>
             </div>
+            <br/>
+
+            <br/>
+
 
         </ui:define>
 

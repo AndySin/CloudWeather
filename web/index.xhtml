@@ -7,42 +7,48 @@ Copyright © 2017 Andy Sin. All rights reserved.
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <!-- This page is constructed based on the siteTemplate -->
     <ui:composition template="/template/siteTemplate.xhtml" >
 
 
         <ui:define name="editableContent" >
-            
+
             <div id="topMain">
-                
+
                 <index_header>Weather-Proof Activity Planner</index_header>
-                
+
                 <br></br>
                 <br></br>
-                
+
                 <index_regular>The easiest, most advanced, way to plan an activity.</index_regular>
-                
+
                 <br></br><br></br>
                 <br></br><br></br>
-                
+
                 <p:button styleClass="index_signup" outcome="CheckWeather" value="TRY IT NOW"/>
 
                 <br></br><br></br>
-                
+
                 <img src="resources/images/divider.png" width="600px" height="auto"/>
-                
+
                 <br></br>
-                
-                <p:button styleClass="index_login" outcome="SignIn" value="LOG IN"/> 
-                
+                <c:if test="#{accountManager.isLoggedIn() == true}">
+
+                    <p:button styleClass="index_login" outcome="UserHomePage" value="LOG IN"/> 
+                </c:if>
+
+                <c:if test="#{accountManager.isLoggedIn() == false}">
+                    <p:button styleClass="index_login" outcome="SignIn" value="LOG IN"/> 
+                </c:if>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                
+
                 <p:button styleClass="index_signup" outcome="SignUp" value="SIGN UP"/>
 
             </div>
-            
+
             <div id="bottomMain">
                 <br></br>
                 <index_bottom_header>Sign up for free and immediately get access to:</index_bottom_header>
@@ -60,7 +66,7 @@ Copyright © 2017 Andy Sin. All rights reserved.
                     <li type="circle">And Much More!</li>
                 </ul>
             </div>
-           
+
         </ui:define>
 
     </ui:composition>
