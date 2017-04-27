@@ -77,18 +77,14 @@ Copyright © 2017 Osman Balci. All rights reserved.
 
                             <p:commandButton id="change_password" class="login"
                                              style="width: 290px; height: 55px; font-family: Lato; background: #313134; color: white; font-weight: 300; box-shadow: none; text-decoration: none; font-size: 20px; border-style: solid; border-width: 1px;"
-                                             value="Change Password" action="ForgotPassword?faces-redirect=true"
-                                             >
+                                             value="Change Password" action="ForgotPassword?faces-redirect=true">
                             </p:commandButton>
 
                             <p:commandButton id="delete_account" class="login"
                                              style=" width: 290px; height: 55px; font-family: Lato; background: #313134; color: white; font-weight: 300; box-shadow: none; text-decoration: none; font-size: 20px; border-style: solid; border-width: 1px;"
-                                             value="Delete Account" action="#{userEventsController.addEvent}"
-                                             >
-
+                                             value="Delete Account" action="DeleteAccount?faces-redirect=true">
                             </p:commandButton>
                         </p:panelGrid>
-
                     </h:form>
 
                     <p:panelGrid id="result" columns="2" style="width:100%;margin:10px 0px;" columnClasses="weatherResults,weatherResults" layout="grid" styleClass="ui-panelgrid-blank">
@@ -148,7 +144,6 @@ Copyright © 2017 Osman Balci. All rights reserved.
 
                 </h:form>
             </div>
-
         </ui:define>
 
     </ui:composition>

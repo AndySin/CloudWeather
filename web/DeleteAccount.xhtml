@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created by Akhil Gangu on 2017.04.26
+Copyright © 2017 Akhil Gangu. All rights reserved.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <!-- Do not enter tags before the composition line since they are ignored by JSF -->
+
+    <!-- This page is constructed based on the siteTemplate -->
+    <ui:composition template="/template/siteTemplate.xhtml">
+
+        <!-- Create the content for this page below -->
+        <ui:define name="editableContent">
+            <div align="center"> <index_header>Delete Account</index_header></div>
+            <br></br>
+
+            <div align="center" style="width:500px; background-color: #FEFEFE; margin:0 auto;">
+                <h:form id="ConfirmPasswordForm">
+                    <f:event listener="#{accountManager.validateUserPassword}" type="postValidate"/>
+                    <br/>
+                    <table cellspacing="10">
+                        <tr>
+                            <td><index_regular>Password</index_regular></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:password id="password" value="#{accountManager.selected.password}" required="true" 
+                                            style="font-family: Lato; width:250px; box-shadow: none;" requiredMessage="Password field is required!" />
+                            </td>
+                        </tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr>
+                            <td><index_regular>Confirm Password</index_regular></td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <p:password id="confirmPassword" required="true" 
+                                            style="font-family: Lato; width:250px; box-shadow: none;" requiredMessage="Confirm Password field is required!"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <p:commandButton id="delete" value="Delete" icon="ui-icon-trash" class="login"
+                                     action="#{accountManager.deleteAccount()}" ajax="false" >
+                    </p:commandButton>
+
+                    <br/>
+                    <br/>
+                    <p:messages id="msgs" showIcon="false" style="errorMessages" />
+                    <h:outputLabel value="#{accountManager.statusMessage}" style="errorMessages" />
+                </h:form>
+            </div>
+            <br /><br />
+
+        </ui:define>
+
+    </ui:composition>
+    <!-- Do not enter tags after the composition line since they are ignored by JSF -->
+
+</html>
