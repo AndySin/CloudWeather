@@ -34,7 +34,7 @@ Copyright © 2017 Andy Sin. All rights reserved.
 
                         </th> 
                         <th align="right">
-
+                            <!-- User can add activity to his calender if logged in -->
                             <c:if test="#{accountManager.isLoggedIn() == true}">
 
                                 <p:commandButton value="Add to Planner" styleClass="resultsButton" onclick="PF('addConfirmDlg').show();" />
@@ -117,6 +117,8 @@ Copyright © 2017 Andy Sin. All rights reserved.
                     </tr>
                 </table>
 
+                    <!-- Display relevant weather information about queried days -->
+                
                 <div id="middleMain">
                     <p:graphicImage url="resources/images/weatherIcons/#{searchedWeatherController.freqIcon}.png"/>
                     <br/>
@@ -241,6 +243,8 @@ Copyright © 2017 Andy Sin. All rights reserved.
                     <br />
                     <br />
 
+                        <!-- Displays weather results in an hourly format -->
+                    
                     <p:carousel value="#{searchedWeatherController.eventHourlyWeather}" headerText="Activity Hourly Forecast" var="item" itemStyle="text-align:center" responsive="true" styleClass="weatherResults" style="font-size: 18px" numVisible="5" >
                         <p:panelGrid columns="2" style="width:100%;margin:10px 0px;" columnClasses="weatherResults,weatherResults" layout="grid" styleClass="ui-panelgrid-blank">
                             <f:facet name="header">

@@ -8,14 +8,14 @@ Copyright © 2017 Osman Balci. All rights reserved.
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:p="http://primefaces.org/ui">
 
     <!-- This page is constructed based on the siteTemplate -->
     <ui:composition template="/template/siteTemplate.xhtml" >
 
         <ui:define name="editableContent" >
 
+            <!-- Get weather for current location -->
 
             <h:form prependId="false">
                 <div class="latlng" style="display:none;">
@@ -27,6 +27,8 @@ Copyright © 2017 Osman Balci. All rights reserved.
                                  value="#{searchedWeatherController.searchLongitude}">
                     </h:inputText>
                 </div>
+
+                <!-- Query current location from browser -->
 
                 <script>
                     var lat = document.getElementById("searchQueryFieldLat");
@@ -59,6 +61,8 @@ Copyright © 2017 Osman Balci. All rights reserved.
                     button.click();
                 }, 100);
             </script>
+
+            <!-- Button menu -->
 
             <div id="topMain" background-color="transparent">
                 <div align="center"><index_header>Welcome!</index_header></div>
@@ -154,6 +158,8 @@ Copyright © 2017 Osman Balci. All rights reserved.
                         </div>
                     </p:panelGrid>
 
+                    <!-- Displays any alerts for the area -->
+
                     <p:carousel value="#{searchedWeatherController.result.alerts}" headerText="Alerts" var="item" itemStyle="text-align:center" responsive="true" style="font-size: 18px" numVisible="1" >
                         <p:panelGrid columns="2" id="result2" style="text-align: left;width:100%;margin:10px 0px;" columnClasses="weatherResults,weatherResults" layout="grid" styleClass="ui-panelgrid-blank">
 
@@ -172,6 +178,8 @@ Copyright © 2017 Osman Balci. All rights reserved.
                 </p:panelGrid>
             </div>
 
+                <!-- Weekly calendar with upcoming events -->
+            
             <div id="bottomMain" style="background: transparent">
 
                 <h:form id="PlannerDataForm2" >
