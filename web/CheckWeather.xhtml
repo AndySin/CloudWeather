@@ -21,6 +21,8 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
 
             <script src="resources/js/jquery.geocomplete.js" type="text/javascript"></script>
 
+            <!-- Triggers the geocomplete function, which is used to get lat and long from an address  -->
+            <!-- The geocomplete feature is tagged onto the input with id geocomplete -->
 
             <script>
                 $(document).ready(function () {
@@ -45,6 +47,9 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                         <tr>
                             <td><index_regular>Location:</index_regular></td>
                         </tr>
+
+                        <!-- Uses the Google Geocoding api to suggest locations based on input -->
+
                         <tr>
                             <td align="left">
                                 <p:inputText id="geocomplete" style="font-family: Lato; width:325px; box-shadow: none;" required="true">
@@ -52,6 +57,9 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                             </td>
 
                         </tr>
+
+                        <!-- Event start time -->
+
                         <tr>
                             <td><index_regular id="startTime">Event Start:</index_regular></td>
                         </tr>
@@ -64,6 +72,9 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                         <tr>
                             <td><index_regular id="endTime">Event End:</index_regular></td>
                         </tr>
+
+                        <!-- Event end time -->
+
                         <tr>
 
                             <td align="left">
@@ -71,8 +82,10 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                                             pattern="MM/dd/yyyy HH:mm" required="true" styleClass="calendarClass"/>
                             </td>
                         </tr>
-                        
                     </table>
+
+                    <!-- Whether the event recurs -->
+
                     <div class="latlng" style="display:none;">
                         <h:inputText id="searchQueryFieldLat" class="lat"
                                      value="#{searchedWeatherController.searchLatitude}">

@@ -21,6 +21,8 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
             <div align="center"> <index_header>Delete Account</index_header></div>
             <br></br>
 
+                <!-- Password validation -->
+            
             <div align="center" style="width:500px; background-color: #FEFEFE; margin:0 auto;">
                 <h:form id="ConfirmPasswordForm">
                     <br/>
@@ -44,6 +46,8 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                             <td><index_regular>Confirm Password</index_regular></td>
                         </tr>
 
+                            <!-- Passwords must match -->
+                        
                         <tr>
                             <td>
                                 <p:password id="confirmPassword" required="true" 
@@ -52,6 +56,9 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                         </tr>
                     </table>
                     <br/>
+                    
+                        <!-- Triggers account deletion -->
+                    
                     <p:commandButton id="delete" value="Delete" class="login"
                                      action="#{accountManager.deleteAccount()}" ajax="false" >
                     </p:commandButton>
