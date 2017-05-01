@@ -157,15 +157,15 @@ Copyright © 2017 Osman Balci. All rights reserved.
                     <p:carousel value="#{searchedWeatherController.result.alerts}" headerText="Alerts" var="item" itemStyle="text-align:center" responsive="true" style="font-size: 18px" numVisible="1" >
                         <p:panelGrid columns="2" id="result2" style="text-align: left;width:100%;margin:10px 0px;" columnClasses="weatherResults,weatherResults" layout="grid" styleClass="ui-panelgrid-blank">
 
-                            <h:outputText value="Summary:" />
+                            <h:outputText style="font-weight: bold" value="Summary:" />
                             <h:outputText value="#{item.description}"/>
 
-                            <h:outputText value="Severity:" />
-                            <h:outputText value="#{item.severity}"/>
+                            <h:outputText style="font-weight: bold" value="Severity:" />
+                            <h:outputText  style="color: red" value="#{item.severity}"/>
 
-                            <h:outputText value="Source:" />
-                            <h:outputText value="#{item.uri}"/>
-                            
+                            <h:outputText style="font-weight: bold" value="Source:" />
+                            <a style="color: #0aa9f7;" href="#{item.uri}" target="_blank">Click Here for Full Description</a>
+
 
                         </p:panelGrid>
                     </p:carousel>

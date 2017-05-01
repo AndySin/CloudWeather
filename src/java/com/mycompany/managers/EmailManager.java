@@ -43,7 +43,7 @@ public class EmailManager {
             + "Multiday Event Forecast, Real-Time Severe Weather Alerts, "
             + "Minute-by-Minute Forecast Accuracy, Email Reminder Notifications, "
             + "and Much More!</p>";
-    private final String SITE_URL = "http://localhost:8080/CloudWeather/index.xhtml";
+    private final String SITE_URL = "http://venus.cs.vt.edu/CloudWeather/";
 
     private String emailTo;             // Contains only one email address to send email to
     private String emailSubject;        // Subject line of the email message

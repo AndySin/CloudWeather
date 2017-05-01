@@ -348,7 +348,11 @@ public class SearchedWeatherController implements Serializable {
                 ? null : data.getString("title");
         String uri = data.isNull("uri")
                 ? null : data.getString("uri");
-        return new Alert((description != null) ?description.substring(0, Math.min(description.length(), 100)) : null, expires, regions, severity, time, title,
+        if (severity != null) {
+            severity = severity.substring(0, 1).toUpperCase() + severity.substring(1);
+        }
+
+        return new Alert((description != null) ? description.substring(0, Math.min(description.length(), 100)) : null, expires, regions, severity, time, title,
                 uri);
     }
 
