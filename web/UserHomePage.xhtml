@@ -8,7 +8,8 @@ Copyright © 2017 Osman Balci. All rights reserved.
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <!-- This page is constructed based on the siteTemplate -->
     <ui:composition template="/template/siteTemplate.xhtml" >
@@ -37,8 +38,10 @@ Copyright © 2017 Osman Balci. All rights reserved.
                     }
 
                     function showPosition(position) {
-                        lat.value = position.coords.latitude;
-                        lng.value = position.coords.longitude;
+                        //lat.value = position.coords.latitude;
+                        //lng.value = position.coords.longitude;
+                        lat.value = 35.3848841;
+                        lng.value = -77.99276509;
                     }
 
                     window.onload = getLocation();
@@ -152,7 +155,7 @@ Copyright © 2017 Osman Balci. All rights reserved.
                     </p:panelGrid>
 
                     <p:carousel value="#{searchedWeatherController.result.alerts}" headerText="Alerts" var="item" itemStyle="text-align:center" responsive="true" style="font-size: 18px" numVisible="1" >
-                        <p:panelGrid columns="2" id="result2" style="width:100%;margin:10px 0px;" columnClasses="weatherResults,weatherResults" layout="grid" styleClass="ui-panelgrid-blank">
+                        <p:panelGrid columns="2" id="result2" style="text-align: left;width:100%;margin:10px 0px;" columnClasses="weatherResults,weatherResults" layout="grid" styleClass="ui-panelgrid-blank">
 
                             <h:outputText value="Summary:" />
                             <h:outputText value="#{item.description}"/>
@@ -162,6 +165,7 @@ Copyright © 2017 Osman Balci. All rights reserved.
 
                             <h:outputText value="Source:" />
                             <h:outputText value="#{item.uri}"/>
+                            
 
                         </p:panelGrid>
                     </p:carousel>

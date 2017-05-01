@@ -348,7 +348,7 @@ public class SearchedWeatherController implements Serializable {
                 ? null : data.getString("title");
         String uri = data.isNull("uri")
                 ? null : data.getString("uri");
-        return new Alert(description, expires, regions, severity, time, title,
+        return new Alert((description != null) ?description.substring(0, Math.min(description.length(), 100)) : null, expires, regions, severity, time, title,
                 uri);
     }
 
@@ -376,7 +376,7 @@ public class SearchedWeatherController implements Serializable {
         DataBlock daily = data.isNull(DAY)
                 ? null : createDataBlock(data.getJSONObject(DAY));
         List<Alert> alerts = data.isNull(ALERT)
-                ? null : createAlerts(data.getJSONArray(ALERT));
+                ? new ArrayList<>() : createAlerts(data.getJSONArray(ALERT));
         return new Response(latitude, longitude, timezone, currently,
                 minutely, hourly, daily, alerts);
     }

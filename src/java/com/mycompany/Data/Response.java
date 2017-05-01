@@ -32,6 +32,9 @@ public class Response {
         this.hourly = hourly;
         this.daily = daily;
         this.alerts = alerts;
+        if(alerts.isEmpty()) {
+            alerts.add(new Alert("There are no alerts.", new Long(0), null, "N/A", new Long(0), "N/A", "N/A"));
+        }
     }
 
     public Double getLatitude() {
