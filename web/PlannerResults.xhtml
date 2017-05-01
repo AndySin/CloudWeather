@@ -35,6 +35,8 @@ Copyright © 2017 Andy Sin. All rights reserved.
                         </th> 
                         <th align="right">
 
+                                <!-- Allow for deleting activity if user is signed in -->
+                            
                             <c:if test="#{accountManager.isLoggedIn() == true}">
 
                                 <p:commandButton value="Delete Activity" styleClass="resultsButton" actionListener="#{userEventsController.deleteEvent}"/>
@@ -50,6 +52,8 @@ Copyright © 2017 Andy Sin. All rights reserved.
                     </tr>
                 </table>
 
+                    <!-- Display event weather statistics -->
+                
                 <div id="middleMain">
                     <p:graphicImage url="resources/images/weatherIcons/#{searchedWeatherController.freqIcon}.png"/>
                     <br/>
@@ -171,6 +175,8 @@ Copyright © 2017 Andy Sin. All rights reserved.
 
             <div align="center">
 
+                    <!-- Displays event weather statistics in an hourly format in carousel -->
+                
                 <h:form id="WeatherResultsForm">
                     <br />
                     <br />
