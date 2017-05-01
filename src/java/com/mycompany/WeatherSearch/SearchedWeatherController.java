@@ -74,7 +74,7 @@ public class SearchedWeatherController implements Serializable {
 
     private double avgWind;
     private double avgHumidity;
-    private double avgPrecipChance;
+    private double avgFeelsLike;
 
     private String freqIcon;
 
@@ -152,7 +152,7 @@ public class SearchedWeatherController implements Serializable {
 
         avgWind = 0;
         avgHumidity = 0;
-        avgPrecipChance = 0;
+        avgFeelsLike = 0;
 
         Map<String, Integer> iconFreqs = new HashMap<String, Integer>();
         int maxFreq = 0;
@@ -171,7 +171,7 @@ public class SearchedWeatherController implements Serializable {
             avgTemp += numHours * dp.getTemperature();
             avgCloudCover += numHours * dp.getCloudCover();
             avgVisibility += numHours * dp.getVisibility();
-            avgPrecipChance += numHours * dp.getPrecipProbability();
+            avgFeelsLike += numHours * dp.getApparentTemperature();
             avgWind += numHours * dp.getWindSpeed();
             avgHumidity += numHours * dp.getHumidity();
 
@@ -449,7 +449,7 @@ public class SearchedWeatherController implements Serializable {
         this.duration = duration;
     }
 
-    public void clearSearchFields() {;
+    public void clearSearchFields() {
     }
 
     public double getMaxTemp() {
@@ -540,12 +540,12 @@ public class SearchedWeatherController implements Serializable {
         this.avgHumidity = avgHumidity;
     }
 
-    public double getAvgPrecipChance() {
-        return avgPrecipChance;
+    public double getAvgFeelsLike() {
+        return avgFeelsLike;
     }
 
-    public void setAvgPrecipChance(double avgPrecipChance) {
-        this.avgPrecipChance = avgPrecipChance;
+    public void setAvgFeelsLike(double avgPrecipChance) {
+        this.avgFeelsLike = avgPrecipChance;
     }
 
     public String getFreqIcon() {

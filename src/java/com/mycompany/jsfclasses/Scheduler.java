@@ -103,7 +103,7 @@ public class Scheduler implements Serializable {
         searchedWeatherController.setSearchLongitude(longi);
 
         searchedWeatherController.getForecast();
-
+        
         FacesContext.getCurrentInstance().getExternalContext().redirect("PlannerResults.xhtml");
         FacesContext.getCurrentInstance().responseComplete();
 

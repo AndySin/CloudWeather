@@ -176,7 +176,7 @@ Copyright © 2017 Osman Balci. All rights reserved.
                     <h:panelGrid columns="1" columnClasses="weatherResults">
                         <p:schedule id="weekCal" value="#{scheduleView.eventModel}" draggable="false" view="basicWeek" aspectRatio="5"
                                     timeFormat="h:mmt" rightHeaderTemplate="" timeZone="GMT-4" leftHeaderTemplate="" centerHeaderTemplate="">
-                            <p:ajax event="eventSelect" listener="#{scheduleView.onEventSelect}"/>
+                            <p:ajax event="eventSelect" listener="#{scheduleView.onEventSelect}" oncomplete="#{userEventsController.setFlag(0)}"/>
                         </p:schedule>
 
                         <p:spacer style="height: 10px;"/>

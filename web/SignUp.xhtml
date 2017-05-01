@@ -42,14 +42,14 @@ Copyright © 2017 Osman Balci. All rights reserved.
                         <tr>
                             <td>
                                 <p:inputText id="firstName" value="#{accountManager.firstName}" required="true" styleClass="accountInputTextField"
-                                             requiredMessage="#{bundle.CreateCustomerRequiredMessage_firstName}" label="First Name">
+                                             requiredMessage="First Name is Required!" label="First Name">
                                     <f:validateLength minimum="2" />
                                 </p:inputText>   
                             </td>
 
                             <td style="padding-left: 50px;">
                                 <p:inputText id="email" value="#{accountManager.email}" required="true" styleClass="accountInputTextField"
-                                             requiredMessage="#{bundle.CreateCustomerRequiredMessage_email}" label="Email">
+                                             requiredMessage="Email Address is Required!" label="Email">
                                     <f:validator validatorId="emailValidator" />  
                                 </p:inputText>
                             </td>
@@ -70,7 +70,7 @@ Copyright © 2017 Osman Balci. All rights reserved.
 
                             <td style="padding-left: 50px;">
                                 <p:inputText id="username" value="#{accountManager.username}" required="true" styleClass="accountInputTextField"
-                                             requiredMessage="#{bundle.CreateCustomerRequiredMessage_username}" label="Username">
+                                             requiredMessage="Username is Required!" label="Username">
                                     <f:validator validatorId="usernameValidator"/> 
                                 </p:inputText>
                             </td>
@@ -84,13 +84,14 @@ Copyright © 2017 Osman Balci. All rights reserved.
                         <tr>
                             <td>
                                 <p:inputText id="lastName" value="#{accountManager.lastName}" required="true" styleClass="accountInputTextField"
-                                             requiredMessage="#{bundle.CreateCustomerRequiredMessage_lastName}" label="Last Name">
+                                             requiredMessage="Last Name is Required!" label="Last Name">
                                     <f:validateLength minimum="2" />
                                 </p:inputText>
                             </td>
 
                             <td style="padding-left: 50px;">
-                                <p:password id="password" value="#{accountManager.password}" feedback="true" required="true" styleClass="accountInputTextField">
+                                <p:password id="password" value="#{accountManager.password}" feedback="true" required="true" 
+                                            styleClass="accountInputTextField" requiredMessage="Password is Required!">
                                     <!-- Execute the "validate" method in the "PasswordValidator.java" class file to validate the password entered. -->
                                     <f:validator validatorId="passwordValidator" /> 
                                 </p:password>
@@ -104,13 +105,14 @@ Copyright © 2017 Osman Balci. All rights reserved.
                         <tr>
                             <td>
                                 <p:inputText id="address1" value="#{accountManager.address1}" required="true" styleClass="accountInputTextField"
-                                             requiredMessage="#{bundle.CreateCustomerRequiredMessage_address1}" label="Address Line 1">
+                                             requiredMessage="Address is Required!" label="Address Line 1">
                                     <f:validateLength minimum="2" />
                                 </p:inputText> 
                             </td>
 
                             <td style="padding-left: 50px;">
-                                <p:password id="confirmPassword" value="ToBeReadFromThisFieldByAccountManager" required="true" styleClass="accountInputTextField"/>
+                                <p:password id="confirmPassword" value="ToBeReadFromThisFieldByAccountManager" required="true" 
+                                            styleClass="accountInputTextField" requiredMessage="Confirm Password is Required!"/>
                             </td>
                         </tr>
 
@@ -126,7 +128,7 @@ Copyright © 2017 Osman Balci. All rights reserved.
 
                             <td style="padding-left: 50px;">
                                 <h:selectOneMenu id="securityQuestion" style="width: 228px; height: 30px; border-radius: 3px;" label="Security Questions"
-                                                 value="#{accountManager.securityQuestion}" required="true" >
+                                                 value="#{accountManager.securityQuestion}" required="true" requiredMessage="Security Question is Required!" >
                                     <f:selectItems value="#{accountManager.security_questions}" />
                                 </h:selectOneMenu>
                             </td>
@@ -139,14 +141,14 @@ Copyright © 2017 Osman Balci. All rights reserved.
                         <tr>
                             <td>
                                 <p:inputText id="city" value="#{accountManager.city}" required="true" styleClass="accountInputTextField"
-                                             requiredMessage="#{bundle.CreateCustomerRequiredMessage_city}" label="City">
+                                             requiredMessage="City is Required!" label="City">
                                     <f:validateLength minimum="2" />
                                 </p:inputText>
                             </td>
 
                             <td style="padding-left: 50px;">
                                 <p:inputText id="securityAnswer" value="#{accountManager.securityAnswer}" required="true" styleClass="accountInputTextField"
-                                             requiredMessage="#{bundle.CreateCustomerRequiredMessage_securityAnswer}" label="Security Answer">
+                                             requiredMessage="Security Answer is Required!" label="Security Answer">
                                     <f:validateLength minimum="2" />
                                 </p:inputText>
                             </td>
@@ -158,8 +160,9 @@ Copyright © 2017 Osman Balci. All rights reserved.
                         </tr>
                         <tr>
                             <td>
-                                <h:selectOneMenu id="state" style="width: 228px; height: 30px; border-radius: 3px;" value="#{accountManager.state}" required="true">
-                                    <f:selectItems value="#{accountManager.listOfStates}" var="state"
+                                <h:selectOneMenu id="state" style="width: 228px; height: 30px; border-radius: 3px;" 
+                                                 requiredMessage="State is Required!" value="#{accountManager.state}" required="true">
+                                    <f:selectItems value="#{accountManager.listOfStates}" var="state" 
                                                    itemLabel="#{state}" itemValue="#{state}" />
                                 </h:selectOneMenu> 
                             </td>
@@ -172,7 +175,7 @@ Copyright © 2017 Osman Balci. All rights reserved.
                         <tr>
                             <td>
                                 <p:inputText id="zipcode" value="#{accountManager.zipcode}" required="true" styleClass="accountInputTextField"
-                                             requiredMessage="#{bundle.CreateCustomerRequiredMessage_zipcode}" label="Zip Code">
+                                             requiredMessage="Zipcode is Required!" label="Zip Code">
 
                                 </p:inputText> 
                             </td>
@@ -181,8 +184,6 @@ Copyright © 2017 Osman Balci. All rights reserved.
                     <p:spacer height="20px"/>
                     <div align="center">
                         <p:commandButton class="login" style="display:inline" id="submit" value="Submit" action="#{accountManager.createAccount()}" ajax="false"/>
-                        <p:spacer width="10px"/>
-                        <p:commandButton class="login" style="display:inline" action="index?faces-redirect=true" value="Cancel" ajax="false"/>
                     </div>
                     <br/>
                     <br/>

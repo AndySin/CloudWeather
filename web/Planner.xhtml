@@ -23,7 +23,7 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                 <h:panelGrid columns="1" columnClasses="weatherResults">
                     <p:schedule id="monthCal" value="#{scheduleView.eventModel}" styleClass="monthCal" draggable="false"
                                 timeFormat="h:mmt" rightHeaderTemplate="" timeZone="GMT-4">
-                        <p:ajax event="eventSelect" listener="#{scheduleView.onEventSelect}"/>
+                        <p:ajax event="eventSelect" listener="#{scheduleView.onEventSelect}" oncomplete="#{userEventsController.setFlag(1)}"/>
                         <p:ajax event="dateSelect" listener="#{scheduleView.onDateSelect}" update="createEvent" oncomplete="PF('createEventDialog').show();" />
                     </p:schedule>
 

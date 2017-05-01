@@ -19,13 +19,15 @@ Copyright © 2017 Osman Balci. All rights reserved.
             <div id="topMain">
                 <!-- Error messages will be shown here if any  -->
 
-                <h:outputText id="formMessage" class="errorMessages" value="#{emailManager.statusMessage}" />
                 <br/>
                 <index_header>Share Weather-Proof with your friends!</index_header>
 
                 <br></br><br></br>
 
                 <h:form style="padding-left: 25%; padding-right: 25%">
+
+                    <h:outputText id="formMessage" class="errorMessages" value="#{emailManager.statusMessage}" />
+
                     <br/>
                     <!--From field-->
                     <br/>
@@ -42,7 +44,7 @@ Copyright © 2017 Osman Balci. All rights reserved.
                         <p:watermark for="toField" value="Enter your friend's emails separated by commas"/>
                         <br/>
                         <br/>
-                        
+
                         <!-- 
                         <h:outputText value="Subject: " styleClass="emailLabels"/>
                         <br/>

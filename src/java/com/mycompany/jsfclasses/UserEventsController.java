@@ -53,6 +53,9 @@ public class UserEventsController implements Serializable {
 
     private List<UserEvents> items = null;
     private UserEvents selected;
+    
+    // 0 from profile, 1 from planner 
+    private int flag;
 
     public UserEventsController() {
     }
@@ -98,6 +101,22 @@ public class UserEventsController implements Serializable {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
+    }
+
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
+    }
+    
+    public String backButtonListener(){
+        if(flag == 0){
+            return "UserHomePage?faces-redirect=true";
+        }
+        
+        return "Planner?faces-redirect=true";
     }
 
     public List<UserEvents> getItems() {
