@@ -8,7 +8,8 @@ Copyright © 2017 Osman Balci. All rights reserved.
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <!-- This page is constructed based on the siteTemplate -->
     <ui:composition template="/template/siteTemplate.xhtml" >
@@ -42,8 +43,8 @@ Copyright © 2017 Osman Balci. All rights reserved.
                     function showPosition(position) {
                         //lat.value = position.coords.latitude;
                         //lng.value = position.coords.longitude;
-                        lat.value = 35.3848841;
-                        lng.value = -77.99276509;
+                        lat.value = position.coords.latitude;
+                        lng.value = position.coords.longitude;
                     }
 
                     window.onload = getLocation();
@@ -163,23 +164,40 @@ Copyright © 2017 Osman Balci. All rights reserved.
                     <p:carousel value="#{searchedWeatherController.result.alerts}" headerText="Alerts" var="item" itemStyle="text-align:center" responsive="true" style="font-size: 18px" numVisible="1" >
                         <p:panelGrid columns="2" id="result2" style="text-align: left;width:100%;margin:10px 0px;" columnClasses="weatherResults,weatherResults" layout="grid" styleClass="ui-panelgrid-blank">
 
-                            <h:outputText style="font-weight: bold" value="Summary:" />
-                            <h:outputText value="#{item.description}"/>
+                            <c:choose>
+                                <c:when test="${empty item.uri}">
 
-                            <h:outputText style="font-weight: bold" value="Severity:" />
-                            <h:outputText  style="color: red" value="#{item.severity}"/>
+                                    <h:outputText style="font-weight: bold" value="Summary:" />
+                                    <h:outputText value="#{item.description}"/>
 
-                            <h:outputText style="font-weight: bold" value="Source:" />
-                            <a style="color: #0aa9f7;" href="#{item.uri}" target="_blank">Click Here for Full Description</a>
+                                    <h:outputText style="font-weight: bold" value="Severity:" />
+                                    <h:outputText value="#{item.severity}"/>
 
+                                    <h:outputText style="font-weight: bold" value="Source:" />
+                                    <h:outputText value="N/A"/>
+
+                                </c:when>
+                                <c:otherwise>
+
+                                    <h:outputText style="font-weight: bold" value="Summary:" />
+                                    <h:outputText value="#{item.description}..."/>
+
+                                    <h:outputText style="font-weight: bold" value="Severity:" />
+                                    <h:outputText style="color: red" value="#{item.severity}"/>
+
+                                    <h:outputText style="font-weight: bold" value="Source:" />
+                                    <a style="color: #0aa9f7;" href="#{item.uri}" target="_blank">Click Here for Full Description</a>
+
+                                </c:otherwise>
+                            </c:choose>
 
                         </p:panelGrid>
                     </p:carousel>
                 </p:panelGrid>
             </div>
 
-                <!-- Weekly calendar with upcoming events -->
-            
+            <!-- Weekly calendar with upcoming events -->
+
             <div id="bottomMain" style="background: transparent">
 
                 <h:form id="PlannerDataForm2" >

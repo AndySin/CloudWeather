@@ -102,7 +102,7 @@ public class DataPoint {
     }
 
     /**
-     * Getters and setters
+     * Getter and setter methods
      */
     public Double getApparentTemperature() {
         return apparentTemperature;
@@ -194,6 +194,8 @@ public class DataPoint {
 
     /**
      * Conveniently format the date for display on web page
+     * @param date Date object to be modified into the correct format.
+     * @return Correctly formatted Date as a string.
      */
     public String convertedDate(Date date) {
 

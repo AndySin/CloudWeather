@@ -1,6 +1,8 @@
 /*********************************************
 Cascading Style Sheets (CSS) Style Definitions
 Composed by Osman Balci on May 24, 2016.
+Edited by Abhiroop Singh.
+Credit to: Dark Sky API Icons and Color Scheme
 *********************************************/
 
 html, body {
@@ -43,13 +45,6 @@ html, body {
     height: 100%;                   /* Set page height vertically 100% */
     margin: 0px;
     padding: 0px;
-}
-
-
-
-@keyframes animatedBackground {
-    from { background-position: 0 0; }
-    to { background-position: 100% 0; }
 }
 
 /* Style the text used under the standard HTML tag "body" */

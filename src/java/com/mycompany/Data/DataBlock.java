@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class DataBlock {
 
-    // inforation available in JSON structure
+    // Inforation available in JSON structure
     private final List<DataPoint> data;
     private final String icon;
     private final String summary;
@@ -28,7 +28,7 @@ public class DataBlock {
     }
 
     /**
-     * Getters and setters
+     * Getter and setter methods
      */
     
     public List<DataPoint> getData() {

@@ -23,7 +23,14 @@ public class Alert {
     private final String uri;
 
     /**
-     * Storing information about a new alert
+     * Contructor for the Government Issued Alerts.
+     * @param description Description of the alert.
+     * @param expires The time of expiration.
+     * @param regions The locations of the active alert.
+     * @param severity The level of severity.
+     * @param time The time of the active alert.
+     * @param title The name of the alert.
+     * @param uri The link to the full description of the alert.
      */
     public Alert(String description, Long expires, List<String> regions,
             String severity, Long time, String title, String uri) {
@@ -35,11 +42,10 @@ public class Alert {
         this.title = title;
         this.uri = uri;
     }
-    
+
     /**
      * Getter and setter methods
      */
-    
     public String getDescription() {
         return description;
     }

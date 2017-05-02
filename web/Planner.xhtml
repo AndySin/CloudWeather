@@ -19,8 +19,11 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
         <ui:define name="editableContent">
             <p:growl id="growl" life="7000"/>
 
-                <!-- Monthly calendar -->
-            
+            <!-- Monthly calendar used to react to touch events
+                 - Clicking on Empty Date opens dialog to create and add an event
+                 - Clicking on a pre-defined event takes User to the results page for that event.
+            -->
+
             <h:form id="PlannerDataForm">
                 <h:panelGrid columns="1" columnClasses="weatherResults">
                     <p:schedule id="monthCal" value="#{scheduleView.eventModel}" styleClass="monthCal" draggable="false"

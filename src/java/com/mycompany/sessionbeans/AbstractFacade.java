@@ -1,6 +1,6 @@
 /*
- * Created by Tanya Sutan-Tanon on 2017.04.20  * 
- * Copyright © 2017 Osman Balci. All rights reserved. * 
+ * Created by Abhiroop Singh on 2017.05.01  * 
+ * Copyright © 2017 Abhiroop Singh. All rights reserved. * 
  */
 package com.mycompany.sessionbeans;
 
@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 
 /**
  *
- * @author Tanya
+ * @author Abhi
  */
 public abstract class AbstractFacade<T> {
 

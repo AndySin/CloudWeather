@@ -1,8 +1,11 @@
+/*
+ * Created by Abhiroop Singh on 2017.05.01  * 
+ * Copyright © 2017 Abhiroop Singh. All rights reserved. * 
+ */
 package com.mycompany.jsfclasses;
 
 import com.mycompany.WeatherSearch.SearchedWeatherController;
 import com.mycompany.entityclasses.UserEvents;
-import com.mycompany.jsfclasses.UserEventsController;
 import com.mycompany.managers.AccountManager;
 import java.io.IOException;
 import java.io.Serializable;
@@ -24,7 +27,9 @@ import org.primefaces.model.ScheduleModel;
 @SessionScoped
 
 @Named(value = "scheduleView")
-
+/**
+ * Class used to listening to events on the planner for actions
+ */
 public class Scheduler implements Serializable {
 
     private ScheduleModel eventModel;
@@ -40,6 +45,11 @@ public class Scheduler implements Serializable {
     @Inject
     private SearchedWeatherController searchedWeatherController;
 
+    /*
+        Method used to construct the intial pre-defined events on the calendar for
+        the user that is logged in. Goes through and add all the events from the database
+        under that registered user.
+     */
     @PostConstruct
     public void init() {
         eventModel = new DefaultScheduleModel();
@@ -56,6 +66,10 @@ public class Scheduler implements Serializable {
 
     }
 
+    /*
+        Getter and setter methods
+     */
+    
     public ScheduleModel getEventModel() {
         return eventModel;
     }
@@ -79,6 +93,10 @@ public class Scheduler implements Serializable {
         event = new DefaultScheduleEvent();
     }
 
+    /*
+     *   Method used when an Event is clicked on the Calendar, which will in turn
+     *   will requery the results and show the results page for the user-selected event.
+     */
     public void onEventSelect(SelectEvent selectEvent) throws IOException {
         event = (ScheduleEvent) selectEvent.getObject();
 
@@ -103,12 +121,15 @@ public class Scheduler implements Serializable {
         searchedWeatherController.setSearchLongitude(longi);
 
         searchedWeatherController.getForecast();
-        
+
         FacesContext.getCurrentInstance().getExternalContext().redirect("PlannerResults.xhtml");
         FacesContext.getCurrentInstance().responseComplete();
 
     }
-
+    
+    /*
+     *  Method used to add events to the Calendar when a User clicks on a empty date box.
+     */
     public void onDateSelect(SelectEvent selectEvent) {
         event = new DefaultScheduleEvent("", (Date) selectEvent.getObject(), (Date) selectEvent.getObject());
     }

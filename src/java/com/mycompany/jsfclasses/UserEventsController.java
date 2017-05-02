@@ -1,3 +1,7 @@
+/*
+ * Created by Abhiroop Singh on 2017.05.01  * 
+ * Copyright © 2017 Abhiroop Singh. All rights reserved. * 
+ */
 package com.mycompany.jsfclasses;
 
 import com.mycompany.WeatherSearch.SearchedWeatherController;
@@ -26,6 +30,9 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
 
+/**
+ * Class used to control UserEvents associated with each user.
+ */
 @Named("userEventsController")
 @SessionScoped
 public class UserEventsController implements Serializable {
@@ -53,7 +60,7 @@ public class UserEventsController implements Serializable {
 
     private List<UserEvents> items = null;
     private UserEvents selected;
-    
+
     // 0 from profile, 1 from planner 
     private int flag;
 
@@ -84,6 +91,9 @@ public class UserEventsController implements Serializable {
         return selected;
     }
 
+    /**
+     * Method used to create a Event in the DB.
+     */
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("UserEventsCreated"));
         if (!JsfUtil.isValidationFailed()) {
@@ -91,10 +101,16 @@ public class UserEventsController implements Serializable {
         }
     }
 
+    /**
+     * Method used to update a Event in the DB.
+     */
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UserEventsUpdated"));
     }
 
+    /**
+     * Method used to destroy a Event in the DB.
+     */
     public void destroy() {
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("UserEventsDeleted"));
         if (!JsfUtil.isValidationFailed()) {
@@ -111,11 +127,17 @@ public class UserEventsController implements Serializable {
         this.flag = flag;
     }
     
-    public String backButtonListener(){
-        if(flag == 0){
+    /**
+     * Method that redirects the "Go Back" in the correct manner,
+     * ranging from either the UserHomePage.xhtml or Planner.xhtml,
+     * based on the flag bit.
+     * @return String for redirect of xhtml page.
+     */
+    public String backButtonListener() {
+        if (flag == 0) {
             return "UserHomePage?faces-redirect=true";
         }
-        
+
         return "Planner?faces-redirect=true";
     }
 
@@ -133,12 +155,15 @@ public class UserEventsController implements Serializable {
             Integer userId = signedInUser.getId();
 
             // Obtain only those files from the database that belong to the signed-in user
-            items = getUserEventsFacade().findUserVideosByUserID(userId);
+            items = getUserEventsFacade().findUserEventsByUserID(userId);
         }
         return items;
 
     }
 
+    /**
+     * Method used to refresh and update the list of items
+     */
     public void refreshFileList() {
         /*
         By setting the items to null, we force the getItems
@@ -195,6 +220,10 @@ public class UserEventsController implements Serializable {
         return getFacade().findAll();
     }
 
+    /**
+     * Method used when User's want to delete Events from their Calendar
+     * @throws IOException 
+     */
     public void deleteEvent() throws IOException {
 
         String eventName = searchedWeatherController.getEventName();
@@ -210,11 +239,16 @@ public class UserEventsController implements Serializable {
 
         FacesContext.getCurrentInstance().getExternalContext().redirect("UserHomePage.xhtml");
         FacesContext.getCurrentInstance().responseComplete();
-        
+
         scheduleView.init();
 
     }
 
+    /**
+     * Method used to Add Events to the User Calendar and update the entry into
+     * the Database.
+     * @return Redirect xhtml page string.
+     */
     public String addEvent() {
         if (accountManager.isLoggedIn()) {
             String eventName = searchedWeatherController.getEventName();

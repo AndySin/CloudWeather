@@ -1,3 +1,7 @@
+/*
+ * Created by Abhiroop Singh on 2017.05.01  * 
+ * Copyright © 2017 Abhiroop Singh. All rights reserved. * 
+ */
 package com.mycompany.jsfclasses;
 
 import com.mycompany.entityclasses.User;
@@ -19,6 +23,13 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
+/**
+ * Class used to control User information for the signed-in User entry. 
+ * This class allows persistence adds, updates, removes of User entries from the
+ * database.
+ * @author Abhi
+ */
+
 @Named("userController")
 @SessionScoped
 public class UserController implements Serializable {
@@ -31,6 +42,10 @@ public class UserController implements Serializable {
     public UserController() {
     }
 
+    /*
+        Getter and setter methods
+    */
+    
     public User getSelected() {
         return selected;
     }
@@ -55,6 +70,9 @@ public class UserController implements Serializable {
         return selected;
     }
 
+    /**
+     * Creates User in DB.
+     */
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("UserCreated"));
         if (!JsfUtil.isValidationFailed()) {
@@ -62,10 +80,16 @@ public class UserController implements Serializable {
         }
     }
 
+    /**
+     * Updates User in DB.
+     */
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UserUpdated"));
     }
 
+    /**
+     * Destroys User in DB.
+     */
     public void destroy() {
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("UserDeleted"));
         if (!JsfUtil.isValidationFailed()) {
@@ -73,7 +97,7 @@ public class UserController implements Serializable {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
-
+    
     public List<User> getItems() {
         if (items == null) {
             items = getFacade().findAll();

@@ -1,5 +1,5 @@
 /*
- * Created by Abhiroop Singh on 2017.03.28  * 
+ * Created by Abhiroop Singh on 2017.05.01  * 
  * Copyright © 2017 Abhiroop Singh. All rights reserved. * 
  */
 package com.mycompany.sessionbeans;
@@ -32,13 +32,13 @@ public class UserEventsFacade extends AbstractFacade<UserEvents> {
     /**
      *
      * @param userID is the Primary Key of the user entity in the database
-     * @return a list of object references of userFiles that belong to the user
+     * @return a list of object references of userEvents that belong to the user
      * whose DB Primary Key = userID
      */
-    public List<UserEvents> findUserVideosByUserID(Integer userID) {
+    public List<UserEvents> findUserEventsByUserID(Integer userID) {
         /*
-        The following @NamedQuery definition is given in UserFile.java entity class file:
-        @NamedQuery(name = "UserFile.findUserFilesByUserId", query = "SELECT u FROM UserFile u WHERE u.userId.id = :userId")
+        The following @NamedQuery definition is given in UserEvent.java entity class file:
+        @NamedQuery(name = "UserFile.findUserEventsByUserId", query = "SELECT u FROM UserEvents u WHERE u.userId.id = :userId")
         
         The following statement obtaines the results from the named database query.
          */
@@ -49,6 +49,10 @@ public class UserEventsFacade extends AbstractFacade<UserEvents> {
         return userEvent;
     }
 
+    /**
+     * Method used to find the Latitude for an event through the provided
+     * parameters, and uses the UserEvents.findLatitude named query.
+     */
     public float findLatitude(int userId, String name, long start, long end) {
 
         float latitude = (float) em.createNamedQuery("UserEvents.findLatitude")
@@ -62,6 +66,10 @@ public class UserEventsFacade extends AbstractFacade<UserEvents> {
 
     }
 
+    /**
+     * Method used to find the Longitude for an event through the provided
+     * parameters, and uses the UserEvents.findLongitude named query.
+     */
     public float findLongitude(int userId, String name, long start, long end) {
 
         float longitude = (float) em.createNamedQuery("UserEvents.findLongitude")
@@ -75,6 +83,10 @@ public class UserEventsFacade extends AbstractFacade<UserEvents> {
 
     }
 
+    /**
+     * Method used to find an event associated with the provided
+     * parameters, and uses the UserEvents.findEvent named query.
+     */
     public UserEvents findEvent(int userId, String name, long start, long end) {
 
         UserEvents event = (UserEvents) em.createNamedQuery("UserEvents.findEvent")

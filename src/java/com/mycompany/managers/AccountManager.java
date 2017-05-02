@@ -1,6 +1,6 @@
 /*
- * Created by Tanya Sutan-Tanon on 2017.04.18  * 
- * Copyright Â© 2017 Osman Balci. All rights reserved. * 
+ * Created by Abhiroop Singh on 2017.05.01  * 
+ * Copyright © 2017 Abhiroop Singh. All rights reserved. * 
  */
 package com.mycompany.managers;
 
@@ -48,7 +48,7 @@ as long as the user's established HTTP session is alive.
 
 /**
  *
- * @author Tanya
+ * @author Abhi
  */
 
 /*
