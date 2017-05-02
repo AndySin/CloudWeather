@@ -58,8 +58,10 @@ public class SearchedWeatherController implements Serializable {
     private String recurring;
     private String duration;
 
+    // hourly weather information relevant to the event is stored in here
     private List<DataPoint> eventHourlyWeather;
 
+    // summary statistics for the event used to display in the WeatherForecastResults page
     private double maxTemp;
     private double minTemp;
     private double avgTemp;
@@ -76,6 +78,7 @@ public class SearchedWeatherController implements Serializable {
     private double avgHumidity;
     private double avgFeelsLike;
 
+    // icon to be used for display that best represents the weather for the duration of the event
     private String freqIcon;
 
     private static final String CURRENT = "currently";
@@ -92,6 +95,7 @@ public class SearchedWeatherController implements Serializable {
     FacesMessage resultMsg;
 
     public String getForecast() {
+        // .getTime() returns time in milliseconds
         long unixStart = eventStartTime.getTime() / 1000;
         long unixEnd = eventEndTime.getTime() / 1000;
 
@@ -103,6 +107,7 @@ public class SearchedWeatherController implements Serializable {
             return null;
         }
 
+        // ensure only multiday event forecast check is allowed for signed in users - validation check
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         if (!accountManager.isLoggedIn() && !formatter.format(eventStartTime).
                 equals(formatter.format(eventEndTime))) {
@@ -114,16 +119,19 @@ public class SearchedWeatherController implements Serializable {
 
         try {
             eventHourlyWeather = new ArrayList<>();
+            // get weather information day by day for the event
             for (long x = unixStart; x <= unixEnd; x += 86400) {
                 getDayForecast(x);
                 processHourlyData();
             }
+            // SPECIAL CASE: Round minutes to the associated hour
             if (eventHourlyWeather.get(eventHourlyWeather.size() - 1).getTime() + (3600 - 1) < (eventEndTime.
                     getTime() / 1000)) {
                 getDayForecast(eventEndTime.getTime() / 1000);
                 processHourlyData();
             }
         } catch (Exception e) {
+            // something went wrong when dealing with location provided by user
             e.printStackTrace();
             resultMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "Invalid Input. Please Verify Location!", null);
@@ -131,11 +139,17 @@ public class SearchedWeatherController implements Serializable {
             return null;
         }
 
+        // extract event specific weather information
         updateEventStats();
 
+        // redirect page to display the results
         return "WeatherForecastResults?faces-redirect=true";
     }
 
+    /**
+     * Calculates summary statistics for a particular event based on 
+     * hourly information that has been extracted.
+     */
     private void updateEventStats() {
         // reset values
         maxTemp = Double.MIN_VALUE;
@@ -154,11 +168,16 @@ public class SearchedWeatherController implements Serializable {
         avgHumidity = 0;
         avgFeelsLike = 0;
 
+        // for figuring out the most common weather icon to be used for display
         Map<String, Integer> iconFreqs = new HashMap<String, Integer>();
         int maxFreq = 0;
+        
+        // for calculating avg
         double numHours = 1.0 / eventHourlyWeather.size();
 
+        // iterate through the hourly information that has been extracted
         for (DataPoint dp : eventHourlyWeather) {
+            // a mix of max, min, and avg values of weather information is now calculated
             maxTemp = Math.max(maxTemp, dp.getTemperature());
             minTemp = Math.min(minTemp, dp.getTemperature());
 
@@ -181,16 +200,21 @@ public class SearchedWeatherController implements Serializable {
                 iconFreqs.put(dp.getIcon(), 1);
             }
 
+            // updates the most common weather icon encountered in the hourly
+            // weather information used so far
             if (maxFreq < iconFreqs.get(dp.getIcon())) {
                 maxFreq = iconFreqs.get(dp.getIcon());
                 freqIcon = dp.getIcon();
             }
         }
     }
-
+    
+    /**
+     * Prepare query for getting weather information for a given day.
+     * Unix time is the start time for an event
+     */
     private void getDayForecast(long unixTime) {
-        // TODO: error handling if past date is provided by user
-
+        // NOTE that 48 hours worth of data is returned startin from unixTime
         try {
             String weatherAPICall = weatherAPIUrl + weatherAPIKey
                     + "/" + searchLatitude + "," + searchLongitude + ","
@@ -205,7 +229,11 @@ public class SearchedWeatherController implements Serializable {
         }
     }
 
+    /**
+     * Prepare query to get current weather information
+     */
     public void getCurrentlyForecast() {
+        // current weather information does not include timestamp information in URL
         try {
             String weatherAPICall = weatherAPIUrl + weatherAPIKey
                     + "/" + searchLatitude + "," + searchLongitude;
@@ -226,9 +254,11 @@ public class SearchedWeatherController implements Serializable {
 
         // iterate through hourly data for the event's day
         for (DataPoint datapoint : hours) {
+            // passed end time of event - can stop getting the hourly information
             if (datapoint.getDate().compareTo(eventEndTime) > 0) {
                 break;
             }
+            // check if the hourly data point is relevant to the event
             if (datapoint.getDate().compareTo(eventStartTime) >= 0 && datapoint.
                     getDate().compareTo(eventEndTime) <= 0) {
                 eventHourlyWeather.add(datapoint);
@@ -263,7 +293,11 @@ public class SearchedWeatherController implements Serializable {
         }
     }
 
+    /**
+     * Extracts all the weather specific information from the response
+     */
     private DataPoint createDataPoint(JSONObject data) {
+        // all the information made available by Dark Sky API
         Double apparentTemperature = data.isNull("apparentTemperature")
                 ? null : data.getDouble("apparentTemperature");
         Double apparentTemperatureMax = data.isNull("apparentTemperatureMax")
@@ -308,6 +342,8 @@ public class SearchedWeatherController implements Serializable {
                 ? null : data.getInt("windBearing");
         Double windSpeed = data.isNull("windSpeed")
                 ? null : data.getDouble("windSpeed");
+        
+        // create a new DataPoint object encapsulating all the information extracted form above
         return new DataPoint(apparentTemperature, apparentTemperatureMax,
                 apparentTemperatureMaxTime, apparentTemperatureMin,
                 apparentTemperatureMinTime, cloudCover, dewPoint, humidity,
@@ -316,6 +352,10 @@ public class SearchedWeatherController implements Serializable {
                 temperatureMinTime, time, visibility, windBearing, windSpeed);
     }
 
+    /**
+     * A DataBlock holds a list of data points, summary, and icon for the response
+     * that was returned for a specific query
+     */
     private DataBlock createDataBlock(JSONObject data) {
         List<DataPoint> dataList = new ArrayList<>();
         JSONArray dataArr = data.isNull(DATA)
@@ -326,9 +366,14 @@ public class SearchedWeatherController implements Serializable {
         String icon = data.isNull("icon") ? null : data.getString("icon");
         String summary = data.isNull("summary")
                 ? null : data.getString("summary");
+        
+        // create new DataBlock object with information extracted from above
         return new DataBlock(dataList, icon, summary);
     }
 
+    /**
+     * Extract information for each alert given appropriate part of the JSON structure
+     */
     private Alert createAlert(JSONObject data) {
         JSONArray regionArr = data.isNull("regions")
                 ? new JSONArray() : data.getJSONArray("regions");
@@ -352,10 +397,14 @@ public class SearchedWeatherController implements Serializable {
             severity = severity.substring(0, 1).toUpperCase() + severity.substring(1);
         }
 
+        // create new Alert object to store parsed information from above
         return new Alert((description != null) ? description.substring(0, Math.min(description.length(), 100)) : null, expires, regions, severity, time, title,
                 uri);
     }
 
+    /**
+     * Parses information for each alert based on the response
+     */
     private List<Alert> createAlerts(JSONArray data) {
         List<Alert> alerts = new ArrayList<>();
         for (int x = 0; x < data.length(); x++) {
@@ -364,13 +413,19 @@ public class SearchedWeatherController implements Serializable {
         return alerts;
     }
 
+    /**
+     * Create a new Response object using appropriate keys used in JSON data
+     */
     private Response createResponse(JSONObject data) {
+        // can extract directly based on key
         Double latitude = data.isNull("latitude")
                 ? null : data.getDouble("latitude");
         Double longitude = data.isNull("longitude")
                 ? null : data.getDouble("longitude");
         String timezone = data.isNull("timezone")
                 ? null : data.getString("timezone");
+        
+        // need to parse the structures within the JSON data for this data
         DataPoint currently = data.isNull(CURRENT)
                 ? null : createDataPoint(data.getJSONObject(CURRENT));
         DataBlock minutely = data.isNull(MINUTE)
@@ -381,9 +436,17 @@ public class SearchedWeatherController implements Serializable {
                 ? null : createDataBlock(data.getJSONObject(DAY));
         List<Alert> alerts = data.isNull(ALERT)
                 ? new ArrayList<>() : createAlerts(data.getJSONArray(ALERT));
+        
+        // create new response from extracted information
         return new Response(latitude, longitude, timezone, currently,
                 minutely, hourly, daily, alerts);
     }
+    
+    /*
+    ===============================================================
+    Getters and setters
+    ===============================================================
+     */
 
     public String getSearchLatitude() {
         return searchLatitude;

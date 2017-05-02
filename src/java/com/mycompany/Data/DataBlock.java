@@ -13,16 +13,24 @@ import java.util.List;
  */
 public class DataBlock {
 
+    // inforation available in JSON structure
     private final List<DataPoint> data;
     private final String icon;
     private final String summary;
 
+    /**
+     * Creates a new DataBlock object with appropriate information
+     */
     public DataBlock(List<DataPoint> data, String icon, String summary) {
         this.data = data;
         this.icon = icon;
         this.summary = summary;
     }
 
+    /**
+     * Getters and setters
+     */
+    
     public List<DataPoint> getData() {
         return data;
     }

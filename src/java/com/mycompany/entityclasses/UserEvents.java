@@ -77,6 +77,12 @@ public class UserEvents implements Serializable {
     @ManyToOne
     private User userId;
 
+    /*
+    ===============================================================
+    Class constructors for instantiating a UserEvent entity object to
+    represent a row in the User table in the CloudWeatherDB database.
+    ===============================================================
+     */
     public UserEvents() {
     }
 
@@ -102,6 +108,11 @@ public class UserEvents implements Serializable {
         this.userId = user;
     }
 
+    /*
+    ===============================================================
+    Getters and setters
+    ===============================================================
+     */
     public Integer getId() {
         return id;
     }
@@ -182,5 +193,4 @@ public class UserEvents implements Serializable {
     public void setEndTime(long endTime) {
         this.endTime = endTime;
     }
-
 }

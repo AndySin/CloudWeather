@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class Alert {
 
+    // alert information provided by API
     private final String description;
     private final Long expires;
     private final List<String> regions;
@@ -21,6 +22,9 @@ public class Alert {
     private final String title;
     private final String uri;
 
+    /**
+     * Storing information about a new alert
+     */
     public Alert(String description, Long expires, List<String> regions,
             String severity, Long time, String title, String uri) {
         this.description = description;
@@ -31,7 +35,11 @@ public class Alert {
         this.title = title;
         this.uri = uri;
     }
-
+    
+    /**
+     * Getter and setter methods
+     */
+    
     public String getDescription() {
         return description;
     }
@@ -59,5 +67,4 @@ public class Alert {
     public String getUri() {
         return uri;
     }
-
 }

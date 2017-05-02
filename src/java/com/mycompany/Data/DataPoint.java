@@ -13,6 +13,8 @@ import java.util.Date;
  * @author Andy
  */
 public class DataPoint {
+
+    // specific weather information available in JSON structure 
     private final Double apparentTemperature;
     private final Double apparentTemperatureMax;
     private final Long apparentTemperatureMaxTime;
@@ -35,6 +37,9 @@ public class DataPoint {
     private final String windBearing;
     private final Double windSpeed;
 
+    /**
+     * Creates a new DataPoint object to store weather information for display
+     */
     public DataPoint(Double apparentTemperature, Double apparentTemperatureMax,
             Long apparentTemperatureMaxTime, Double apparentTemperatureMin,
             Long apparentTemperatureMinTime, Double cloudCover, Double dewPoint,
@@ -66,6 +71,12 @@ public class DataPoint {
         this.windSpeed = windSpeed;
     }
 
+    /**
+     * Determines wind direction based on windBearing information from JSON data
+     *
+     * @param windBearing from JSON data
+     * @return direction based on windBearing
+     */
     private String windDirection(Integer windBearing) {
         if (windBearing == null) {
             return null;
@@ -90,6 +101,9 @@ public class DataPoint {
         }
     }
 
+    /**
+     * Getters and setters
+     */
     public Double getApparentTemperature() {
         return apparentTemperature;
     }
@@ -173,13 +187,16 @@ public class DataPoint {
     public Double getWindSpeed() {
         return windSpeed;
     }
-    
+
     public Date getDate() {
         return new Date(time * 1000);
     }
-    
+
+    /**
+     * Conveniently format the date for display on web page
+     */
     public String convertedDate(Date date) {
-        
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("h:mm aa");
         String formattedDate = dateFormat.format(date).toString();
         return formattedDate;

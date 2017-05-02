@@ -133,7 +133,7 @@ public class User implements Serializable {
     /*
     ===============================================================
     Class constructors for instantiating a User entity object to
-    represent a row in the User table in the CloudDriveDB database.
+    represent a row in the User table in the CloudWeatherDB database.
     ===============================================================
      */
     public User() {
@@ -160,8 +160,7 @@ public class User implements Serializable {
 
     /*
     ===============================================================
-    Class constructors for instantiating a User entity object to
-    represent a row in the User table in the CloudDriveDB database.
+    Getters and setters
     ===============================================================
      */
     public Integer getId() {

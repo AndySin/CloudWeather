@@ -21,6 +21,9 @@ public class Response {
     private final DataBlock daily;
     private final List<Alert> alerts;
 
+    /**
+     * Creates a response object to encapsulate the information provided by Dark Sky API
+     */
     public Response(Double latitude, Double longitude, String timezone,
             DataPoint currently, DataBlock minutely, DataBlock hourly,
             DataBlock daily, List<Alert> alerts) {
@@ -36,6 +39,10 @@ public class Response {
             alerts.add(new Alert("There are no alerts.", new Long(0), null, "N/A", new Long(0), "N/A", "N/A"));
         }
     }
+    
+    /**
+     * Getters and setters
+     */
 
     public Double getLatitude() {
         return latitude;
