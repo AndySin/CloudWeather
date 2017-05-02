@@ -165,13 +165,13 @@ Copyright © 2017 Osman Balci. All rights reserved.
                         <p:panelGrid columns="2" id="result2" style="text-align: left;width:100%;margin:10px 0px;" columnClasses="weatherResults,weatherResults" layout="grid" styleClass="ui-panelgrid-blank">
 
                             <c:choose>
-                                <c:when test="${empty item.uri}">
+                                <c:when test="${item.description eq 'There are no alerts.'}">
 
                                     <h:outputText style="font-weight: bold" value="Summary:" />
                                     <h:outputText value="#{item.description}"/>
 
                                     <h:outputText style="font-weight: bold" value="Severity:" />
-                                    <h:outputText value="#{item.severity}"/>
+                                    <h:outputText value="N/A"/>
 
                                     <h:outputText style="font-weight: bold" value="Source:" />
                                     <h:outputText value="N/A"/>
