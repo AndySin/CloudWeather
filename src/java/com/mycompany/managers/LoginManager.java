@@ -125,7 +125,10 @@ public class LoginManager implements Serializable {
 
             // Initialize the session map with user properties of interest
             initializeSessionMap(user);
-
+            
+            // HARD-CODED "current weather" for demo purposes to show alerts
+            
+            
             // Redirect to show the Profile page
             return "UserHomePage.xhtml?faces-redirect=true";
         }

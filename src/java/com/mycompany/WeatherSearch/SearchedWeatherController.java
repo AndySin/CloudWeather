@@ -145,6 +145,14 @@ public class SearchedWeatherController implements Serializable {
         // redirect page to display the results
         return "WeatherForecastResults?faces-redirect=true";
     }
+    
+    // for demo purposes - to show alerts
+    public void setCurrentLocation(){
+        // harcoded Golsboro, NC coordiates for user home page
+        this.searchLatitude = "35.381174";
+        this.searchLongitude = "-78.062514";
+        this.getCurrentlyForecast();
+    }
 
     /**
      * Calculates summary statistics for a particular event based on 

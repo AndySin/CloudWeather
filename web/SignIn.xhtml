@@ -60,7 +60,7 @@ Copyright © 2017 Akhil Gangu. All rights reserved.
                     </table>
                     <br/>
                     <p:commandButton id="login" value="Sign In" action="#{loginManager.loginUser()}" 
-                                     class="login" ajax="false"/>
+                                     class="login" ajax="false" onclick="#{searchedWeatherController.setCurrentLocation()}"/>
                     <br/>
                     <br/>
                 </h:form>

@@ -15,10 +15,10 @@ Copyright © 2017 Osman Balci. All rights reserved.
     <ui:composition template="/template/siteTemplate.xhtml" >
 
         <ui:define name="editableContent" >
-
-            <!-- Get weather for current location -->
-
-            <h:form prependId="false">
+            
+            <!-- Get weather for current location : COMMENTING OUT FOR DEMO PURPOSES
+                
+                <h:form prependId="false">
                 <div class="latlng" style="display:none;">
                     <h:inputText id="searchQueryFieldLat"
                                  value="#{searchedWeatherController.searchLatitude}">
@@ -29,7 +29,7 @@ Copyright © 2017 Osman Balci. All rights reserved.
                     </h:inputText>
                 </div>
 
-                <!-- Query current location from browser -->
+                 Query current location from browser 
 
                 <script>
                     var lat = document.getElementById("searchQueryFieldLat");
@@ -61,10 +61,10 @@ Copyright © 2017 Osman Balci. All rights reserved.
                 setTimeout(function () {
                     button.click();
                 }, 100);
-            </script>
+            </script>-->
 
             <!-- Button menu -->
-
+            
             <div id="topMain" background-color="transparent">
                 <div align="center"><index_header>Welcome!</index_header></div>
 
