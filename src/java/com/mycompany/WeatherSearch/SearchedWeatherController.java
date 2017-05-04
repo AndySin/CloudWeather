@@ -145,18 +145,20 @@ public class SearchedWeatherController implements Serializable {
         // redirect page to display the results
         return "WeatherForecastResults?faces-redirect=true";
     }
-    
+
     // for demo purposes - to show alerts
-    public void setCurrentLocation(){
+    public String setCurrentLocation() {
         // harcoded Golsboro, NC coordiates for user home page
-        this.searchLatitude = "35.381174";
-        this.searchLongitude = "-78.062514";
+        setSearchLatitude("35.381174");
+        setSearchLongitude("-78.062514");
         this.getCurrentlyForecast();
+        
+        return "UserHomePage.xhtml?faces-redirect=true";
     }
 
     /**
-     * Calculates summary statistics for a particular event based on 
-     * hourly information that has been extracted.
+     * Calculates summary statistics for a particular event based on hourly
+     * information that has been extracted.
      */
     private void updateEventStats() {
         // reset values
@@ -179,7 +181,7 @@ public class SearchedWeatherController implements Serializable {
         // for figuring out the most common weather icon to be used for display
         Map<String, Integer> iconFreqs = new HashMap<String, Integer>();
         int maxFreq = 0;
-        
+
         // for calculating avg
         double numHours = 1.0 / eventHourlyWeather.size();
 
@@ -216,10 +218,10 @@ public class SearchedWeatherController implements Serializable {
             }
         }
     }
-    
+
     /**
-     * Prepare query for getting weather information for a given day.
-     * Unix time is the start time for an event
+     * Prepare query for getting weather information for a given day. Unix time
+     * is the start time for an event
      */
     private void getDayForecast(long unixTime) {
         // NOTE that 48 hours worth of data is returned startin from unixTime
@@ -227,6 +229,8 @@ public class SearchedWeatherController implements Serializable {
             String weatherAPICall = weatherAPIUrl + weatherAPIKey
                     + "/" + searchLatitude + "," + searchLongitude + ","
                     + unixTime;
+
+            System.out.println("Day URL: " + weatherAPICall);
 
             JSONObject jsonData = readUrlContent(weatherAPICall);
 
@@ -245,6 +249,8 @@ public class SearchedWeatherController implements Serializable {
         try {
             String weatherAPICall = weatherAPIUrl + weatherAPIKey
                     + "/" + searchLatitude + "," + searchLongitude;
+
+            System.out.println("Currently URL: " + weatherAPICall);
 
             JSONObject jsonData = readUrlContent(weatherAPICall);
 
@@ -350,7 +356,7 @@ public class SearchedWeatherController implements Serializable {
                 ? null : data.getInt("windBearing");
         Double windSpeed = data.isNull("windSpeed")
                 ? null : data.getDouble("windSpeed");
-        
+
         // create a new DataPoint object encapsulating all the information extracted form above
         return new DataPoint(apparentTemperature, apparentTemperatureMax,
                 apparentTemperatureMaxTime, apparentTemperatureMin,
@@ -361,8 +367,8 @@ public class SearchedWeatherController implements Serializable {
     }
 
     /**
-     * A DataBlock holds a list of data points, summary, and icon for the response
-     * that was returned for a specific query
+     * A DataBlock holds a list of data points, summary, and icon for the
+     * response that was returned for a specific query
      */
     private DataBlock createDataBlock(JSONObject data) {
         List<DataPoint> dataList = new ArrayList<>();
@@ -374,13 +380,14 @@ public class SearchedWeatherController implements Serializable {
         String icon = data.isNull("icon") ? null : data.getString("icon");
         String summary = data.isNull("summary")
                 ? null : data.getString("summary");
-        
+
         // create new DataBlock object with information extracted from above
         return new DataBlock(dataList, icon, summary);
     }
 
     /**
-     * Extract information for each alert given appropriate part of the JSON structure
+     * Extract information for each alert given appropriate part of the JSON
+     * structure
      */
     private Alert createAlert(JSONObject data) {
         JSONArray regionArr = data.isNull("regions")
@@ -432,7 +439,7 @@ public class SearchedWeatherController implements Serializable {
                 ? null : data.getDouble("longitude");
         String timezone = data.isNull("timezone")
                 ? null : data.getString("timezone");
-        
+
         // need to parse the structures within the JSON data for this data
         DataPoint currently = data.isNull(CURRENT)
                 ? null : createDataPoint(data.getJSONObject(CURRENT));
@@ -444,18 +451,17 @@ public class SearchedWeatherController implements Serializable {
                 ? null : createDataBlock(data.getJSONObject(DAY));
         List<Alert> alerts = data.isNull(ALERT)
                 ? new ArrayList<>() : createAlerts(data.getJSONArray(ALERT));
-        
+
         // create new response from extracted information
         return new Response(latitude, longitude, timezone, currently,
                 minutely, hourly, daily, alerts);
     }
-    
+
     /*
     ===============================================================
     Getters and setters
     ===============================================================
      */
-
     public String getSearchLatitude() {
         return searchLatitude;
     }
