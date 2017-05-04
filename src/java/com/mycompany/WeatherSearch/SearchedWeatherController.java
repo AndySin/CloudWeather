@@ -41,7 +41,7 @@ public class SearchedWeatherController implements Serializable {
     private final String weatherAPIUrl = "https://api.darksky.net/forecast/";
 
     // API Key for weather API
-    private final String weatherAPIKey = "118cd3bc23f9cedca19972cf3c3e9347";
+    private final String weatherAPIKey = "4c3a261b5bb1e7aeded8500dff160cd0";
 
     private String searchLatitude;
     private String searchLongitude;
