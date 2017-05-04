@@ -135,6 +135,7 @@ public class UserEventsController implements Serializable {
      */
     public String backButtonListener() {
         if (flag == 0) {
+            searchedWeatherController.setCurrentLocation();
             return "UserHomePage?faces-redirect=true";
         }
 
