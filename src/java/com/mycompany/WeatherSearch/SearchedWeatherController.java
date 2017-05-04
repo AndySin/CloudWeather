@@ -230,8 +230,6 @@ public class SearchedWeatherController implements Serializable {
                     + "/" + searchLatitude + "," + searchLongitude + ","
                     + unixTime;
 
-            System.out.println("Day URL: " + weatherAPICall);
-
             JSONObject jsonData = readUrlContent(weatherAPICall);
 
             result = createResponse(jsonData);
@@ -249,8 +247,6 @@ public class SearchedWeatherController implements Serializable {
         try {
             String weatherAPICall = weatherAPIUrl + weatherAPIKey
                     + "/" + searchLatitude + "," + searchLongitude;
-
-            System.out.println("Currently URL: " + weatherAPICall);
 
             JSONObject jsonData = readUrlContent(weatherAPICall);
 
